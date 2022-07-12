@@ -3,6 +3,7 @@ package test;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import main.Estacionamento;
@@ -16,6 +17,7 @@ class CriaEstacionamentoTest {
 	}
 
 	@Test
+	@Tag("TesteFuncional")
 	void testAdicionaId1() throws Exception {
 		EstacionamentoBuilder estacionamentoBuilder = new EstacionamentoBuilder();
 
@@ -25,6 +27,7 @@ class CriaEstacionamentoTest {
 	}
 
 	@Test
+	@Tag("TesteFuncional")
 	void testAdicionaId2() throws Exception {
 
 		EstacionamentoBuilder estacionamentoBuilder = new EstacionamentoBuilder();
@@ -35,6 +38,7 @@ class CriaEstacionamentoTest {
 	}
 
 	@Test
+	@Tag("TesteFuncional")
 	void testAdicionaId3000() throws Exception {
 		EstacionamentoBuilder estacionamentoBuilder = new EstacionamentoBuilder();
 
@@ -44,6 +48,7 @@ class CriaEstacionamentoTest {
 	}
 
 	@Test
+	@Tag("TesteExcecao")
 	void testAdicionaIdInvalido() {
 		EstacionamentoBuilder estacionamentoBuilder = new EstacionamentoBuilder();
 
