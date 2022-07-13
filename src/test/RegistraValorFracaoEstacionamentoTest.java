@@ -7,7 +7,8 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import main.EstacionamentoBuilder;
-import main.EstacionamentoValorFracaoInvalidoException;
+import main.EstacionamentoValorFracaoInvalidoNegativoException;
+import main.EstacionamentoValorFracaoInvalidoZeroException;
 
 class RegistraValorFracaoEstacionamentoTest {
 
@@ -47,8 +48,17 @@ class RegistraValorFracaoEstacionamentoTest {
 	void testValorFracaoInvalido0() {
 		EstacionamentoBuilder estacionamentoBuilder = new EstacionamentoBuilder();
 
-		assertThrows(EstacionamentoValorFracaoInvalidoException.class,
+		assertThrows(EstacionamentoValorFracaoInvalidoZeroException.class,
 				() -> estacionamentoBuilder.setValorFracao(0.00));
+	}
+	
+	@Test
+	@Tag("TesteExcecao")
+	void testValorFracaoInvalidoNegativo() {
+		EstacionamentoBuilder estacionamentoBuilder = new EstacionamentoBuilder();
+
+		assertThrows(EstacionamentoValorFracaoInvalidoNegativoException.class,
+				() -> estacionamentoBuilder.setValorFracao(-0.01));
 	}
 
 }

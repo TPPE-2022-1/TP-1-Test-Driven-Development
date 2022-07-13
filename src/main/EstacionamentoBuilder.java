@@ -33,7 +33,11 @@ public class EstacionamentoBuilder {
 	public void setValorFracao(double valorFracao) throws EstacionamentoValorFracaoInvalidoException {
 		Double.compare(valorFracao, 0.00);
 		if (Double.compare(valorFracao, 0.00) == 0) {
-			throw new EstacionamentoValorFracaoInvalidoException();
+			throw new EstacionamentoValorFracaoInvalidoZeroException();
+		}
+		
+		if (valorFracao < 0.00) {
+			throw new EstacionamentoValorFracaoInvalidoNegativoException();
 		}
 		
 		this.valorFracao = valorFracao;
