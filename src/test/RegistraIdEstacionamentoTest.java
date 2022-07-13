@@ -6,7 +6,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-import main.Estacionamento;
 import main.EstacionamentoBuilder;
 import main.EstacionamentoIdInvalidoException;
 
@@ -18,23 +17,21 @@ class RegistraIdEstacionamentoTest {
 
 	@Test
 	@Tag("TesteFuncional")
-	void testAdicionaId1() throws Exception {
+	void testAdicionaId1() {
 		EstacionamentoBuilder estacionamentoBuilder = new EstacionamentoBuilder();
 
 		assertDoesNotThrow(() -> estacionamentoBuilder.setId(1));
-		Estacionamento e = estacionamentoBuilder.build();
-		assertEquals(1, e.getId());
+		assertEquals(1, estacionamentoBuilder.getId());
 	}
 
 	@Test
 	@Tag("TesteFuncional")
-	void testAdicionaId2() throws Exception {
+	void testAdicionaId2() {
 
 		EstacionamentoBuilder estacionamentoBuilder = new EstacionamentoBuilder();
 
 		assertDoesNotThrow(() -> estacionamentoBuilder.setId(2));
-		Estacionamento e = estacionamentoBuilder.build();
-		assertEquals(2, e.getId());
+		assertEquals(2, estacionamentoBuilder.getId());
 	}
 
 	@Test
@@ -43,8 +40,7 @@ class RegistraIdEstacionamentoTest {
 		EstacionamentoBuilder estacionamentoBuilder = new EstacionamentoBuilder();
 
 		assertDoesNotThrow(() -> estacionamentoBuilder.setId(3000));
-		Estacionamento e = estacionamentoBuilder.build();
-		assertEquals(3000, e.getId());
+		assertEquals(3000, estacionamentoBuilder.getId());
 	}
 
 	@Test
