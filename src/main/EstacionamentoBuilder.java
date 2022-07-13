@@ -4,6 +4,11 @@ public class EstacionamentoBuilder {
 
 	int id;
 	double valorFracao;
+	private double descontoHoraCheia;
+
+	public double getDescontoHoraCheia() {
+		return descontoHoraCheia;
+	}
 
 	public int getId() {
 		return id;
@@ -41,6 +46,10 @@ public class EstacionamentoBuilder {
 		}
 		
 		this.valorFracao = valorFracao;
+	}
+
+	public void setDescontoHoraCheia(double descontoHoraCheia) {
+		this.descontoHoraCheia = descontoHoraCheia;
 	}
 
 }
