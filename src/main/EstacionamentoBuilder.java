@@ -3,6 +3,7 @@ package main;
 public class EstacionamentoBuilder {
 
 	int id;
+	double valorFracao;
 
 	public void setId(int id) throws EstacionamentoIdInvalidoException {
 		if (id < 0) {
@@ -16,6 +17,10 @@ public class EstacionamentoBuilder {
 			throw new EstacionamentoIdInvalidoException();
 		}
 		return new Estacionamento(this);
+	}
+
+	public void setValorFracao(double valorFracao) {
+		this.valorFracao = valorFracao;
 	}
 
 }
