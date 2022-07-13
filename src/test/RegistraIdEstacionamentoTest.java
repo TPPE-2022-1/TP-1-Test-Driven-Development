@@ -10,7 +10,7 @@ import main.Estacionamento;
 import main.EstacionamentoBuilder;
 import main.EstacionamentoIdInvalidoException;
 
-class CriaEstacionamentoTest {
+class RegistraIdEstacionamentoTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
