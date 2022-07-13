@@ -44,7 +44,7 @@ class RegistraValorFracaoEstacionamentoTest {
 
 	@Test
 	@Tag("TesteExcecao")
-	void testValorInvalido0() {
+	void testValorFracaoInvalido0() {
 		EstacionamentoBuilder estacionamentoBuilder = new EstacionamentoBuilder();
 
 		assertThrows(EstacionamentoValorFracaoInvalidoException.class,
