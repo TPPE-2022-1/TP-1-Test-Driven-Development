@@ -48,7 +48,10 @@ public class EstacionamentoBuilder {
 		this.valorFracao = valorFracao;
 	}
 
-	public void setDescontoHoraCheia(double descontoHoraCheia) {
+	public void setDescontoHoraCheia(double descontoHoraCheia) throws EstacionamentoValorHoraCheiaInvalidoNegativoException {
+		if (descontoHoraCheia < 0.0) {
+			throw new EstacionamentoValorHoraCheiaInvalidoNegativoException();
+		}
 		this.descontoHoraCheia = descontoHoraCheia;
 	}
 
