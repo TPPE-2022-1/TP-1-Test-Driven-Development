@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import main.EstacionamentoBuilder;
+import main.EstacionamentoValorHoraCheiaInvalidoMaior100Exception;
 import main.EstacionamentoValorHoraCheiaInvalidoNegativoException;
 
 class RegistraValorHoraCheiaEstacionamentoTest {
@@ -58,6 +59,15 @@ class RegistraValorHoraCheiaEstacionamentoTest {
 
 		assertThrows(EstacionamentoValorHoraCheiaInvalidoNegativoException.class,
 				() -> estacionamentoBuilder.setDescontoHoraCheia(-0.01));
+	}
+	
+	@Test
+	@Tag("TesteExcecao")
+	void testValorHoraCheiaInvalidoMaior100() {
+		EstacionamentoBuilder estacionamentoBuilder = new EstacionamentoBuilder();
+
+		assertThrows(EstacionamentoValorHoraCheiaInvalidoMaior100Exception.class,
+				() -> estacionamentoBuilder.setDescontoHoraCheia(100.01));
 	}
 
 }
