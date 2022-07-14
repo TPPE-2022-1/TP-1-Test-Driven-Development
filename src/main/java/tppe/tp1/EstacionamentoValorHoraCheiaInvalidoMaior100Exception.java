@@ -1,4 +1,4 @@
-package main;
+package tppe.tp1;
 
 public class EstacionamentoValorHoraCheiaInvalidoMaior100Exception extends EstacionamentoValorHoraCheiaInvalido {
 

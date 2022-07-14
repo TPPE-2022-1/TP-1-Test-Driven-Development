@@ -1,13 +1,10 @@
-package test;
+package tppe.tp1;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-
-import main.EstacionamentoBuilder;
-import main.EstacionamentoIdInvalidoException;
 
 class RegistraIdEstacionamentoTest {
 
