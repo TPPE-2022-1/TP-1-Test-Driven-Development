@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 
 import tppe.tp1.estacionamento.EstacionamentoBuilder;
 import tppe.tp1.estacionamento.exceptions.EstacionamentoValorEventoInvalidoNegativoException;
-import tppe.tp1.estacionamento.exceptions.EstacionamentoValorMensalidadeInvalidoNegativoException;
 
 public class RegistraValorEventoEstacionamentoTest {
 
