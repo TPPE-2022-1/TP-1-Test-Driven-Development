@@ -81,7 +81,15 @@ public class EstacionamentoBuilder {
 		this.valorDiariaDiurna = valorDiariaDiurna;
 	}
 
-	public void setDescontoDiariaNoturna(double descontoDiariaNoturna) {
+	public void setDescontoDiariaNoturna(double descontoDiariaNoturna) throws EstacionamentoValorDiariaNoturnaInvalidoNegativoException, EstacionamentoValorDiariaNoturnaInvalidoMaior100Exception {
+		if (descontoDiariaNoturna < 0.0) {
+			throw new EstacionamentoValorDiariaNoturnaInvalidoNegativoException();
+		}
+		
+		if (descontoDiariaNoturna > 100.0) {
+			throw new EstacionamentoValorDiariaNoturnaInvalidoMaior100Exception();
+		}
+		
 		this.descontoDiariaNoturna = descontoDiariaNoturna;
 	}
 
