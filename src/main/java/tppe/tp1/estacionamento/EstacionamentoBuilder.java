@@ -26,6 +26,11 @@ public class EstacionamentoBuilder {
 	private LocalTime horarioEntradaDiariaNoturna;
 	private LocalTime horarioSaidaDiariaNoturna;
 	private Double valorMensalidade;
+	private Double valorEvento;
+
+	public Double getValorEvento() {
+		return valorEvento;
+	}
 
 	public Double getValorMensalidade() {
 		return valorMensalidade;
@@ -142,6 +147,10 @@ public class EstacionamentoBuilder {
 		}
 		
 		this.valorMensalidade = mensalidade;
+	}
+
+	public void setValorEvento(Double valorEvento) {
+		this.valorEvento = valorEvento;
 	}
 
 }
