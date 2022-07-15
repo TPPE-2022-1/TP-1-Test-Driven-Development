@@ -41,4 +41,22 @@ class RegistraValorMensalistaEstacionamentoTest {
 		assertDoesNotThrow(() -> estacionamentoBuilder.setValorMensalidade(mensalidade));
 		assertEquals(mensalidade, estacionamentoBuilder.getValorMensalidade());
 	}
+	
+	@Test
+	@Tag("TesteExcecao")
+	void testValorMensalistaInvalido0() {
+		EstacionamentoBuilder estacionamentoBuilder = new EstacionamentoBuilder();
+
+		assertThrows(EstacionamentoValorMensalidadeInvalidoZeroException.class,
+				() -> estacionamentoBuilder.setValorMensalidade(0.00));
+	}
+	
+	@Test
+	@Tag("TesteExcecao")
+	void testValorMensalistaInvalidoNegativo() {
+		EstacionamentoBuilder estacionamentoBuilder = new EstacionamentoBuilder();
+
+		assertThrows(EstacionamentoValorMensalidadeInvalidoNegativoException.class,
+				() -> estacionamentoBuilder.setValorMensalidade(-0.01));
+	}
 }

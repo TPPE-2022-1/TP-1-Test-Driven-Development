@@ -118,7 +118,15 @@ public class EstacionamentoBuilder {
 		this.horarioSaidaDiariaNoturna = horarioSaidaDiariaNoturna;
 	}
 
-	public void setValorMensalidade(Double mensalidade) {
+	public void setValorMensalidade(Double mensalidade) throws EstacionamentoValorMensalidadeInvalidoZeroException, EstacionamentoValorMensalidadeInvalidoNegativoException {
+		if (mensalidade.compareTo(0.00) == 0) {
+			throw new EstacionamentoValorMensalidadeInvalidoZeroException();
+		}
+		
+		if (mensalidade < 0.00) {
+			throw new EstacionamentoValorMensalidadeInvalidoNegativoException();
+		}
+		
 		this.valorMensalidade = mensalidade;
 	}
 
