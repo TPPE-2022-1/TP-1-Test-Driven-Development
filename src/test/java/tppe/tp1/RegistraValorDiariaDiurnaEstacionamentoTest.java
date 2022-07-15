@@ -38,5 +38,23 @@ class RegistraValorDiariaDiurnaEstacionamentoTest {
 		assertDoesNotThrow(() -> estacionamentoBuilder.setValorDiariaDiurna(25.25));
 		assertEquals(25.25, estacionamentoBuilder.getValorDiariaDiurna());
 	}
+	
+	@Test
+	@Tag("TesteExcecao")
+	void testValorDiariaDiurnaInvalido0() {
+		EstacionamentoBuilder estacionamentoBuilder = new EstacionamentoBuilder();
+
+		assertThrows(EstacionamentoValorDiariaDiurnaInvalidoZeroException.class,
+				() -> estacionamentoBuilder.setValorDiariaDiurna(0.00));
+	}
+	
+	@Test
+	@Tag("TesteExcecao")
+	void testValorDiariaDiurnaInvalidoNegativo() {
+		EstacionamentoBuilder estacionamentoBuilder = new EstacionamentoBuilder();
+
+		assertThrows(EstacionamentoValorDiariaDiurnaInvalidoNegativoException.class,
+				() -> estacionamentoBuilder.setValorDiariaDiurna(-0.01));
+	}
 
 }
