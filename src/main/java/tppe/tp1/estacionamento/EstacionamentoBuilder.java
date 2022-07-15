@@ -28,6 +28,11 @@ public class EstacionamentoBuilder {
 	private LocalTime horarioSaidaDiariaNoturna;
 	private Double valorMensalidade;
 	private Double valorEvento;
+	private LocalTime horarioAbertura;
+
+	public LocalTime getHorarioAbertura() {
+		return horarioAbertura;
+	}
 
 	public Double getValorEvento() {
 		return valorEvento;
@@ -155,6 +160,10 @@ public class EstacionamentoBuilder {
 			throw new EstacionamentoValorEventoInvalidoNegativoException();
 		}
 		this.valorEvento = valorEvento;
+	}
+
+	public void setHorarioAbertura(LocalTime horarioAbertura) {
+		this.horarioAbertura = horarioAbertura;
 	}
 
 }
