@@ -17,5 +17,23 @@ public class RegistraHorarioEntradaDiariaNoturnaTest {
 		assertDoesNotThrow(() -> estacionamentoBuilder.setHorarioEntradaDiariaNoturna(horarioEntradaDiariaNoturna));
 		assertEquals(horarioEntradaDiariaNoturna, estacionamentoBuilder.getHorarioEntradaDiariaNoturna());
 	}
+	
+	@Test
+	void testaInsereHorarioEntrada2359() {
+		EstacionamentoBuilder estacionamentoBuilder = new EstacionamentoBuilder();
+
+		LocalTime horarioEntradaDiariaNoturna = LocalTime.parse("23:59");
+		assertDoesNotThrow(() -> estacionamentoBuilder.setHorarioEntradaDiariaNoturna(horarioEntradaDiariaNoturna));
+		assertEquals(horarioEntradaDiariaNoturna, estacionamentoBuilder.getHorarioEntradaDiariaNoturna());
+	}
+	
+	@Test
+	void testaInsereHorarioEntrada1212() {
+		EstacionamentoBuilder estacionamentoBuilder = new EstacionamentoBuilder();
+
+		LocalTime horarioEntradaDiariaNoturna = LocalTime.parse("12:12");
+		assertDoesNotThrow(() -> estacionamentoBuilder.setHorarioEntradaDiariaNoturna(horarioEntradaDiariaNoturna));
+		assertEquals(horarioEntradaDiariaNoturna, estacionamentoBuilder.getHorarioEntradaDiariaNoturna());
+	}
 
 }
