@@ -5,6 +5,11 @@ public class EstacionamentoBuilder {
 	int id;
 	double valorFracao;
 	private double descontoHoraCheia;
+	private double valorDiariaDiurna;
+
+	public double getValorDiariaDiurna() {
+		return valorDiariaDiurna;
+	}
 
 	public double getDescontoHoraCheia() {
 		return descontoHoraCheia;
@@ -57,6 +62,10 @@ public class EstacionamentoBuilder {
 			throw new EstacionamentoValorHoraCheiaInvalidoMaior100Exception();
 		}
 		this.descontoHoraCheia = descontoHoraCheia;
+	}
+
+	public void setValorDiariaDiurna(double valorDiariaDiurna) {
+		this.valorDiariaDiurna = valorDiariaDiurna;
 	}
 
 }
