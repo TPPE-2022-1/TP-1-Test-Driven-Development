@@ -16,10 +16,30 @@ public class RegistraValorEventoEstacionamentoTest {
 
 	@Test
 	@Tag("TesteFuncional")
-	void testAdicionaValorEvento() {
+	void testAdicionaValorEvento40() {
 		EstacionamentoBuilder estacionamentoBuilder = new EstacionamentoBuilder();
 
 		Double valorEvento = 40.00;
+		assertDoesNotThrow(() -> estacionamentoBuilder.setValorEvento(valorEvento));
+		assertEquals(valorEvento, estacionamentoBuilder.getValorEvento());
+	}
+	
+	@Test
+	@Tag("TesteFuncional")
+	void testAdicionaValorEvento0() {
+		EstacionamentoBuilder estacionamentoBuilder = new EstacionamentoBuilder();
+
+		Double valorEvento = 0.00;
+		assertDoesNotThrow(() -> estacionamentoBuilder.setValorEvento(valorEvento));
+		assertEquals(valorEvento, estacionamentoBuilder.getValorEvento());
+	}
+	
+	@Test
+	@Tag("TesteFuncional")
+	void testAdicionaValorEvento12345() {
+		EstacionamentoBuilder estacionamentoBuilder = new EstacionamentoBuilder();
+
+		Double valorEvento = 123.45;
 		assertDoesNotThrow(() -> estacionamentoBuilder.setValorEvento(valorEvento));
 		assertEquals(valorEvento, estacionamentoBuilder.getValorEvento());
 	}
