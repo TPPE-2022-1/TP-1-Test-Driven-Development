@@ -6,7 +6,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-class RegistraValorDiariaNoturnaEstacionamentoTest {
+import tppe.tp1.estacionamento.EstacionamentoBuilder;
+import tppe.tp1.estacionamento.exceptions.EstacionamentoValorDiariaNoturnaInvalidoMaior100Exception;
+import tppe.tp1.estacionamento.exceptions.EstacionamentoValorDiariaNoturnaInvalidoNegativoException;
+
+public class RegistraValorDiariaNoturnaEstacionamentoTest {
 
 	@BeforeEach
 	void setUp() throws Exception {

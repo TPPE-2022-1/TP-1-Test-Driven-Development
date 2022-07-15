@@ -1,4 +1,4 @@
-package tppe.tp1;
+package tppe.tp1.estacionamento;
 
 public class Estacionamento {
 	private int id;

@@ -1,6 +1,20 @@
-package tppe.tp1;
+package tppe.tp1.estacionamento;
 
 import java.time.LocalTime;
+
+import tppe.tp1.estacionamento.exceptions.EstacionamentoIdInvalidoException;
+import tppe.tp1.estacionamento.exceptions.EstacionamentoValorDiariaDiurnaInvalidoNegativoException;
+import tppe.tp1.estacionamento.exceptions.EstacionamentoValorDiariaDiurnaInvalidoZeroException;
+import tppe.tp1.estacionamento.exceptions.EstacionamentoValorDiariaNoturnaInvalidoMaior100Exception;
+import tppe.tp1.estacionamento.exceptions.EstacionamentoValorDiariaNoturnaInvalidoNegativoException;
+import tppe.tp1.estacionamento.exceptions.EstacionamentoValorFracaoInvalidoException;
+import tppe.tp1.estacionamento.exceptions.EstacionamentoValorFracaoInvalidoNegativoException;
+import tppe.tp1.estacionamento.exceptions.EstacionamentoValorFracaoInvalidoZeroException;
+import tppe.tp1.estacionamento.exceptions.EstacionamentoValorHoraCheiaInvalidoException;
+import tppe.tp1.estacionamento.exceptions.EstacionamentoValorHoraCheiaInvalidoMaior100Exception;
+import tppe.tp1.estacionamento.exceptions.EstacionamentoValorHoraCheiaInvalidoNegativoException;
+import tppe.tp1.estacionamento.exceptions.EstacionamentoValorMensalidadeInvalidoNegativoException;
+import tppe.tp1.estacionamento.exceptions.EstacionamentoValorMensalidadeInvalidoZeroException;
 
 public class EstacionamentoBuilder {
 
@@ -75,7 +89,7 @@ public class EstacionamentoBuilder {
 		this.valorFracao = valorFracao;
 	}
 
-	public void setDescontoHoraCheia(double descontoHoraCheia) throws EstacionamentoValorHoraCheiaInvalido {
+	public void setDescontoHoraCheia(double descontoHoraCheia) throws EstacionamentoValorHoraCheiaInvalidoException {
 		if (descontoHoraCheia < 0.0) {
 			throw new EstacionamentoValorHoraCheiaInvalidoNegativoException();
 		}

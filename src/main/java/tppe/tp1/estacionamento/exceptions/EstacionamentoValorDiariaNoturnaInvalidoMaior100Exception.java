@@ -1,4 +1,4 @@
-package tppe.tp1;
+package tppe.tp1.estacionamento.exceptions;
 
 public class EstacionamentoValorDiariaNoturnaInvalidoMaior100Exception extends Exception {
 

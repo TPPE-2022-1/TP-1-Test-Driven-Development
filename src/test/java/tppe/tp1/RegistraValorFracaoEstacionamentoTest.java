@@ -6,7 +6,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-class RegistraValorFracaoEstacionamentoTest {
+import tppe.tp1.estacionamento.EstacionamentoBuilder;
+import tppe.tp1.estacionamento.exceptions.EstacionamentoValorFracaoInvalidoNegativoException;
+import tppe.tp1.estacionamento.exceptions.EstacionamentoValorFracaoInvalidoZeroException;
+
+public class RegistraValorFracaoEstacionamentoTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
