@@ -9,7 +9,7 @@ import org.junit.platform.suite.api.SuiteDisplayName;
 @SelectClasses({ RegistraIdEstacionamentoTest.class, RegistraValorFracaoEstacionamentoTest.class,
 		RegistraValorHoraCheiaEstacionamentoTest.class, RegistraValorDiariaDiurnaEstacionamentoTest.class,
 		RegistraValorDiariaNoturnaEstacionamentoTest.class, RegistraHorarioEntradaDiariaNoturnaTest.class,
-		RegistraHorarioSaidaDiariaNoturnaTest.class })
+		RegistraHorarioSaidaDiariaNoturnaTest.class, RegistraValorMensalistaEstacionamentoTest.class })
 @IncludeTags("TesteExcecao")
 @SuiteDisplayName("Testes de Excecao")
 class TestesExcecaoTest {
