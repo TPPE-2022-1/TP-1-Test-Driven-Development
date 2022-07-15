@@ -1,5 +1,7 @@
 package tppe.tp1;
 
+import java.time.LocalTime;
+
 public class EstacionamentoBuilder {
 
 	int id;
@@ -7,6 +9,11 @@ public class EstacionamentoBuilder {
 	private double descontoHoraCheia;
 	private double valorDiariaDiurna;
 	private double descontoDiariaNoturna;
+	private LocalTime horarioEntradaDiariaNoturna;
+
+	public LocalTime getHorarioEntradaDiariaNoturna() {
+		return horarioEntradaDiariaNoturna;
+	}
 
 	public double getDescontoDiariaNoturna() {
 		return descontoDiariaNoturna;
@@ -91,6 +98,10 @@ public class EstacionamentoBuilder {
 		}
 		
 		this.descontoDiariaNoturna = descontoDiariaNoturna;
+	}
+
+	public void setHorarioEntradaDiariaNoturna(LocalTime horarioEntradaDiariaNoturna) {
+		this.horarioEntradaDiariaNoturna = horarioEntradaDiariaNoturna;
 	}
 
 }
