@@ -10,6 +10,11 @@ public class EstacionamentoBuilder {
 	private double valorDiariaDiurna;
 	private double descontoDiariaNoturna;
 	private LocalTime horarioEntradaDiariaNoturna;
+	private LocalTime horarioSaidaDiariaNoturna;
+
+	public LocalTime getHorarioSaidaDiariaNoturna() {
+		return horarioSaidaDiariaNoturna;
+	}
 
 	public LocalTime getHorarioEntradaDiariaNoturna() {
 		return horarioEntradaDiariaNoturna;
@@ -102,6 +107,10 @@ public class EstacionamentoBuilder {
 
 	public void setHorarioEntradaDiariaNoturna(LocalTime horarioEntradaDiariaNoturna) {
 		this.horarioEntradaDiariaNoturna = horarioEntradaDiariaNoturna;
+	}
+
+	public void setHorarioSaidaDiariaNoturna(LocalTime horarioSaidaDiariaNoturna) {
+		this.horarioSaidaDiariaNoturna = horarioSaidaDiariaNoturna;
 	}
 
 }
