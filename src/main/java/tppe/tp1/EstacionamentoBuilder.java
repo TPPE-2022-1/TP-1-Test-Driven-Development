@@ -6,6 +6,11 @@ public class EstacionamentoBuilder {
 	double valorFracao;
 	private double descontoHoraCheia;
 	private double valorDiariaDiurna;
+	private double descontoDiariaNoturna;
+
+	public double getDescontoDiariaNoturna() {
+		return descontoDiariaNoturna;
+	}
 
 	public double getValorDiariaDiurna() {
 		return valorDiariaDiurna;
@@ -74,6 +79,10 @@ public class EstacionamentoBuilder {
 		}
 		
 		this.valorDiariaDiurna = valorDiariaDiurna;
+	}
+
+	public void setDescontoDiariaNoturna(double descontoDiariaNoturna) {
+		this.descontoDiariaNoturna = descontoDiariaNoturna;
 	}
 
 }
