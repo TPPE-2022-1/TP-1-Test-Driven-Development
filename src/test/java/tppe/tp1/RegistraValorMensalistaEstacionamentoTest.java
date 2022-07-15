@@ -14,10 +14,30 @@ class RegistraValorMensalistaEstacionamentoTest {
 
 	@Test
 	@Tag("TesteFuncional")
-	void testAdicionaValorMensalista() {
+	void testAdicionaValorMensalista400() {
 		EstacionamentoBuilder estacionamentoBuilder = new EstacionamentoBuilder();
 
 		Double mensalidade = 400.00;
+		assertDoesNotThrow(() -> estacionamentoBuilder.setValorMensalidade(mensalidade));
+		assertEquals(mensalidade, estacionamentoBuilder.getValorMensalidade());
+	}
+	
+	@Test
+	@Tag("TesteFuncional")
+	void testAdicionaValorMensalista10025() {
+		EstacionamentoBuilder estacionamentoBuilder = new EstacionamentoBuilder();
+
+		Double mensalidade = 100.25;
+		assertDoesNotThrow(() -> estacionamentoBuilder.setValorMensalidade(mensalidade));
+		assertEquals(mensalidade, estacionamentoBuilder.getValorMensalidade());
+	}
+	
+	@Test
+	@Tag("TesteFuncional")
+	void testAdicionaValorMensalista052() {
+		EstacionamentoBuilder estacionamentoBuilder = new EstacionamentoBuilder();
+
+		Double mensalidade = 0.52;
 		assertDoesNotThrow(() -> estacionamentoBuilder.setValorMensalidade(mensalidade));
 		assertEquals(mensalidade, estacionamentoBuilder.getValorMensalidade());
 	}
