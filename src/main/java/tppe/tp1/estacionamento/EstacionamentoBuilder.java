@@ -29,9 +29,14 @@ public class EstacionamentoBuilder {
 	private Double valorMensalidade;
 	private Double valorEvento;
 	private LocalTime horarioAbertura;
+	private LocalTime horarioEncerramento;
 
 	public LocalTime getHorarioAbertura() {
 		return horarioAbertura;
+	}
+
+	public LocalTime getHorarioEncerramento() {
+		return horarioEncerramento;
 	}
 
 	public Double getValorEvento() {
@@ -164,6 +169,10 @@ public class EstacionamentoBuilder {
 
 	public void setHorarioAbertura(LocalTime horarioAbertura) {
 		this.horarioAbertura = horarioAbertura;
+	}
+
+	public void setHorarioEncerramento(LocalTime horarioEncerramento) {
+		this.horarioEncerramento = horarioEncerramento;
 	}
 
 }
