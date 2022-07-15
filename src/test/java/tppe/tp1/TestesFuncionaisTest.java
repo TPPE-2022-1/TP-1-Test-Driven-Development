@@ -8,7 +8,8 @@ import org.junit.platform.suite.api.SuiteDisplayName;
 @Suite
 @SelectClasses({ RegistraIdEstacionamentoTest.class, RegistraValorFracaoEstacionamentoTest.class,
 		RegistraValorHoraCheiaEstacionamentoTest.class, RegistraValorDiariaDiurnaEstacionamentoTest.class,
-		RegistraValorDiariaNoturnaEstacionamentoTest.class })
+		RegistraValorDiariaNoturnaEstacionamentoTest.class, RegistraHorarioEntradaDiariaNoturnaTest.class,
+		RegistraHorarioSaidaDiariaNoturnaTest.class })
 @IncludeTags("TesteFuncional")
 @SuiteDisplayName("Testes Funcionais")
 public class TestesFuncionaisTest {
