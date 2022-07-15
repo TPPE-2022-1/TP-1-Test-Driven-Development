@@ -14,10 +14,30 @@ public class RegistraHorarioAberturaTest {
 
 	@Test
 	@Tag("TesteFuncional")
-	void testaInsereHorarioEntrada() {
+	void testaInsereHorarioAbertura0600() {
 		EstacionamentoBuilder estacionamentoBuilder = new EstacionamentoBuilder();
 
 		LocalTime horarioAbertura = LocalTime.parse("06:00");
+		assertDoesNotThrow(() -> estacionamentoBuilder.setHorarioAbertura(horarioAbertura));
+		assertEquals(horarioAbertura, estacionamentoBuilder.getHorarioAbertura());
+	}
+
+	@Test
+	@Tag("TesteFuncional")
+	void testaInsereHorarioAbertura0630() {
+		EstacionamentoBuilder estacionamentoBuilder = new EstacionamentoBuilder();
+
+		LocalTime horarioAbertura = LocalTime.parse("06:30");
+		assertDoesNotThrow(() -> estacionamentoBuilder.setHorarioAbertura(horarioAbertura));
+		assertEquals(horarioAbertura, estacionamentoBuilder.getHorarioAbertura());
+	}
+
+	@Test
+	@Tag("TesteFuncional")
+	void testaInsereHorarioAbertura0000() {
+		EstacionamentoBuilder estacionamentoBuilder = new EstacionamentoBuilder();
+
+		LocalTime horarioAbertura = LocalTime.parse("00:00");
 		assertDoesNotThrow(() -> estacionamentoBuilder.setHorarioAbertura(horarioAbertura));
 		assertEquals(horarioAbertura, estacionamentoBuilder.getHorarioAbertura());
 	}
