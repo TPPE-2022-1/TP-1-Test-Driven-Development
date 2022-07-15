@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import tppe.tp1.estacionamento.EstacionamentoBuilder;
+import tppe.tp1.estacionamento.exceptions.EstacionamentoValorEventoInvalidoNegativoException;
+import tppe.tp1.estacionamento.exceptions.EstacionamentoValorMensalidadeInvalidoNegativoException;
 
 public class RegistraValorEventoEstacionamentoTest {
 
@@ -23,7 +25,7 @@ public class RegistraValorEventoEstacionamentoTest {
 		assertDoesNotThrow(() -> estacionamentoBuilder.setValorEvento(valorEvento));
 		assertEquals(valorEvento, estacionamentoBuilder.getValorEvento());
 	}
-	
+
 	@Test
 	@Tag("TesteFuncional")
 	void testAdicionaValorEvento0() {
@@ -33,7 +35,7 @@ public class RegistraValorEventoEstacionamentoTest {
 		assertDoesNotThrow(() -> estacionamentoBuilder.setValorEvento(valorEvento));
 		assertEquals(valorEvento, estacionamentoBuilder.getValorEvento());
 	}
-	
+
 	@Test
 	@Tag("TesteFuncional")
 	void testAdicionaValorEvento12345() {
@@ -42,5 +44,15 @@ public class RegistraValorEventoEstacionamentoTest {
 		Double valorEvento = 123.45;
 		assertDoesNotThrow(() -> estacionamentoBuilder.setValorEvento(valorEvento));
 		assertEquals(valorEvento, estacionamentoBuilder.getValorEvento());
+	}
+
+	@Test
+	@Tag("TesteExcecao")
+	void testValorEventoInvalidoNegativo() {
+		EstacionamentoBuilder estacionamentoBuilder = new EstacionamentoBuilder();
+
+		Double valorEvento = -0.01;
+		assertThrows(EstacionamentoValorEventoInvalidoNegativoException.class,
+				() -> estacionamentoBuilder.setValorEvento(valorEvento));
 	}
 }

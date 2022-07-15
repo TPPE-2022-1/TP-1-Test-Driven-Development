@@ -7,6 +7,7 @@ import tppe.tp1.estacionamento.exceptions.EstacionamentoValorDiariaDiurnaInvalid
 import tppe.tp1.estacionamento.exceptions.EstacionamentoValorDiariaDiurnaInvalidoZeroException;
 import tppe.tp1.estacionamento.exceptions.EstacionamentoValorDiariaNoturnaInvalidoMaior100Exception;
 import tppe.tp1.estacionamento.exceptions.EstacionamentoValorDiariaNoturnaInvalidoNegativoException;
+import tppe.tp1.estacionamento.exceptions.EstacionamentoValorEventoInvalidoNegativoException;
 import tppe.tp1.estacionamento.exceptions.EstacionamentoValorFracaoInvalidoException;
 import tppe.tp1.estacionamento.exceptions.EstacionamentoValorFracaoInvalidoNegativoException;
 import tppe.tp1.estacionamento.exceptions.EstacionamentoValorFracaoInvalidoZeroException;
@@ -149,7 +150,10 @@ public class EstacionamentoBuilder {
 		this.valorMensalidade = mensalidade;
 	}
 
-	public void setValorEvento(Double valorEvento) {
+	public void setValorEvento(Double valorEvento) throws EstacionamentoValorEventoInvalidoNegativoException {
+		if (valorEvento < 0.00) {
+			throw new EstacionamentoValorEventoInvalidoNegativoException();
+		}
 		this.valorEvento = valorEvento;
 	}
 
