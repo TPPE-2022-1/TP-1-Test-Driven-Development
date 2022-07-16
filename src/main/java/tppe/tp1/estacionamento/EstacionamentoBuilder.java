@@ -30,6 +30,11 @@ public class EstacionamentoBuilder {
 	private Double valorEvento;
 	private LocalTime horarioAbertura;
 	private LocalTime horarioEncerramento;
+	private Integer capacidade;
+
+	public Integer getCapacidade() {
+		return capacidade;
+	}
 
 	public LocalTime getHorarioAbertura() {
 		return horarioAbertura;
@@ -97,11 +102,11 @@ public class EstacionamentoBuilder {
 		if (Double.compare(valorFracao, 0.00) == 0) {
 			throw new EstacionamentoValorFracaoInvalidoZeroException();
 		}
-		
+
 		if (valorFracao < 0.00) {
 			throw new EstacionamentoValorFracaoInvalidoNegativoException();
 		}
-		
+
 		this.valorFracao = valorFracao;
 	}
 
@@ -109,34 +114,38 @@ public class EstacionamentoBuilder {
 		if (descontoHoraCheia < 0.0) {
 			throw new EstacionamentoValorHoraCheiaInvalidoNegativoException();
 		}
-		
+
 		if (descontoHoraCheia > 100.0) {
 			throw new EstacionamentoValorHoraCheiaInvalidoMaior100Exception();
 		}
 		this.descontoHoraCheia = descontoHoraCheia;
 	}
 
-	public void setValorDiariaDiurna(double valorDiariaDiurna) throws EstacionamentoValorDiariaDiurnaInvalidoZeroException, EstacionamentoValorDiariaDiurnaInvalidoNegativoException {
+	public void setValorDiariaDiurna(double valorDiariaDiurna)
+			throws EstacionamentoValorDiariaDiurnaInvalidoZeroException,
+			EstacionamentoValorDiariaDiurnaInvalidoNegativoException {
 		if (Double.compare(valorDiariaDiurna, 0.00) == 0) {
 			throw new EstacionamentoValorDiariaDiurnaInvalidoZeroException();
 		}
-		
+
 		if (valorDiariaDiurna < 0.00) {
 			throw new EstacionamentoValorDiariaDiurnaInvalidoNegativoException();
 		}
-		
+
 		this.valorDiariaDiurna = valorDiariaDiurna;
 	}
 
-	public void setDescontoDiariaNoturna(double descontoDiariaNoturna) throws EstacionamentoValorDiariaNoturnaInvalidoNegativoException, EstacionamentoValorDiariaNoturnaInvalidoMaior100Exception {
+	public void setDescontoDiariaNoturna(double descontoDiariaNoturna)
+			throws EstacionamentoValorDiariaNoturnaInvalidoNegativoException,
+			EstacionamentoValorDiariaNoturnaInvalidoMaior100Exception {
 		if (descontoDiariaNoturna < 0.0) {
 			throw new EstacionamentoValorDiariaNoturnaInvalidoNegativoException();
 		}
-		
+
 		if (descontoDiariaNoturna > 100.0) {
 			throw new EstacionamentoValorDiariaNoturnaInvalidoMaior100Exception();
 		}
-		
+
 		this.descontoDiariaNoturna = descontoDiariaNoturna;
 	}
 
@@ -148,15 +157,16 @@ public class EstacionamentoBuilder {
 		this.horarioSaidaDiariaNoturna = horarioSaidaDiariaNoturna;
 	}
 
-	public void setValorMensalidade(Double mensalidade) throws EstacionamentoValorMensalidadeInvalidoZeroException, EstacionamentoValorMensalidadeInvalidoNegativoException {
+	public void setValorMensalidade(Double mensalidade) throws EstacionamentoValorMensalidadeInvalidoZeroException,
+			EstacionamentoValorMensalidadeInvalidoNegativoException {
 		if (mensalidade.compareTo(0.00) == 0) {
 			throw new EstacionamentoValorMensalidadeInvalidoZeroException();
 		}
-		
+
 		if (mensalidade < 0.00) {
 			throw new EstacionamentoValorMensalidadeInvalidoNegativoException();
 		}
-		
+
 		this.valorMensalidade = mensalidade;
 	}
 
@@ -173,6 +183,10 @@ public class EstacionamentoBuilder {
 
 	public void setHorarioEncerramento(LocalTime horarioEncerramento) {
 		this.horarioEncerramento = horarioEncerramento;
+	}
+
+	public void setCapacidade(Integer capacidade) {
+		this.capacidade = capacidade;
 	}
 
 }
