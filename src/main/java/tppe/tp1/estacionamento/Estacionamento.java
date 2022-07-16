@@ -1,12 +1,12 @@
 package tppe.tp1.estacionamento;
 
 public class Estacionamento {
-	private int id;
-	private double valorFracao;
+	private Integer id;
+	private Double valorFracao;
 	
 	Estacionamento(EstacionamentoBuilder builder) {
-		this.id = builder.id;
-		this.valorFracao = builder.valorFracao;
+		this.id = builder.getId();
+		this.valorFracao = builder.getValorFracao();
 	}
 
 	public Integer getId() {

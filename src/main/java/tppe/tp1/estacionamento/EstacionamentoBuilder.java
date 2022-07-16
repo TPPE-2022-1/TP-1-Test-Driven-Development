@@ -23,11 +23,11 @@ import tppe.tp1.estacionamento.exceptions.EstacionamentoValorMensalidadeInvalido
 
 public class EstacionamentoBuilder {
 
-	int id;
-	double valorFracao;
-	private double descontoHoraCheia;
-	private double valorDiariaDiurna;
-	private double descontoDiariaNoturna;
+	private Integer id;
+	private Double valorFracao;
+	private Double descontoHoraCheia;
+	private Double valorDiariaDiurna;
+	private Double descontoDiariaNoturna;
 	private LocalTime horarioEntradaDiariaNoturna;
 	private LocalTime horarioSaidaDiariaNoturna;
 	private Double valorMensalidade;
