@@ -33,6 +33,11 @@ public class EstacionamentoBuilder {
 	private LocalTime horarioAbertura;
 	private LocalTime horarioEncerramento;
 	private Integer capacidade;
+	private Double retornoContratante;
+
+	public Double getRetornoContratante() {
+		return retornoContratante;
+	}
 
 	public Integer getCapacidade() {
 		return capacidade;
@@ -199,6 +204,10 @@ public class EstacionamentoBuilder {
 		}
 
 		this.capacidade = capacidade;
+	}
+
+	public void setRetornoContratante(Double retornoContratante) {
+		this.retornoContratante = retornoContratante;
 	}
 
 }
