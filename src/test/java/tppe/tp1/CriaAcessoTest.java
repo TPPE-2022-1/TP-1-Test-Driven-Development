@@ -12,6 +12,8 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import tppe.tp1.acesso.Acesso;
 import tppe.tp1.acesso.AcessoBuilder;
+import tppe.tp1.acesso.exceptions.AcessoPlacaInvalidaException;
+import tppe.tp1.acesso.exceptions.AcessoPlacaVazioException;
 
 public class CriaAcessoTest {
 
@@ -19,7 +21,7 @@ public class CriaAcessoTest {
 	@ParameterizedTest
 	@MethodSource("criaAcessos")
 	@Tag("TesteFuncional")
-	void testCriaAcesso(String placa, String entrada, String saida) {
+	void testCriaAcesso(String placa, String entrada, String saida) throws AcessoPlacaInvalidaException, AcessoPlacaVazioException {
 		AcessoBuilder acessoBuilder = new AcessoBuilder();
 
 		LocalTime horaEntrada = LocalTime.parse(entrada);
