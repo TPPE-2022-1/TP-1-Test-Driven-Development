@@ -1,5 +1,6 @@
 package tppe.tp1;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalTime;
@@ -13,7 +14,7 @@ import tppe.tp1.estacionamento.EstacionamentoBuilder;
 public class CriaEstacionamentoTest {
 	@Test
 	@Tag("TesteFuncional")
-	void testCriaestacionamento0() throws Exception {
+	void testCriaestacionamento0() {
 		EstacionamentoBuilder estacionamentoBuilder = new EstacionamentoBuilder();
 
 		Integer id = 0;
@@ -30,21 +31,25 @@ public class CriaEstacionamentoTest {
 		Integer capacidade = 300;
 		Double retornoContratante = 50.0;
 
-		estacionamentoBuilder.setId(id);
-		estacionamentoBuilder.setValorFracao(valorFracao);
-		estacionamentoBuilder.setDescontoHoraCheia(descontoHoraCheia);
-		estacionamentoBuilder.setValorDiariaDiurna(valorDiariaDiurna);
-		estacionamentoBuilder.setDescontoDiariaNoturna(descontoDiariaNoturna);
-		estacionamentoBuilder.setHorarioEntradaDiariaNoturna(entradaDiariaNoturna);
-		estacionamentoBuilder.setHorarioSaidaDiariaNoturna(saidaDiariaNoturna);
-		estacionamentoBuilder.setValorMensalidade(mensalidade);
-		estacionamentoBuilder.setValorEvento(valorEvento);
-		estacionamentoBuilder.setHorarioAbertura(horarioAbertura);
-		estacionamentoBuilder.setHorarioEncerramento(horarioFechamento);
-		estacionamentoBuilder.setCapacidade(capacidade);
-		estacionamentoBuilder.setRetornoContratante(retornoContratante);
+		assertDoesNotThrow(() -> {
+			estacionamentoBuilder.setId(id);
+			estacionamentoBuilder.setValorFracao(valorFracao);
+			estacionamentoBuilder.setDescontoHoraCheia(descontoHoraCheia);
+			estacionamentoBuilder.setValorDiariaDiurna(valorDiariaDiurna);
+			estacionamentoBuilder.setDescontoDiariaNoturna(descontoDiariaNoturna);
+			estacionamentoBuilder.setHorarioEntradaDiariaNoturna(entradaDiariaNoturna);
+			estacionamentoBuilder.setHorarioSaidaDiariaNoturna(saidaDiariaNoturna);
+			estacionamentoBuilder.setValorMensalidade(mensalidade);
+			estacionamentoBuilder.setValorEvento(valorEvento);
+			estacionamentoBuilder.setHorarioAbertura(horarioAbertura);
+			estacionamentoBuilder.setHorarioEncerramento(horarioFechamento);
+			estacionamentoBuilder.setCapacidade(capacidade);
+			estacionamentoBuilder.setRetornoContratante(retornoContratante);
+		});
 
-		Estacionamento estacionamento = estacionamentoBuilder.build();
+		Estacionamento estacionamento = assertDoesNotThrow(() -> {
+			return estacionamentoBuilder.build();
+		});
 
 		assertEquals(id, estacionamento.getId());
 		assertEquals(valorFracao, estacionamento.getValorFracao());
@@ -60,10 +65,10 @@ public class CriaEstacionamentoTest {
 		assertEquals(capacidade, estacionamento.getCapacidade());
 		assertEquals(retornoContratante, estacionamento.getRetornoContratante());
 	}
-	
+
 	@Test
 	@Tag("TesteFuncional")
-	void testCriaestacionamento1() throws Exception {
+	void testCriaestacionamento1() {
 		EstacionamentoBuilder estacionamentoBuilder = new EstacionamentoBuilder();
 
 		Integer id = 1;
@@ -80,21 +85,25 @@ public class CriaEstacionamentoTest {
 		Integer capacidade = 120;
 		Double retornoContratante = 60.0;
 
-		estacionamentoBuilder.setId(id);
-		estacionamentoBuilder.setValorFracao(valorFracao);
-		estacionamentoBuilder.setDescontoHoraCheia(descontoHoraCheia);
-		estacionamentoBuilder.setValorDiariaDiurna(valorDiariaDiurna);
-		estacionamentoBuilder.setDescontoDiariaNoturna(descontoDiariaNoturna);
-		estacionamentoBuilder.setHorarioEntradaDiariaNoturna(entradaDiariaNoturna);
-		estacionamentoBuilder.setHorarioSaidaDiariaNoturna(saidaDiariaNoturna);
-		estacionamentoBuilder.setValorMensalidade(mensalidade);
-		estacionamentoBuilder.setValorEvento(valorEvento);
-		estacionamentoBuilder.setHorarioAbertura(horarioAbertura);
-		estacionamentoBuilder.setHorarioEncerramento(horarioFechamento);
-		estacionamentoBuilder.setCapacidade(capacidade);
-		estacionamentoBuilder.setRetornoContratante(retornoContratante);
+		assertDoesNotThrow(() -> {
+			estacionamentoBuilder.setId(id);
+			estacionamentoBuilder.setValorFracao(valorFracao);
+			estacionamentoBuilder.setDescontoHoraCheia(descontoHoraCheia);
+			estacionamentoBuilder.setValorDiariaDiurna(valorDiariaDiurna);
+			estacionamentoBuilder.setDescontoDiariaNoturna(descontoDiariaNoturna);
+			estacionamentoBuilder.setHorarioEntradaDiariaNoturna(entradaDiariaNoturna);
+			estacionamentoBuilder.setHorarioSaidaDiariaNoturna(saidaDiariaNoturna);
+			estacionamentoBuilder.setValorMensalidade(mensalidade);
+			estacionamentoBuilder.setValorEvento(valorEvento);
+			estacionamentoBuilder.setHorarioAbertura(horarioAbertura);
+			estacionamentoBuilder.setHorarioEncerramento(horarioFechamento);
+			estacionamentoBuilder.setCapacidade(capacidade);
+			estacionamentoBuilder.setRetornoContratante(retornoContratante);
+		});
 
-		Estacionamento estacionamento = estacionamentoBuilder.build();
+		Estacionamento estacionamento = assertDoesNotThrow(() -> {
+			return estacionamentoBuilder.build();
+		});
 
 		assertEquals(id, estacionamento.getId());
 		assertEquals(valorFracao, estacionamento.getValorFracao());
@@ -113,7 +122,7 @@ public class CriaEstacionamentoTest {
 
 	@Test
 	@Tag("TesteFuncional")
-	void testCriaestacionamento2() throws Exception {
+	void testCriaestacionamento2() {
 		EstacionamentoBuilder estacionamentoBuilder = new EstacionamentoBuilder();
 
 		Integer id = 2;
@@ -130,21 +139,25 @@ public class CriaEstacionamentoTest {
 		Integer capacidade = 600;
 		Double retornoContratante = 70.0;
 
-		estacionamentoBuilder.setId(id);
-		estacionamentoBuilder.setValorFracao(valorFracao);
-		estacionamentoBuilder.setDescontoHoraCheia(descontoHoraCheia);
-		estacionamentoBuilder.setValorDiariaDiurna(valorDiariaDiurna);
-		estacionamentoBuilder.setDescontoDiariaNoturna(descontoDiariaNoturna);
-		estacionamentoBuilder.setHorarioEntradaDiariaNoturna(entradaDiariaNoturna);
-		estacionamentoBuilder.setHorarioSaidaDiariaNoturna(saidaDiariaNoturna);
-		estacionamentoBuilder.setValorMensalidade(mensalidade);
-		estacionamentoBuilder.setValorEvento(valorEvento);
-		estacionamentoBuilder.setHorarioAbertura(horarioAbertura);
-		estacionamentoBuilder.setHorarioEncerramento(horarioFechamento);
-		estacionamentoBuilder.setCapacidade(capacidade);
-		estacionamentoBuilder.setRetornoContratante(retornoContratante);
+		assertDoesNotThrow(() -> {
+			estacionamentoBuilder.setId(id);
+			estacionamentoBuilder.setValorFracao(valorFracao);
+			estacionamentoBuilder.setDescontoHoraCheia(descontoHoraCheia);
+			estacionamentoBuilder.setValorDiariaDiurna(valorDiariaDiurna);
+			estacionamentoBuilder.setDescontoDiariaNoturna(descontoDiariaNoturna);
+			estacionamentoBuilder.setHorarioEntradaDiariaNoturna(entradaDiariaNoturna);
+			estacionamentoBuilder.setHorarioSaidaDiariaNoturna(saidaDiariaNoturna);
+			estacionamentoBuilder.setValorMensalidade(mensalidade);
+			estacionamentoBuilder.setValorEvento(valorEvento);
+			estacionamentoBuilder.setHorarioAbertura(horarioAbertura);
+			estacionamentoBuilder.setHorarioEncerramento(horarioFechamento);
+			estacionamentoBuilder.setCapacidade(capacidade);
+			estacionamentoBuilder.setRetornoContratante(retornoContratante);
+		});
 
-		Estacionamento estacionamento = estacionamentoBuilder.build();
+		Estacionamento estacionamento = assertDoesNotThrow(() -> {
+			return estacionamentoBuilder.build();
+		});
 
 		assertEquals(id, estacionamento.getId());
 		assertEquals(valorFracao, estacionamento.getValorFracao());
@@ -160,4 +173,4 @@ public class CriaEstacionamentoTest {
 		assertEquals(capacidade, estacionamento.getCapacidade());
 		assertEquals(retornoContratante, estacionamento.getRetornoContratante());
 	}
-	}
+}
