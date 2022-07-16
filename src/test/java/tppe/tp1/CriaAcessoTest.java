@@ -32,11 +32,33 @@ public class CriaAcessoTest {
 		assertEquals(horaSaida, acesso.getHoraSaida());
 	}
 
+	@Test
+	@Tag("TesteFuncional")
 	void testCriaAcessoD() throws Exception  {
 		AcessoBuilder acessoBuilder = new AcessoBuilder();
 		
 		String placa = "JGC2830";
 		LocalTime horaEntrada = LocalTime.of(10, 30);
+		LocalTime horaSaida = LocalTime.of(15, 30);
+		
+		acessoBuilder.setPlaca(placa);
+		acessoBuilder.setHoraEntrada(horaEntrada);
+		acessoBuilder.setHoraSaida(horaSaida);
+		
+		Acesso acesso = acessoBuilder.build();
+		
+		assertEquals(placa, acesso.getPlaca());
+		assertEquals(horaEntrada, acesso.getHoraEntrada());
+		assertEquals(horaSaida, acesso.getHoraSaida());
+	}
+
+	@Test
+	@Tag("TesteFuncional")
+	void testCriaAcessoT() throws Exception  {
+		AcessoBuilder acessoBuilder = new AcessoBuilder();
+		
+		String placa = "JHX1785";
+		LocalTime horaEntrada = LocalTime.of(7, 30);
 		LocalTime horaSaida = LocalTime.of(15, 30);
 		
 		acessoBuilder.setPlaca(placa);
