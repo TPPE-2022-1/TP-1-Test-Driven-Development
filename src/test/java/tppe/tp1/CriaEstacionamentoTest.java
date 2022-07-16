@@ -13,7 +13,7 @@ import tppe.tp1.estacionamento.EstacionamentoBuilder;
 public class CriaEstacionamentoTest {
 	@Test
 	@Tag("TesteFuncional")
-	void testCriaestacionamento() throws Exception {
+	void testCriaestacionamento0() throws Exception {
 		EstacionamentoBuilder estacionamentoBuilder = new EstacionamentoBuilder();
 
 		Integer id = 0;
@@ -60,4 +60,104 @@ public class CriaEstacionamentoTest {
 		assertEquals(capacidade, estacionamento.getCapacidade());
 		assertEquals(retornoContratante, estacionamento.getRetornoContratante());
 	}
-}
+	
+	@Test
+	@Tag("TesteFuncional")
+	void testCriaestacionamento1() throws Exception {
+		EstacionamentoBuilder estacionamentoBuilder = new EstacionamentoBuilder();
+
+		Integer id = 1;
+		Double valorFracao = 20.00;
+		Double descontoHoraCheia = 10.0;
+		Double valorDiariaDiurna = 70.00;
+		Double descontoDiariaNoturna = 30.0;
+		LocalTime entradaDiariaNoturna = LocalTime.of(21, 0);
+		LocalTime saidaDiariaNoturna = LocalTime.of(7, 0);
+		Double mensalidade = 455.0;
+		Double valorEvento = 60.0;
+		LocalTime horarioAbertura = LocalTime.MIN;
+		LocalTime horarioFechamento = LocalTime.MAX;
+		Integer capacidade = 120;
+		Double retornoContratante = 60.0;
+
+		estacionamentoBuilder.setId(id);
+		estacionamentoBuilder.setValorFracao(valorFracao);
+		estacionamentoBuilder.setDescontoHoraCheia(descontoHoraCheia);
+		estacionamentoBuilder.setValorDiariaDiurna(valorDiariaDiurna);
+		estacionamentoBuilder.setDescontoDiariaNoturna(descontoDiariaNoturna);
+		estacionamentoBuilder.setHorarioEntradaDiariaNoturna(entradaDiariaNoturna);
+		estacionamentoBuilder.setHorarioSaidaDiariaNoturna(saidaDiariaNoturna);
+		estacionamentoBuilder.setValorMensalidade(mensalidade);
+		estacionamentoBuilder.setValorEvento(valorEvento);
+		estacionamentoBuilder.setHorarioAbertura(horarioAbertura);
+		estacionamentoBuilder.setHorarioEncerramento(horarioFechamento);
+		estacionamentoBuilder.setCapacidade(capacidade);
+		estacionamentoBuilder.setRetornoContratante(retornoContratante);
+
+		Estacionamento estacionamento = estacionamentoBuilder.build();
+
+		assertEquals(id, estacionamento.getId());
+		assertEquals(valorFracao, estacionamento.getValorFracao());
+		assertEquals(descontoHoraCheia, estacionamento.getDescontoHoraCheia());
+		assertEquals(valorDiariaDiurna, estacionamento.getValorDiariaDiurna());
+		assertEquals(descontoDiariaNoturna, estacionamento.getDescontoDiariaNoturna());
+		assertEquals(entradaDiariaNoturna, estacionamento.getHorarioEntradaDiariaNoturna());
+		assertEquals(saidaDiariaNoturna, estacionamento.getHorarioSaidaDiariaNoturna());
+		assertEquals(mensalidade, estacionamento.getValorMensalidade());
+		assertEquals(valorEvento, estacionamento.getValorEvento());
+		assertEquals(horarioAbertura, estacionamento.getHorarioAbertura());
+		assertEquals(horarioFechamento, estacionamento.getHorarioEncerramento());
+		assertEquals(capacidade, estacionamento.getCapacidade());
+		assertEquals(retornoContratante, estacionamento.getRetornoContratante());
+	}
+
+	@Test
+	@Tag("TesteFuncional")
+	void testCriaestacionamento2() throws Exception {
+		EstacionamentoBuilder estacionamentoBuilder = new EstacionamentoBuilder();
+
+		Integer id = 2;
+		Double valorFracao = 10.00;
+		Double descontoHoraCheia = 0.0;
+		Double valorDiariaDiurna = 50.00;
+		Double descontoDiariaNoturna = 40.0;
+		LocalTime entradaDiariaNoturna = LocalTime.of(20, 0);
+		LocalTime saidaDiariaNoturna = LocalTime.of(8, 0);
+		Double mensalidade = 350.0;
+		Double valorEvento = 40.0;
+		LocalTime horarioAbertura = LocalTime.of(6, 0);
+		LocalTime horarioFechamento = LocalTime.of(22, 0);
+		Integer capacidade = 600;
+		Double retornoContratante = 70.0;
+
+		estacionamentoBuilder.setId(id);
+		estacionamentoBuilder.setValorFracao(valorFracao);
+		estacionamentoBuilder.setDescontoHoraCheia(descontoHoraCheia);
+		estacionamentoBuilder.setValorDiariaDiurna(valorDiariaDiurna);
+		estacionamentoBuilder.setDescontoDiariaNoturna(descontoDiariaNoturna);
+		estacionamentoBuilder.setHorarioEntradaDiariaNoturna(entradaDiariaNoturna);
+		estacionamentoBuilder.setHorarioSaidaDiariaNoturna(saidaDiariaNoturna);
+		estacionamentoBuilder.setValorMensalidade(mensalidade);
+		estacionamentoBuilder.setValorEvento(valorEvento);
+		estacionamentoBuilder.setHorarioAbertura(horarioAbertura);
+		estacionamentoBuilder.setHorarioEncerramento(horarioFechamento);
+		estacionamentoBuilder.setCapacidade(capacidade);
+		estacionamentoBuilder.setRetornoContratante(retornoContratante);
+
+		Estacionamento estacionamento = estacionamentoBuilder.build();
+
+		assertEquals(id, estacionamento.getId());
+		assertEquals(valorFracao, estacionamento.getValorFracao());
+		assertEquals(descontoHoraCheia, estacionamento.getDescontoHoraCheia());
+		assertEquals(valorDiariaDiurna, estacionamento.getValorDiariaDiurna());
+		assertEquals(descontoDiariaNoturna, estacionamento.getDescontoDiariaNoturna());
+		assertEquals(entradaDiariaNoturna, estacionamento.getHorarioEntradaDiariaNoturna());
+		assertEquals(saidaDiariaNoturna, estacionamento.getHorarioSaidaDiariaNoturna());
+		assertEquals(mensalidade, estacionamento.getValorMensalidade());
+		assertEquals(valorEvento, estacionamento.getValorEvento());
+		assertEquals(horarioAbertura, estacionamento.getHorarioAbertura());
+		assertEquals(horarioFechamento, estacionamento.getHorarioEncerramento());
+		assertEquals(capacidade, estacionamento.getCapacidade());
+		assertEquals(retornoContratante, estacionamento.getRetornoContratante());
+	}
+	}
