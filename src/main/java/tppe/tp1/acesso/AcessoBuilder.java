@@ -2,6 +2,9 @@ package tppe.tp1.acesso;
 
 import java.time.LocalTime;
 
+import tppe.tp1.acesso.exceptions.AcessoPlacaInvalidaException;
+
+
 public class AcessoBuilder {
 	
 	private String placa;
@@ -15,6 +18,7 @@ public class AcessoBuilder {
 		return new Acesso(this);
 	}
 
+	// GET
 	public String getPlaca() {
 		return placa;
 	}
@@ -38,7 +42,9 @@ public class AcessoBuilder {
 	public Float getValorContratante() {
 		return valorContratante;
 	}
-
+	// Fim Get
+	
+	//	SET
 	public void setValorContratante(Float valorContratante) {
 		this.valorContratante = valorContratante;
 	}
@@ -55,12 +61,15 @@ public class AcessoBuilder {
 		this.horaSaida = horaSaida;
 	}
 
-	public void setPlaca(String placa) {
+	public void setPlaca(String placa) throws AcessoPlacaInvalidaException {
+		if(placa.length() != 7) {
+			throw new AcessoPlacaInvalidaException();
+		}
 		this.placa = placa;
 	}
 
 	public void setHoraEntrada(LocalTime horaEntrada) {
 		this.horaEntrada = horaEntrada;
 	}
-	
+	//	FIM SET
 }
