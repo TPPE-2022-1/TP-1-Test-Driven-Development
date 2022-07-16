@@ -5,6 +5,8 @@ import java.time.LocalTime;
 import tppe.tp1.estacionamento.exceptions.EstacionamentoCapacidadeInvalidaNegativaException;
 import tppe.tp1.estacionamento.exceptions.EstacionamentoCapacidadeInvalidaZeroException;
 import tppe.tp1.estacionamento.exceptions.EstacionamentoIdInvalidoException;
+import tppe.tp1.estacionamento.exceptions.EstacionamentoRetornoContratanteInvalidoNegativoException;
+import tppe.tp1.estacionamento.exceptions.EstacionamentoRetornoContratanteInvalidoZeroException;
 import tppe.tp1.estacionamento.exceptions.EstacionamentoValorDiariaDiurnaInvalidoNegativoException;
 import tppe.tp1.estacionamento.exceptions.EstacionamentoValorDiariaDiurnaInvalidoZeroException;
 import tppe.tp1.estacionamento.exceptions.EstacionamentoValorDiariaNoturnaInvalidoMaior100Exception;
@@ -206,7 +208,17 @@ public class EstacionamentoBuilder {
 		this.capacidade = capacidade;
 	}
 
-	public void setRetornoContratante(Double retornoContratante) {
+	public void setRetornoContratante(Double retornoContratante)
+			throws EstacionamentoRetornoContratanteInvalidoZeroException,
+			EstacionamentoRetornoContratanteInvalidoNegativoException {
+		if (retornoContratante.compareTo(0.0) == 0) {
+			throw new EstacionamentoRetornoContratanteInvalidoZeroException();
+		}
+
+		if (retornoContratante < 0) {
+			throw new EstacionamentoRetornoContratanteInvalidoNegativoException();
+		}
+
 		this.retornoContratante = retornoContratante;
 	}
 
