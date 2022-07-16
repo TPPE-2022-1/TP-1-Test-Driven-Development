@@ -3,6 +3,7 @@ package tppe.tp1.acesso;
 import java.time.LocalTime;
 
 import tppe.tp1.acesso.exceptions.AcessoPlacaInvalidaException;
+import tppe.tp1.acesso.exceptions.AcessoPlacaVazioException;
 
 
 public class AcessoBuilder {
@@ -61,8 +62,11 @@ public class AcessoBuilder {
 		this.horaSaida = horaSaida;
 	}
 
-	public void setPlaca(String placa) throws AcessoPlacaInvalidaException {
-		if(placa.length() != 7) {
+	public void setPlaca(String placa) throws AcessoPlacaInvalidaException, AcessoPlacaVazioException {
+		if(placa.trim().isEmpty()) {
+			throw new AcessoPlacaVazioException();
+		}
+		if(placa.trim().length() != 7) {
 			throw new AcessoPlacaInvalidaException();
 		}
 		this.placa = placa;
