@@ -2,6 +2,8 @@ package tppe.tp1.estacionamento;
 
 import java.time.LocalTime;
 
+import tppe.tp1.estacionamento.exceptions.EstacionamentoCapacidadeInvalidaNegativaException;
+import tppe.tp1.estacionamento.exceptions.EstacionamentoCapacidadeInvalidaZeroException;
 import tppe.tp1.estacionamento.exceptions.EstacionamentoIdInvalidoException;
 import tppe.tp1.estacionamento.exceptions.EstacionamentoValorDiariaDiurnaInvalidoNegativoException;
 import tppe.tp1.estacionamento.exceptions.EstacionamentoValorDiariaDiurnaInvalidoZeroException;
@@ -174,6 +176,7 @@ public class EstacionamentoBuilder {
 		if (valorEvento < 0.00) {
 			throw new EstacionamentoValorEventoInvalidoNegativoException();
 		}
+
 		this.valorEvento = valorEvento;
 	}
 
@@ -185,7 +188,16 @@ public class EstacionamentoBuilder {
 		this.horarioEncerramento = horarioEncerramento;
 	}
 
-	public void setCapacidade(Integer capacidade) {
+	public void setCapacidade(Integer capacidade)
+			throws EstacionamentoCapacidadeInvalidaZeroException, EstacionamentoCapacidadeInvalidaNegativaException {
+		if (capacidade.compareTo(0) == 0) {
+			throw new EstacionamentoCapacidadeInvalidaZeroException();
+		}
+
+		if (capacidade < 0) {
+			throw new EstacionamentoCapacidadeInvalidaNegativaException();
+		}
+
 		this.capacidade = capacidade;
 	}
 
