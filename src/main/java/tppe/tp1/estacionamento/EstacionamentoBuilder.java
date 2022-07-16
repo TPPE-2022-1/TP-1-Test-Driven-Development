@@ -20,6 +20,7 @@ import tppe.tp1.estacionamento.exceptions.EstacionamentoValorHoraCheiaInvalidoMa
 import tppe.tp1.estacionamento.exceptions.EstacionamentoValorHoraCheiaInvalidoNegativoException;
 import tppe.tp1.estacionamento.exceptions.EstacionamentoValorMensalidadeInvalidoNegativoException;
 import tppe.tp1.estacionamento.exceptions.EstacionamentoValorMensalidadeInvalidoZeroException;
+import tppe.tp1.estacionamento.exceptions.EstacionamentoValoresNoturnosInvalidos;
 
 public class EstacionamentoBuilder {
 
@@ -96,13 +97,18 @@ public class EstacionamentoBuilder {
 		this.id = id;
 	}
 
-	public Estacionamento build() throws EstacionamentoIdInvalidoException, EstacionamentoValorFracaoInvalidoException {
-		if (id < 0) {
-			throw new EstacionamentoIdInvalidoException();
+	public Estacionamento build() throws EstacionamentoValoresNoturnosInvalidos {
+		/*
+		 * Validar horário de entrada e saída da diária noturna
+		 * 
+		 * O horário de entrada deve ser maior (posterior) do que o de saída, pois se
+		 * refere ao dia anterior
+		 */
+		if (horarioEntradaDiariaNoturna.isBefore(horarioSaidaDiariaNoturna)) {
+			throw new EstacionamentoValoresNoturnosInvalidos(
+					"Horário de entrada deve posterior ao de saída, por acontecer no dia anterior");
 		}
-		if (Double.compare(valorFracao, 0.00) == 0) {
-			throw new EstacionamentoValorFracaoInvalidoException();
-		}
+
 		return new Estacionamento(this);
 	}
 
