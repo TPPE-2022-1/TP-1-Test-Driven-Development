@@ -4,6 +4,7 @@ import java.time.LocalTime;
 
 import tppe.tp1.estacionamento.exceptions.EstacionamentoCapacidadeInvalidaNegativaException;
 import tppe.tp1.estacionamento.exceptions.EstacionamentoCapacidadeInvalidaZeroException;
+import tppe.tp1.estacionamento.exceptions.EstacionamentoHorariosAberturaEncerramentoInvalidos;
 import tppe.tp1.estacionamento.exceptions.EstacionamentoIdInvalidoException;
 import tppe.tp1.estacionamento.exceptions.EstacionamentoRetornoContratanteInvalidoNegativoException;
 import tppe.tp1.estacionamento.exceptions.EstacionamentoRetornoContratanteInvalidoZeroException;
@@ -97,7 +98,19 @@ public class EstacionamentoBuilder {
 		this.id = id;
 	}
 
-	public Estacionamento build() throws EstacionamentoValoresNoturnosInvalidos {
+	public Estacionamento build()
+			throws EstacionamentoValoresNoturnosInvalidos, EstacionamentoHorariosAberturaEncerramentoInvalidos {
+		/*
+		 * Validar horário de abertura e encerramento
+		 * 
+		 * O horário de abertura deve ser anterior (menor) ao de encerramento, pois
+		 * ambos acontecem no mesmo dia
+		 */
+		if (horarioAbertura.isAfter(horarioEncerramento)) {
+			throw new EstacionamentoHorariosAberturaEncerramentoInvalidos(
+					"Horário de abertura deve ser anterior ao de encerramento");
+		}
+
 		/*
 		 * Validar horário de entrada e saída da diária noturna
 		 * 
