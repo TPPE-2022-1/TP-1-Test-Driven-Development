@@ -13,6 +13,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import tppe.tp1.acesso.AcessoBuilder;
 
+
 public class RegistroHoraEntradaTest {
 	@BeforeEach
 	void setUp() throws Exception {
@@ -25,7 +26,6 @@ public class RegistroHoraEntradaTest {
 				);
 	}
 	
-	
 	@ParameterizedTest
 	@MethodSource("geraHoraEntrada")
 	@Tag("TesteFuncional")
@@ -34,8 +34,9 @@ public class RegistroHoraEntradaTest {
 		LocalTime horaEntrada = LocalTime.parse(entrada);
 		acessoBuilder.setHoraEntrada(horaEntrada);
 		assertEquals(horaEntrada, acessoBuilder.getHoraEntrada());
-		
+
 	}
+	
 
 	
 }
