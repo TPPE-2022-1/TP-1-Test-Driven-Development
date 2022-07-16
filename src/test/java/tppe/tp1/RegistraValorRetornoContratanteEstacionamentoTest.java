@@ -16,10 +16,30 @@ public class RegistraValorRetornoContratanteEstacionamentoTest {
 
 	@Test
 	@Tag("TesteFuncional")
-	void testAdicionaValorRetornoContratante() {
+	void testAdicionaValorRetornoContratante15() {
 		EstacionamentoBuilder estacionamentoBuilder = new EstacionamentoBuilder();
 
 		Double retornoContratante = 15.0;
+		assertDoesNotThrow(() -> estacionamentoBuilder.setRetornoContratante(retornoContratante));
+		assertEquals(retornoContratante, estacionamentoBuilder.getRetornoContratante());
+	}
+
+	@Test
+	@Tag("TesteFuncional")
+	void testAdicionaValorRetornoContratante50() {
+		EstacionamentoBuilder estacionamentoBuilder = new EstacionamentoBuilder();
+
+		Double retornoContratante = 50.0;
+		assertDoesNotThrow(() -> estacionamentoBuilder.setRetornoContratante(retornoContratante));
+		assertEquals(retornoContratante, estacionamentoBuilder.getRetornoContratante());
+	}
+
+	@Test
+	@Tag("TesteFuncional")
+	void testAdicionaValorRetornoContratante3030() {
+		EstacionamentoBuilder estacionamentoBuilder = new EstacionamentoBuilder();
+
+		Double retornoContratante = 30.30;
 		assertDoesNotThrow(() -> estacionamentoBuilder.setRetornoContratante(retornoContratante));
 		assertEquals(retornoContratante, estacionamentoBuilder.getRetornoContratante());
 	}
