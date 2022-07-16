@@ -5,6 +5,8 @@ import org.junit.platform.suite.api.SelectClasses;
 import org.junit.platform.suite.api.Suite;
 import org.junit.platform.suite.api.SuiteDisplayName;
 
+import tppe.tp1.RegistraHorarioAberturaTest;
+import tppe.tp1.RegistraHorarioEncerramentoTest;
 import tppe.tp1.RegistraHorarioEntradaDiariaNoturnaTest;
 import tppe.tp1.RegistraHorarioSaidaDiariaNoturnaTest;
 import tppe.tp1.RegistraIdEstacionamentoTest;
@@ -20,7 +22,8 @@ import tppe.tp1.RegistraValorMensalistaEstacionamentoTest;
 		RegistraValorHoraCheiaEstacionamentoTest.class, RegistraValorDiariaDiurnaEstacionamentoTest.class,
 		RegistraValorDiariaNoturnaEstacionamentoTest.class, RegistraHorarioEntradaDiariaNoturnaTest.class,
 		RegistraHorarioSaidaDiariaNoturnaTest.class, RegistraValorMensalistaEstacionamentoTest.class,
-		RegistraValorEventoEstacionamentoTest.class })
+		RegistraValorEventoEstacionamentoTest.class, RegistraHorarioAberturaTest.class,
+		RegistraHorarioEncerramentoTest.class })
 @IncludeTags("TesteFuncional")
 @SuiteDisplayName("Testes Funcionais")
 public class TestesFuncionaisTest {
