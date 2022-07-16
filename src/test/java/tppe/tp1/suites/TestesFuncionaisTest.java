@@ -17,6 +17,7 @@ import tppe.tp1.RegistraValorEventoEstacionamentoTest;
 import tppe.tp1.RegistraValorFracaoEstacionamentoTest;
 import tppe.tp1.RegistraValorHoraCheiaEstacionamentoTest;
 import tppe.tp1.RegistraValorMensalistaEstacionamentoTest;
+import tppe.tp1.RegistraValorRetornoContratanteEstacionamentoTest;
 
 @Suite
 @SelectClasses({ RegistraIdEstacionamentoTest.class, RegistraValorFracaoEstacionamentoTest.class,
@@ -24,7 +25,8 @@ import tppe.tp1.RegistraValorMensalistaEstacionamentoTest;
 		RegistraValorDiariaNoturnaEstacionamentoTest.class, RegistraHorarioEntradaDiariaNoturnaTest.class,
 		RegistraHorarioSaidaDiariaNoturnaTest.class, RegistraValorMensalistaEstacionamentoTest.class,
 		RegistraValorEventoEstacionamentoTest.class, RegistraHorarioAberturaTest.class,
-		RegistraHorarioEncerramentoTest.class, RegistraCapacidadeTest.class })
+		RegistraHorarioEncerramentoTest.class, RegistraCapacidadeTest.class,
+		RegistraValorRetornoContratanteEstacionamentoTest.class })
 @IncludeTags("TesteFuncional")
 @SuiteDisplayName("Testes Funcionais")
 public class TestesFuncionaisTest {
