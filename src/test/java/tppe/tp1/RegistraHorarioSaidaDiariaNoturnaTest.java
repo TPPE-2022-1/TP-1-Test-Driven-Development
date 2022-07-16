@@ -32,7 +32,7 @@ public class RegistraHorarioSaidaDiariaNoturnaTest {
 	@ParameterizedTest
 	@MethodSource("getHoraSaidaDiariaNoturna")
 	@Tag("TesteFuncional")
-	void testaInsereHorarioSaida0300(String entrada) {
+	void testaInsereHorarioSaida(String entrada) {
 		EstacionamentoBuilder estacionamentoBuilder = new EstacionamentoBuilder();
 
 		LocalTime horarioSaidaDiariaNoturna = LocalTime.parse(entrada);
