@@ -98,7 +98,6 @@ public class Estacionamento {
 		long minutosCorridos = calculaDiferencaMinutos(horaEntrada, horaSaida);
 		int fracoes = 0;
 
-		if (minutosCorridos < 15) return 0.00;
 		if (minutosCorridos % 15 > 0) fracoes++;
 		fracoes += minutosCorridos / 15;
 

@@ -49,7 +49,7 @@ public class CalculaFracoesTest {
 				Arguments.of(LocalTime.of(12, 00), LocalTime.of(12, 30), 60.00),
 				Arguments.of(LocalTime.of(12, 00), LocalTime.of(12, 16), 60.00),
 				Arguments.of(LocalTime.of(12, 00), LocalTime.of(12, 46), 0.00),
-				Arguments.of(LocalTime.of(12, 00), LocalTime.of(12, 14), 0.00));
+				Arguments.of(LocalTime.of(12, 00), LocalTime.of(12, 14), 30.00));
 	}
 
 }
