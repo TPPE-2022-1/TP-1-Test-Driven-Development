@@ -43,4 +43,14 @@ public class ChecaTipoEventoTest {
 	}
 	
 	
+	
+	@Test
+	@Tag("TesteFuncional")
+	void checaTipoEntradaT() throws Exception {
+		a.setTipoAcesso("Evento");
+		acesso = a.build();
+		assertTrue(acesso.isEvento(acesso.getTipoAcesso()));
+	}
+	
+	
 }
