@@ -3,12 +3,13 @@ package tppe.tp1;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalTime;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
-import tppe.tp1.acesso.AcessoBuilder;
 import tppe.tp1.estacionamento.Estacionamento;
 import tppe.tp1.estacionamento.EstacionamentoBuilder;
 
@@ -34,42 +35,19 @@ public class CalculaFracoesTest {
 		e.setRetornoContratante(50.00);
 		this.estacionamento = e.build();
 	}
-
-	@Test
-	@Tag("TesteFuncional")
-	void testacalculoFracao() throws Exception {
-		AcessoBuilder a = new AcessoBuilder();
-
-		a.setPlaca("JGM4711");
-		a.setHoraEntrada(LocalTime.of(12, 0));
-		a.setHoraSaida(LocalTime.of(12, 15));
-
-		assertEquals(30.00, estacionamento.calculaFracoes(a.getHoraEntrada(), a.getHoraSaida()));
+	
+	@ParameterizedTest
+	@MethodSource("geraAcessos")
+	void testacalculoFracao(LocalTime horaEntrada, LocalTime horaSaida, Double total) throws Exception {
+		assertEquals(total, estacionamento.calculaFracoes(horaEntrada, horaSaida));
 	}
 	
-	@Test
-	@Tag("TesteFuncional")
-	void testacalculoFracaoD() throws Exception {
-		AcessoBuilder a = new AcessoBuilder();
-
-		a.setPlaca("JFM0131");
-		a.setHoraEntrada(LocalTime.of(12, 0));
-		a.setHoraSaida(LocalTime.of(12, 30));
-
-		assertEquals(60.00, estacionamento.calculaFracoes(a.getHoraEntrada(), a.getHoraSaida()));
-	}
-	
-	
-	@Test
-	@Tag("TesteFuncional")
-	void testacalculoFracaoT() throws Exception {
-		AcessoBuilder a = new AcessoBuilder();
-
-		a.setPlaca("JFM0131");
-		a.setHoraEntrada(LocalTime.of(12, 0));
-		a.setHoraSaida(LocalTime.of(12, 45));
-
-		assertEquals(90.00, estacionamento.calculaFracoes(a.getHoraEntrada(), a.getHoraSaida()));
+	static Stream<Arguments> geraAcessos() {
+		return Stream.of(Arguments.of(LocalTime.of(12, 0), LocalTime.of(12, 15), 30.00),
+				Arguments.of(LocalTime.of(12, 00), LocalTime.of(12, 30), 60.00),
+				Arguments.of(LocalTime.of(12, 00), LocalTime.of(12, 16), 60.00),
+				Arguments.of(LocalTime.of(12, 00), LocalTime.of(12, 46), 0.00),
+				Arguments.of(LocalTime.of(12, 00), LocalTime.of(12, 14), 0.00));
 	}
 
 }

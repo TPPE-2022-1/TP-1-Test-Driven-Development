@@ -92,9 +92,12 @@ public class Estacionamento {
 
 	public Double calculaFracoes(LocalTime horaEntrada, LocalTime horaSaida) {
 		long minutosCorridos = calculaDiferencaMinutos(horaEntrada, horaSaida);
+		int fracoes = 0;
 
-		if (minutosCorridos / 15 % 4 > 0)
-			return this.valorFracao * (minutosCorridos / 15 % 4);
-		else return 0.00;
+		if (minutosCorridos < 15) return 0.00;
+		if (minutosCorridos % 15 > 0) fracoes++;
+		fracoes += minutosCorridos / 15;
+
+		return fracoes % 4 * this.valorFracao;
 	}
 }
