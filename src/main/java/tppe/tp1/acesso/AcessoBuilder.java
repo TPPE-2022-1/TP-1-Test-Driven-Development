@@ -76,10 +76,18 @@ public class AcessoBuilder {
 	}
 	
 	public Boolean isDiariaNoturna(EstacionamentoBuilder e) {
-		if(getHoraEntrada().toString().equals(new String("19:00")) &&
-		   getHoraSaida().toString().equals(new String("23:59")))
-			return true;
-		return false;
+		LocalTime entrada = getHoraEntrada();
+		LocalTime saida = getHoraSaida();
+		if(saida.compareTo(entrada) > 0) {
+			if(entrada.compareTo(e.getHorarioSaidaDiariaNoturna()) < 0)
+				return true; // entrou ainda no periodo noturno
+			if(isDiariaDiurna(e))
+				return false; // horario já pago na diaria noturna
+			if(saida.compareTo(e.getHorarioEntradaDiariaNoturna()) > 0)
+				return true; // ficou a noite
+			return false;
+		}
+		return true; // virou o dia
 	}
 	// Fim Get
 	
