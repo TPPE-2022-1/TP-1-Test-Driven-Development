@@ -12,7 +12,7 @@ import tppe.tp1.estacionamento.Estacionamento;
 import tppe.tp1.estacionamento.EstacionamentoBuilder;
 
 public class CalculaHoraCheiaTest {
-	
+
 	private Estacionamento estacionamento;
 
 	@BeforeEach
@@ -33,18 +33,22 @@ public class CalculaHoraCheiaTest {
 		e.setRetornoContratante(60.00);
 		this.estacionamento = e.build();
 	}
-	
+
 	@Test
 	@Tag("Teste Funcional")
 	void testCalculaHoraCheia() {
 		assertEquals(72.00, estacionamento.calculaHoraCheia(LocalTime.of(12, 0), LocalTime.of(13, 0)), 0.1);
 	}
-	
 
-	
 	@Test
 	@Tag("Teste Funcional")
 	void testCalculaHoraCheiaD() {
 		assertEquals(144.00, estacionamento.calculaHoraCheia(LocalTime.of(12, 0), LocalTime.of(14, 0)), 0.1);
+	}
+
+	@Test
+	@Tag("Teste Funcional")
+	void testCalculaHoraCheiaT() {
+		assertEquals(360.00, estacionamento.calculaHoraCheia(LocalTime.of(12, 0), LocalTime.of(17, 0)), 0.1);
 	}
 }
