@@ -84,4 +84,8 @@ public class Estacionamento {
 	public Double getRetornoContratante() {
 		return retornoContratante;
 	}
+
+	public Float calculaFracoes(LocalTime horaEntrada, LocalTime horaSaida) {
+		return 30f;
+	}
 }
