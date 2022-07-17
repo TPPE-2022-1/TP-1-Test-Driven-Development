@@ -46,5 +46,17 @@ public class CalculaFracoesTest {
 
 		assertEquals(30f, estacionamento.calculaFracoes(a.getHoraEntrada(), a.getHoraSaida()));
 	}
+	
+	@Test
+	@Tag("TesteFuncional")
+	void testacalculoFracaoD() throws Exception {
+		AcessoBuilder a = new AcessoBuilder();
+
+		a.setPlaca("JFM0131");
+		a.setHoraEntrada(LocalTime.of(12, 0));
+		a.setHoraSaida(LocalTime.of(12, 30));
+
+		assertEquals(60f, estacionamento.calculaFracoes(a.getHoraEntrada(), a.getHoraSaida()));
+	}
 
 }
