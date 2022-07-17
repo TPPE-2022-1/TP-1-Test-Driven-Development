@@ -90,10 +90,11 @@ public class Estacionamento {
 		return ChronoUnit.MINUTES.between(entrada, saida);
 	}
 
-	public Float calculaFracoes(LocalTime horaEntrada, LocalTime horaSaida) {
+	public Double calculaFracoes(LocalTime horaEntrada, LocalTime horaSaida) {
 		long minutosCorridos = calculaDiferencaMinutos(horaEntrada, horaSaida);
 
-		if (minutosCorridos > 15) return 60f;
-		else return 30f;
+		if (minutosCorridos / 15 % 4 > 0)
+			return this.valorFracao * (minutosCorridos / 15 % 4);
+		else return 0.00;
 	}
 }
