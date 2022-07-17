@@ -21,10 +21,10 @@ public class CalculaFracoesTest {
 	void setup() throws Exception {
 		EstacionamentoBuilder e = new EstacionamentoBuilder();
 		e.setId(0);
-		e.setValorFracao(30f);
-		e.setDescontoHoraCheia(15f);
-		e.setValorDiariaDiurna(120f);
-		e.setDescontoDiariaNoturna(45f);
+		e.setValorFracao(30.00);
+		e.setDescontoHoraCheia(15.00);
+		e.setValorDiariaDiurna(120.00);
+		e.setDescontoDiariaNoturna(45.00);
 		e.setHorarioEntradaDiariaNoturna(LocalTime.of(19, 0));
 		e.setHorarioSaidaDiariaNoturna(LocalTime.of(8, 0));
 		e.setValorMensalidade(600.00);
@@ -39,7 +39,7 @@ public class CalculaFracoesTest {
 	@ParameterizedTest
 	@MethodSource("geraAcessos")
 	void testacalculoFracao(LocalTime horaEntrada, LocalTime horaSaida, Double total) throws Exception {
-		assertEquals(total, estacionamento.calculaFracoes(horaEntrada, horaSaida));
+		assertEquals(total, estacionamento.calculaFracoes(horaEntrada, horaSaida), 0.1);
 	}
 	
 	static Stream<Arguments> geraAcessos() {
