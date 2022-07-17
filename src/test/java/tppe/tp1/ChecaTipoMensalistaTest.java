@@ -1,5 +1,6 @@
 package tppe.tp1;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalTime;
@@ -29,5 +30,13 @@ public class ChecaTipoMensalistaTest {
 		a.setTipoAcesso("Mensalista");
 		acesso = a.build();
 		assertTrue(acesso.isMensalista(acesso.getTipoAcesso()));
+	}
+	
+	@Test
+	@Tag("TesteFuncional")
+	void checaTipoEntradaD() throws Exception {
+		a.setTipoAcesso("Evento");
+		acesso = a.build();
+		assertFalse(acesso.isMensalista(acesso.getTipoAcesso()));
 	}
 }
