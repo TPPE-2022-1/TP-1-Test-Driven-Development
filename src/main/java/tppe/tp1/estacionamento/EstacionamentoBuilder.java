@@ -105,6 +105,54 @@ public class EstacionamentoBuilder {
 			throw new DescricaoEmBrancoException("Id não informado");
 		}
 
+		if (valorFracao == null) {
+			throw new DescricaoEmBrancoException("Valor fração não informado");
+		}
+
+		if (descontoHoraCheia == null) {
+			throw new DescricaoEmBrancoException("Valor desconto de hora cheia não informado");
+		}
+
+		if (valorDiariaDiurna == null) {
+			throw new DescricaoEmBrancoException("Valor diária diurna não informado");
+		}
+
+		if (descontoDiariaNoturna == null) {
+			throw new DescricaoEmBrancoException("Valor desconto diária noturna não informado");
+		}
+
+		if (horarioEntradaDiariaNoturna == null) {
+			throw new DescricaoEmBrancoException("Valor horário entrada noturna não informado");
+		}
+
+		if (horarioSaidaDiariaNoturna == null) {
+			throw new DescricaoEmBrancoException("Valor horário saída noturna não informado");
+		}
+
+		if (valorMensalidade == null) {
+			throw new DescricaoEmBrancoException("Valor mensalidade não informado");
+		}
+
+		if (valorEvento == null) {
+			throw new DescricaoEmBrancoException("Valor evento não informado");
+		}
+
+		if (horarioAbertura == null) {
+			throw new DescricaoEmBrancoException("Horário abertura não informado");
+		}
+
+		if (horarioEncerramento == null) {
+			throw new DescricaoEmBrancoException("Horário fechamento não informado");
+		}
+
+		if (capacidade == null) {
+			throw new DescricaoEmBrancoException("Valor capacidade não informado");
+		}
+
+		if (retornoContratante == null) {
+			throw new DescricaoEmBrancoException("Retorno contratante não informado");
+		}
+
 		/*
 		 * Validar horário de abertura e encerramento
 		 * 
