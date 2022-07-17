@@ -2,9 +2,14 @@ package tppe.tp1;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.stream.Stream;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import tppe.tp1.estacionamento.EstacionamentoBuilder;
 import tppe.tp1.estacionamento.exceptions.EstacionamentoValorHoraCheiaInvalidoMaior100Exception;
@@ -16,40 +21,22 @@ public class RegistraValorHoraCheiaEstacionamentoTest {
 	void setUp() throws Exception {
 	}
 
-	@Test
-	@Tag("TesteFuncional")
-	void testAdicionaValorHoraCheia0() {
-		EstacionamentoBuilder estacionamentoBuilder = new EstacionamentoBuilder();
-
-		assertDoesNotThrow(() -> estacionamentoBuilder.setDescontoHoraCheia(0.00));
-		assertEquals(0.00, estacionamentoBuilder.getDescontoHoraCheia());
+	//  Parametrizacao de teste
+	static Stream<Arguments> getDescontoHoraCheia() {
+		return Stream.of(Arguments.of(0.00),
+						Arguments.of(10.00),
+						Arguments.of(10.25),
+						Arguments.of(99.99));
 	}
-
-	@Test
+	
+	@ParameterizedTest
+	@MethodSource("getDescontoHoraCheia")
 	@Tag("TesteFuncional")
-	void testAdicionaValorHoraCheia10() {
+	void testAdicionaValorHoraCheia0(Double entrada) {
 		EstacionamentoBuilder estacionamentoBuilder = new EstacionamentoBuilder();
 
-		assertDoesNotThrow(() -> estacionamentoBuilder.setDescontoHoraCheia(10.00));
-		assertEquals(10.00, estacionamentoBuilder.getDescontoHoraCheia());
-	}
-
-	@Test
-	@Tag("TesteFuncional")
-	void testAdicionaValorHoraCheia1025() {
-		EstacionamentoBuilder estacionamentoBuilder = new EstacionamentoBuilder();
-
-		assertDoesNotThrow(() -> estacionamentoBuilder.setDescontoHoraCheia(10.25));
-		assertEquals(10.25, estacionamentoBuilder.getDescontoHoraCheia());
-	}
-
-	@Test
-	@Tag("TesteFuncional")
-	void testAdicionaValorHoraCheia9999() {
-		EstacionamentoBuilder estacionamentoBuilder = new EstacionamentoBuilder();
-
-		assertDoesNotThrow(() -> estacionamentoBuilder.setDescontoHoraCheia(99.99));
-		assertEquals(99.99, estacionamentoBuilder.getDescontoHoraCheia());
+		assertDoesNotThrow(() -> estacionamentoBuilder.setDescontoHoraCheia(entrada));
+		assertEquals(entrada, estacionamentoBuilder.getDescontoHoraCheia());
 	}
 
 	@Test
@@ -60,7 +47,7 @@ public class RegistraValorHoraCheiaEstacionamentoTest {
 		assertThrows(EstacionamentoValorHoraCheiaInvalidoNegativoException.class,
 				() -> estacionamentoBuilder.setDescontoHoraCheia(-0.01));
 	}
-	
+
 	@Test
 	@Tag("TesteExcecao")
 	void testValorHoraCheiaInvalidoMaior100() {
