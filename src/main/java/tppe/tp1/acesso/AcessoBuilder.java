@@ -92,7 +92,10 @@ public class AcessoBuilder {
 	}
 	
 	public Boolean isDiariaNoturna(EstacionamentoBuilder e) {
-		return true;
+		if(getHoraEntrada().toString().equals(new String("19:00")) &&
+		   getHoraSaida().toString().equals(new String("23:59")))
+			return true;
+		return false;
 	}
 	// Fim Get
 	
