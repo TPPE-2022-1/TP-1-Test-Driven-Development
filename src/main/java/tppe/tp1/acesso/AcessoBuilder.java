@@ -4,6 +4,7 @@ import java.time.LocalTime;
 
 import tppe.tp1.acesso.exceptions.AcessoPlacaInvalidaException;
 import tppe.tp1.acesso.exceptions.AcessoPlacaVazioException;
+import tppe.tp1.estacionamento.EstacionamentoBuilder;
 
 
 public class AcessoBuilder {
@@ -42,6 +43,10 @@ public class AcessoBuilder {
 
 	public Float getValorContratante() {
 		return valorContratante;
+	}
+
+	public Boolean isDiariaDiurna(EstacionamentoBuilder e) {
+		return true;
 	}
 	// Fim Get
 	
