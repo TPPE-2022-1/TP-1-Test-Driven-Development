@@ -90,6 +90,10 @@ public class AcessoBuilder {
 				return false; // nao completou 9 horas dirunas
 		return true; // completou 9 hroas diurnas
 	}
+	
+	public Boolean isDiariaNoturna(EstacionamentoBuilder e) {
+		return true;
+	}
 	// Fim Get
 	
 	//	SET
