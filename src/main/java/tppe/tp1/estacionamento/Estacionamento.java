@@ -1,6 +1,7 @@
 package tppe.tp1.estacionamento;
 
 import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 
 public class Estacionamento {
 	private Integer id;
@@ -83,5 +84,34 @@ public class Estacionamento {
 
 	public Double getRetornoContratante() {
 		return retornoContratante;
+	}
+	
+	public long calculaDiferencaMinutos(LocalTime entrada, LocalTime saida) {		
+		return ChronoUnit.MINUTES.between(entrada, saida);
+	}
+
+	public long calculaDiferencaHoras(LocalTime entrada, LocalTime saida) {		
+		return ChronoUnit.HOURS.between(entrada, saida);
+	}
+	
+	public Double calculaFracoes(LocalTime horaEntrada, LocalTime horaSaida) {
+		long minutosCorridos = calculaDiferencaMinutos(horaEntrada, horaSaida);
+		int fracoes = 0;
+
+		if (minutosCorridos % 15 > 0) fracoes++;
+		fracoes += minutosCorridos / 15;
+
+		return fracoes % 4 * this.valorFracao;
+	}
+
+	public Double calculaHoraCheia(LocalTime entrada, LocalTime saida) {
+		Double valorHoraCheia = 4 * this.valorFracao;
+		Double desconto = (100 - this.descontoHoraCheia) / 100;
+		long horasCorridas = calculaDiferencaHoras(entrada, saida);
+		
+		if (calculaDiferencaMinutos(entrada, saida) % 60 > 45)
+			horasCorridas++;
+
+		return  horasCorridas * valorHoraCheia * desconto;
 	}
 }
