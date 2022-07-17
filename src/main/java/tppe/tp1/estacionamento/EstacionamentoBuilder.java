@@ -4,6 +4,7 @@ import java.time.LocalTime;
 
 import tppe.tp1.estacionamento.exceptions.EstacionamentoCapacidadeInvalidaNegativaException;
 import tppe.tp1.estacionamento.exceptions.EstacionamentoCapacidadeInvalidaZeroException;
+import tppe.tp1.estacionamento.exceptions.EstacionamentoHorariosAberturaEncerramentoInvalidos;
 import tppe.tp1.estacionamento.exceptions.EstacionamentoIdInvalidoException;
 import tppe.tp1.estacionamento.exceptions.EstacionamentoRetornoContratanteInvalidoNegativoException;
 import tppe.tp1.estacionamento.exceptions.EstacionamentoRetornoContratanteInvalidoZeroException;
@@ -20,6 +21,8 @@ import tppe.tp1.estacionamento.exceptions.EstacionamentoValorHoraCheiaInvalidoMa
 import tppe.tp1.estacionamento.exceptions.EstacionamentoValorHoraCheiaInvalidoNegativoException;
 import tppe.tp1.estacionamento.exceptions.EstacionamentoValorMensalidadeInvalidoNegativoException;
 import tppe.tp1.estacionamento.exceptions.EstacionamentoValorMensalidadeInvalidoZeroException;
+import tppe.tp1.estacionamento.exceptions.EstacionamentoValoresNoturnosInvalidos;
+import tppe.tp1.exceptions.DescricaoEmBrancoException;
 
 public class EstacionamentoBuilder {
 
@@ -96,13 +99,82 @@ public class EstacionamentoBuilder {
 		this.id = id;
 	}
 
-	public Estacionamento build() throws EstacionamentoIdInvalidoException, EstacionamentoValorFracaoInvalidoException {
-		if (id < 0) {
-			throw new EstacionamentoIdInvalidoException();
+	public Estacionamento build() throws EstacionamentoValoresNoturnosInvalidos,
+			EstacionamentoHorariosAberturaEncerramentoInvalidos, DescricaoEmBrancoException {
+		if (id == null) {
+			throw new DescricaoEmBrancoException("Id não informado");
 		}
-		if (Double.compare(valorFracao, 0.00) == 0) {
-			throw new EstacionamentoValorFracaoInvalidoException();
+
+		if (valorFracao == null) {
+			throw new DescricaoEmBrancoException("Valor fração não informado");
 		}
+
+		if (descontoHoraCheia == null) {
+			throw new DescricaoEmBrancoException("Valor desconto de hora cheia não informado");
+		}
+
+		if (valorDiariaDiurna == null) {
+			throw new DescricaoEmBrancoException("Valor diária diurna não informado");
+		}
+
+		if (descontoDiariaNoturna == null) {
+			throw new DescricaoEmBrancoException("Valor desconto diária noturna não informado");
+		}
+
+		if (horarioEntradaDiariaNoturna == null) {
+			throw new DescricaoEmBrancoException("Valor horário entrada noturna não informado");
+		}
+
+		if (horarioSaidaDiariaNoturna == null) {
+			throw new DescricaoEmBrancoException("Valor horário saída noturna não informado");
+		}
+
+		if (valorMensalidade == null) {
+			throw new DescricaoEmBrancoException("Valor mensalidade não informado");
+		}
+
+		if (valorEvento == null) {
+			throw new DescricaoEmBrancoException("Valor evento não informado");
+		}
+
+		if (horarioAbertura == null) {
+			throw new DescricaoEmBrancoException("Horário abertura não informado");
+		}
+
+		if (horarioEncerramento == null) {
+			throw new DescricaoEmBrancoException("Horário fechamento não informado");
+		}
+
+		if (capacidade == null) {
+			throw new DescricaoEmBrancoException("Valor capacidade não informado");
+		}
+
+		if (retornoContratante == null) {
+			throw new DescricaoEmBrancoException("Retorno contratante não informado");
+		}
+
+		/*
+		 * Validar horário de abertura e encerramento
+		 * 
+		 * O horário de abertura deve ser anterior (menor) ao de encerramento, pois
+		 * ambos acontecem no mesmo dia
+		 */
+		if (horarioAbertura.isAfter(horarioEncerramento)) {
+			throw new EstacionamentoHorariosAberturaEncerramentoInvalidos(
+					"Horário de abertura deve ser anterior ao de encerramento");
+		}
+
+		/*
+		 * Validar horário de entrada e saída da diária noturna
+		 * 
+		 * O horário de entrada deve ser maior (posterior) do que o de saída, pois se
+		 * refere ao dia anterior
+		 */
+		if (horarioEntradaDiariaNoturna.isBefore(horarioSaidaDiariaNoturna)) {
+			throw new EstacionamentoValoresNoturnosInvalidos(
+					"Horário de entrada deve posterior ao de saída, por acontecer no dia anterior");
+		}
+
 		return new Estacionamento(this);
 	}
 

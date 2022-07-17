@@ -2,9 +2,14 @@ package tppe.tp1;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.stream.Stream;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import tppe.tp1.estacionamento.EstacionamentoBuilder;
 import tppe.tp1.estacionamento.exceptions.EstacionamentoValorDiariaDiurnaInvalidoNegativoException;
@@ -15,32 +20,23 @@ public class RegistraValorDiariaDiurnaEstacionamentoTest {
 	@BeforeEach
 	void setUp() throws Exception {
 	}
-
-	@Test
-	@Tag("TesteFuncional")
-	void testAdicionaValorDiariaDiurna120() {
-		EstacionamentoBuilder estacionamentoBuilder = new EstacionamentoBuilder();
-
-		assertDoesNotThrow(() -> estacionamentoBuilder.setValorDiariaDiurna(120.00));
-		assertEquals(120.00, estacionamentoBuilder.getValorDiariaDiurna());
+	
+	//  Parametrizacao de teste
+	static Stream<Arguments> getValorDiariaDiurna() {
+		return Stream.of(Arguments.of(120.00),
+						Arguments.of(140.00),
+						Arguments.of(25.25)
+				);
 	}
 	
-	@Test
+	@ParameterizedTest
+	@MethodSource("getValorDiariaDiurna")
 	@Tag("TesteFuncional")
-	void testAdicionaValorDiariaDiurna140() {
+	void testAdicionaValorDiariaDiurna(Double entrada) {
 		EstacionamentoBuilder estacionamentoBuilder = new EstacionamentoBuilder();
 
-		assertDoesNotThrow(() -> estacionamentoBuilder.setValorDiariaDiurna(140.00));
-		assertEquals(140.00, estacionamentoBuilder.getValorDiariaDiurna());
-	}
-	
-	@Test
-	@Tag("TesteFuncional")
-	void testAdicionaValorDiariaDiurna2525() {
-		EstacionamentoBuilder estacionamentoBuilder = new EstacionamentoBuilder();
-
-		assertDoesNotThrow(() -> estacionamentoBuilder.setValorDiariaDiurna(25.25));
-		assertEquals(25.25, estacionamentoBuilder.getValorDiariaDiurna());
+		assertDoesNotThrow(() -> estacionamentoBuilder.setValorDiariaDiurna(entrada));
+		assertEquals(entrada, estacionamentoBuilder.getValorDiariaDiurna());
 	}
 	
 	@Test
