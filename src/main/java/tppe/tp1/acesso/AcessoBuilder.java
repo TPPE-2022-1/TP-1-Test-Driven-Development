@@ -19,9 +19,6 @@ public class AcessoBuilder {
 	private Float valorContratante;	
 	
 	public Acesso build() throws DescricaoEmBrancoException {
-		if (placa == null) {
-			throw new DescricaoEmBrancoException("Placa não pode ser nula");
-		}
 		if (horaEntrada == null) {
 			throw new DescricaoEmBrancoException("Hora de entrada não pode ser nula");
 		}
