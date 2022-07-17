@@ -1,20 +1,15 @@
 package tppe.tp1;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.time.LocalTime;
-import java.util.stream.Stream;
 
-import org.junit.jupiter.api.BeforeAll;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
+
 
 import tppe.tp1.acesso.Acesso;
 import tppe.tp1.acesso.AcessoBuilder;
@@ -58,6 +53,30 @@ public class CadastraAcessoEmListaEstacionamentoTest {
 		estacionamento.addAcesso(acesso);
 		assertEquals(acesso, estacionamento.getAcesso(0));
 		
+	}
+	
+	@Test
+	@Tag("TesteFuncional")
+	void testCadastraAcessoEmListaEstacionamentoCheia() throws Exception {
+		AcessoBuilder  acessoBuilder2 = new AcessoBuilder();
+		AcessoBuilder acessoBuilder = new AcessoBuilder();
+		Acesso acesso, acesso2;
+		
+		acessoBuilder.setPlaca("GHJ7653");
+		acessoBuilder.setHoraEntrada(LocalTime.of(12, 40));
+		acessoBuilder.setHoraSaida(LocalTime.of(15, 30));
+		acessoBuilder2.setPlaca("XXX1234");
+		acessoBuilder2.setHoraEntrada(LocalTime.of(18, 40));
+		acessoBuilder2.setHoraSaida(LocalTime.of(20, 30));
+		
+		acesso = acessoBuilder.build();
+		acesso2 = acessoBuilder.build();
+		
+		estacionamento.addAcesso(acesso);
+		estacionamento.addAcesso(acesso2);
+		assertNotNull(estacionamento.getListaAcessos());
+		assertEquals(acesso, estacionamento.getListaAcessos().get(0));
+		assertEquals(acesso2, estacionamento.getListaAcessos().get(1));
 	}
 
 }

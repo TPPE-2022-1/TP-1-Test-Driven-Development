@@ -129,5 +129,9 @@ public class Estacionamento {
 	public Acesso getAcesso(int i) {
 		return this.acessos.get(i);
 	}
-
+	
+	public List<Acesso> getListaAcessos() {
+		return this.acessos;
+	}
+	
 }
