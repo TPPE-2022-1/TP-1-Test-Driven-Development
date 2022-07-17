@@ -90,6 +90,10 @@ public class Estacionamento {
 		return ChronoUnit.MINUTES.between(entrada, saida);
 	}
 
+	public long calculaDiferencaHoras(LocalTime entrada, LocalTime saida) {		
+		return ChronoUnit.HOURS.between(entrada, saida);
+	}
+	
 	public Double calculaFracoes(LocalTime horaEntrada, LocalTime horaSaida) {
 		long minutosCorridos = calculaDiferencaMinutos(horaEntrada, horaSaida);
 		int fracoes = 0;
@@ -99,5 +103,12 @@ public class Estacionamento {
 		fracoes += minutosCorridos / 15;
 
 		return fracoes % 4 * this.valorFracao;
+	}
+
+	public Double calculaHoraCheia(LocalTime entrada, LocalTime saida) {
+		Double valorHoraCheia = 4 * this.valorFracao;
+		Double desconto = (100 - this.descontoHoraCheia) / 100;
+
+		return  valorHoraCheia * desconto;
 	}
 }
