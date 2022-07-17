@@ -22,6 +22,7 @@ import tppe.tp1.estacionamento.exceptions.EstacionamentoValorHoraCheiaInvalidoNe
 import tppe.tp1.estacionamento.exceptions.EstacionamentoValorMensalidadeInvalidoNegativoException;
 import tppe.tp1.estacionamento.exceptions.EstacionamentoValorMensalidadeInvalidoZeroException;
 import tppe.tp1.estacionamento.exceptions.EstacionamentoValoresNoturnosInvalidos;
+import tppe.tp1.exceptions.DescricaoEmBrancoException;
 
 public class EstacionamentoBuilder {
 
@@ -98,8 +99,12 @@ public class EstacionamentoBuilder {
 		this.id = id;
 	}
 
-	public Estacionamento build()
-			throws EstacionamentoValoresNoturnosInvalidos, EstacionamentoHorariosAberturaEncerramentoInvalidos {
+	public Estacionamento build() throws EstacionamentoValoresNoturnosInvalidos,
+			EstacionamentoHorariosAberturaEncerramentoInvalidos, DescricaoEmBrancoException {
+		if (id == null) {
+			throw new DescricaoEmBrancoException("Id não informado");
+		}
+
 		/*
 		 * Validar horário de abertura e encerramento
 		 * 
