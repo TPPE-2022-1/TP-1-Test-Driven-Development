@@ -39,4 +39,12 @@ public class ChecaTipoMensalistaTest {
 		acesso = a.build();
 		assertFalse(acesso.isMensalista(acesso.getTipoAcesso()));
 	}
+	
+	@Test
+	@Tag("TesteFuncional")
+	void checaTipoEntradaT() throws Exception {
+		a.setTipoAcesso("Mensalista");
+		acesso = a.build();
+		assertTrue(acesso.isMensalista(acesso.getTipoAcesso()));
+	}
 }
