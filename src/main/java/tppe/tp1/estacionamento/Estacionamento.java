@@ -2,6 +2,10 @@ package tppe.tp1.estacionamento;
 
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.List;
+
+import tppe.tp1.acesso.Acesso;
 
 public class Estacionamento {
 	private Integer id;
@@ -17,6 +21,7 @@ public class Estacionamento {
 	private LocalTime horarioEncerramento;
 	private Integer capacidade;
 	private Double retornoContratante;
+	private List<Acesso> acessos;
 	
 	Estacionamento(EstacionamentoBuilder builder) {
 		id = builder.getId();
@@ -32,6 +37,7 @@ public class Estacionamento {
 		horarioEncerramento = builder.getHorarioEncerramento();
 		capacidade = builder.getCapacidade();
 		retornoContratante = builder.getRetornoContratante();
+		acessos = new ArrayList<Acesso>();
 	}
 
 	public Integer getId() {
@@ -114,4 +120,14 @@ public class Estacionamento {
 
 		return  horasCorridas * valorHoraCheia * desconto;
 	}
+
+	public void addAcesso(Acesso acesso) {
+		this.acessos.add(acesso);
+	}
+
+
+	public Acesso getAcesso(int i) {
+		return this.acessos.get(i);
+	}
+
 }
