@@ -68,11 +68,11 @@ public class AcessoBuilder {
 		Boolean saiuNoite = false;
 		if(saida.compareTo(entrada) < 0) {
 			if(saida.toSecondOfDay() - e.getHorarioSaidaDiariaNoturna().toSecondOfDay()
-					>= LocalTime.of(9, 0).toSecondOfDay())
-				return true; // ficou toda a noite mais 9 horas de dia
+					>= LocalTime.of(8, 46).toSecondOfDay())
+				return true; // ficou toda a noite mais 8:46 horas de dia
 			if(e.getHorarioEntradaDiariaNoturna().toSecondOfDay() - entrada.toSecondOfDay()
-					>= LocalTime.of(9, 0).toSecondOfDay())
-				return true; // ficou mais de 9 horas no dia e virou a noite
+					>= LocalTime.of(8, 46).toSecondOfDay())
+				return true; // ficou mais de 8:46 horas no dia e virou a noite
 		}
 		if(getHoraEntrada().compareTo(e.getHorarioEntradaDiariaNoturna()) > 0 ||
 		   getHoraEntrada().compareTo(e.getHorarioSaidaDiariaNoturna()) < 0) {
@@ -86,8 +86,8 @@ public class AcessoBuilder {
 		}
 		if(entrouNoite && saiuNoite)
 			return false;  // ficou somente o periodo noturno
-		if(saida.toSecondOfDay() - entrada.toSecondOfDay() < LocalTime.of(9, 0).toSecondOfDay())
-				return false; // nao completou 9 horas dirunas
+		if(saida.toSecondOfDay() - entrada.toSecondOfDay() < LocalTime.of(8, 46).toSecondOfDay())
+				return false; // nao completou 8:46 horas dirunas
 		return true; // completou 9 hroas diurnas
 	}
 	
