@@ -109,6 +109,9 @@ public class Estacionamento {
 		Double valorHoraCheia = 4 * this.valorFracao;
 		Double desconto = (100 - this.descontoHoraCheia) / 100;
 		long horasCorridas = calculaDiferencaHoras(entrada, saida);
+		
+		if (calculaDiferencaMinutos(entrada, saida) % 60 > 45)
+			horasCorridas++;
 
 		return  horasCorridas * valorHoraCheia * desconto;
 	}
