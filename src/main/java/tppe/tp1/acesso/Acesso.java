@@ -1,6 +1,7 @@
 package tppe.tp1.acesso;
 
 import java.time.LocalTime;
+import java.util.function.BooleanSupplier;
 
 public class Acesso {
 
@@ -43,6 +44,10 @@ public class Acesso {
 
 	public Float getValorContratante() {
 		return valorContratante;
+	}
+
+	public Boolean isMensalista(String tipoAcesso) {
+		return false;
 	}
 
 }
