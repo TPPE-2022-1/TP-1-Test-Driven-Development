@@ -7,8 +7,10 @@ TPPE - Técnicas de Programação para Plataformas Emergentes
 |Matrícula | Aluno |
 | :--: | :--: |
 | 20/2028211 |  [Antônio Aldísio](https://github.com/AntonioAldisio/) |
+| 18/0030272 |  [Antonio Barreto](https://github.com/ruanmoura/) |
 | 19/0106565 |  [Fernando Miranda](https://github.com/ilus1/) |
 | 15/0058462 |  [Davi Antônio](https://github.com/DaviAntonio/) |
+| 18/0018159 |  [Guilherme Braz](https://github.com/GuilhermeBraz/) |
 
 
 

@@ -2,9 +2,14 @@ package tppe.tp1;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.stream.Stream;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import tppe.tp1.estacionamento.EstacionamentoBuilder;
 import tppe.tp1.estacionamento.exceptions.EstacionamentoValorDiariaNoturnaInvalidoMaior100Exception;
@@ -16,33 +21,24 @@ public class RegistraValorDiariaNoturnaEstacionamentoTest {
 	void setUp() throws Exception {
 	}
 
-	@Test
+	//  Parametrizacao de teste
+	static Stream<Arguments> getDescontoDiariaNoturna() {
+		return Stream.of(Arguments.of(0.00),
+						Arguments.of(10.00),
+						Arguments.of(99.99)
+				);
+	}
+
+	@ParameterizedTest
+	@MethodSource("getDescontoDiariaNoturna")
 	@Tag("TesteFuncional")
-	void testAdicionaValorDiariaNoturna0() {
+	void testAdicionaValorDiariaNoturna(Double entrada) {
 		EstacionamentoBuilder estacionamentoBuilder = new EstacionamentoBuilder();
 
-		assertDoesNotThrow(() -> estacionamentoBuilder.setDescontoDiariaNoturna(0.00));
-		assertEquals(0.00, estacionamentoBuilder.getDescontoDiariaNoturna());
+		assertDoesNotThrow(() -> estacionamentoBuilder.setDescontoDiariaNoturna(entrada));
+		assertEquals(entrada, estacionamentoBuilder.getDescontoDiariaNoturna());
 	}
-	
-	@Test
-	@Tag("TesteFuncional")
-	void testAdicionaValorDiariaNoturna10() {
-		EstacionamentoBuilder estacionamentoBuilder = new EstacionamentoBuilder();
 
-		assertDoesNotThrow(() -> estacionamentoBuilder.setDescontoDiariaNoturna(10.00));
-		assertEquals(10.00, estacionamentoBuilder.getDescontoDiariaNoturna());
-	}
-	
-	@Test
-	@Tag("TesteFuncional")
-	void testAdicionaValorDiariaNoturna9999() {
-		EstacionamentoBuilder estacionamentoBuilder = new EstacionamentoBuilder();
-
-		assertDoesNotThrow(() -> estacionamentoBuilder.setDescontoDiariaNoturna(99.99));
-		assertEquals(99.99, estacionamentoBuilder.getDescontoDiariaNoturna());
-	}
-	
 	@Test
 	@Tag("TesteExcecao")
 	void testValorDiariaNoturnaInvalidoNegativo() {
@@ -51,7 +47,7 @@ public class RegistraValorDiariaNoturnaEstacionamentoTest {
 		assertThrows(EstacionamentoValorDiariaNoturnaInvalidoNegativoException.class,
 				() -> estacionamentoBuilder.setDescontoDiariaNoturna(-0.01));
 	}
-	
+
 	@Test
 	@Tag("TesteExcecao")
 	void testValorDiariaNoturnaInvalidoMaior100() {

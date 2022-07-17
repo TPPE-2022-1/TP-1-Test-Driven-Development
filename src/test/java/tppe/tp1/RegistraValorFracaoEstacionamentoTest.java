@@ -2,9 +2,14 @@ package tppe.tp1;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.stream.Stream;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import tppe.tp1.estacionamento.EstacionamentoBuilder;
 import tppe.tp1.estacionamento.exceptions.EstacionamentoValorFracaoInvalidoNegativoException;
@@ -16,31 +21,21 @@ public class RegistraValorFracaoEstacionamentoTest {
 	void setUp() throws Exception {
 	}
 
-	@Test
-	@Tag("TesteFuncional")
-	void testAdicionaValorFracao30() {
-		EstacionamentoBuilder estacionamentoBuilder = new EstacionamentoBuilder();
-
-		assertDoesNotThrow(() -> estacionamentoBuilder.setValorFracao(30.00));
-		assertEquals(30.00, estacionamentoBuilder.getValorFracao());
+	//  Parametrizacao de teste
+	static Stream<Arguments> getValorFracao() {
+		return Stream.of(Arguments.of(30.00),
+						Arguments.of(0.15),
+						Arguments.of(1.01));
 	}
-
-	@Test
+	
+	@ParameterizedTest
+	@MethodSource("getValorFracao")
 	@Tag("TesteFuncional")
-	void testAdicionaValorFracao015() {
+	void testAdicionaValorFracao(Double entrada) {
 		EstacionamentoBuilder estacionamentoBuilder = new EstacionamentoBuilder();
 
-		assertDoesNotThrow(() -> estacionamentoBuilder.setValorFracao(0.15));
-		assertEquals(0.15, estacionamentoBuilder.getValorFracao());
-	}
-
-	@Test
-	@Tag("TesteFuncional")
-	void testAdicionaValorFracao101() {
-		EstacionamentoBuilder estacionamentoBuilder = new EstacionamentoBuilder();
-
-		assertDoesNotThrow(() -> estacionamentoBuilder.setValorFracao(1.01));
-		assertEquals(1.01, estacionamentoBuilder.getValorFracao());
+		assertDoesNotThrow(() -> estacionamentoBuilder.setValorFracao(entrada));
+		assertEquals(entrada, estacionamentoBuilder.getValorFracao());
 	}
 
 	@Test
