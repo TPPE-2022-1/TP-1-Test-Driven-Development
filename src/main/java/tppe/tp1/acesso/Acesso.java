@@ -47,7 +47,10 @@ public class Acesso {
 	}
 
 	public Boolean isMensalista(String tipoAcesso) {
-		return false;
+		if (this.tipoAcesso == "Mensalista")
+			return true;
+		else
+			return false;
 	}
 
 }
