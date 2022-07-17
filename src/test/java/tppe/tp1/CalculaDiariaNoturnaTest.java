@@ -39,7 +39,13 @@ public class CalculaDiariaNoturnaTest {
 
 	static Stream<Arguments> getAcesso() {
 		return Stream.of(Arguments.of("19:00", "23:59", true),
-						 Arguments.of("08:00", "18:00", false));
+						 Arguments.of("08:00", "18:00", false),
+						 Arguments.of("08:00", "08:30", false),
+						 Arguments.of("09:00", "23:59", false),
+						 Arguments.of("09:00", "01:00", true),
+						 Arguments.of("18:00", "17:00", true),
+						 Arguments.of("01:00", "19:00", true),
+						 Arguments.of("00:01", "23:59", true));
 	}
 
 	@ParameterizedTest
