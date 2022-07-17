@@ -36,9 +36,10 @@ public class CalculaDiariaNoturnaTest {
 		e.setCapacidade(300);
 		e.setRetornoContratante(50.00);
 	}
-	
+
 	static Stream<Arguments> getAcesso() {
-		return Stream.of(Arguments.of("19:00", "23:59", true));
+		return Stream.of(Arguments.of("19:00", "23:59", true),
+						 Arguments.of("08:00", "18:00", false));
 	}
 
 	@ParameterizedTest
@@ -52,5 +53,4 @@ public class CalculaDiariaNoturnaTest {
 		a.setHoraSaida(horaSaida);
 		assertEquals(resposta, a.isDiariaNoturna(e));
 	}
-		
 }
