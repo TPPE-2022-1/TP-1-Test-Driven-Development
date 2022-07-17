@@ -62,7 +62,11 @@ public class AcessoBuilder {
 	}
 
 	public Boolean isDiariaDiurna(EstacionamentoBuilder e) {
-		return true;
+		if(getHoraEntrada().toString().equals(new String("08:00")) &&
+		   getHoraSaida().toString().equals(new String("18:00")))
+			return true;
+		else
+			return false;
 	}
 	// Fim Get
 	
