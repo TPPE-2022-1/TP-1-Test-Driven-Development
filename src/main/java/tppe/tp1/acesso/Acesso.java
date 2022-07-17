@@ -54,7 +54,10 @@ public class Acesso {
 	}
 
 	public Boolean isEvento(String tipoAcesso) {
-		return true;
+		if (tipoAcesso == "Evento")
+			return true;
+		else
+			return false;
 	}
 
 }
