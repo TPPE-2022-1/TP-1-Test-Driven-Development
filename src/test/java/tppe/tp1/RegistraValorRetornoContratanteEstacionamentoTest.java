@@ -2,9 +2,14 @@ package tppe.tp1;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.stream.Stream;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import tppe.tp1.estacionamento.EstacionamentoBuilder;
 import tppe.tp1.estacionamento.exceptions.EstacionamentoRetornoContratanteInvalidoNegativoException;
@@ -16,36 +21,24 @@ public class RegistraValorRetornoContratanteEstacionamentoTest {
 	void setUp() throws Exception {
 	}
 
-	@Test
+	//  Parametrizacao de teste
+	static Stream<Arguments> getRetornoContratante() {
+		return Stream.of(Arguments.of(15.0),
+						Arguments.of(50.0),
+						Arguments.of(30.30));
+	}
+
+	@ParameterizedTest
+	@MethodSource("getRetornoContratante")
 	@Tag("TesteFuncional")
-	void testAdicionaValorRetornoContratante15() {
+	void testAdicionaValorRetornoContratante(Double entrada) {
 		EstacionamentoBuilder estacionamentoBuilder = new EstacionamentoBuilder();
 
-		Double retornoContratante = 15.0;
+		Double retornoContratante = entrada;
 		assertDoesNotThrow(() -> estacionamentoBuilder.setRetornoContratante(retornoContratante));
 		assertEquals(retornoContratante, estacionamentoBuilder.getRetornoContratante());
 	}
 
-	@Test
-	@Tag("TesteFuncional")
-	void testAdicionaValorRetornoContratante50() {
-		EstacionamentoBuilder estacionamentoBuilder = new EstacionamentoBuilder();
-
-		Double retornoContratante = 50.0;
-		assertDoesNotThrow(() -> estacionamentoBuilder.setRetornoContratante(retornoContratante));
-		assertEquals(retornoContratante, estacionamentoBuilder.getRetornoContratante());
-	}
-
-	@Test
-	@Tag("TesteFuncional")
-	void testAdicionaValorRetornoContratante3030() {
-		EstacionamentoBuilder estacionamentoBuilder = new EstacionamentoBuilder();
-
-		Double retornoContratante = 30.30;
-		assertDoesNotThrow(() -> estacionamentoBuilder.setRetornoContratante(retornoContratante));
-		assertEquals(retornoContratante, estacionamentoBuilder.getRetornoContratante());
-	}
-	
 	@Test
 	@Tag("TesteExcecao")
 	void testAdicionaRetornoContratanteInvalidoZero() {
