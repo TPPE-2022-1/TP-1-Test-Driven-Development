@@ -108,9 +108,8 @@ public class Estacionamento {
 	public Double calculaHoraCheia(LocalTime entrada, LocalTime saida) {
 		Double valorHoraCheia = 4 * this.valorFracao;
 		Double desconto = (100 - this.descontoHoraCheia) / 100;
+		long horasCorridas = calculaDiferencaHoras(entrada, saida);
 
-		if (calculaDiferencaHoras(entrada, saida) == 2)
-			return 2 * valorHoraCheia * desconto;
-		return  valorHoraCheia * desconto;
+		return  horasCorridas * valorHoraCheia * desconto;
 	}
 }
