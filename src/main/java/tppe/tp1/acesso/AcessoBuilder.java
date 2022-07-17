@@ -2,6 +2,8 @@ package tppe.tp1.acesso;
 
 import java.time.LocalTime;
 
+import tppe.tp1.acesso.exceptions.AcessoEventoInvalidoException;
+import tppe.tp1.acesso.exceptions.AcessoEventoVazioException;
 import tppe.tp1.acesso.exceptions.AcessoPlacaInvalidaException;
 import tppe.tp1.acesso.exceptions.AcessoPlacaVazioException;
 
@@ -54,8 +56,15 @@ public class AcessoBuilder {
 		this.valorAcesso = valorAcesso;
 	}
 	
-	public void setTipoAcesso(String tipoAcesso) {
-		this.tipoAcesso = tipoAcesso;
+	public void setTipoAcesso(String tipoAcesso) throws AcessoEventoInvalidoException, AcessoEventoVazioException {
+		if (tipoAcesso.trim().equalsIgnoreCase("Mensalista"))
+			this.tipoAcesso = "Mensalista";
+		else if (tipoAcesso.trim().equalsIgnoreCase("Evento"))
+			this.tipoAcesso = "Evento";
+		else if (tipoAcesso != null && tipoAcesso.trim().length() > 0)
+			throw new AcessoEventoInvalidoException();
+		else
+			throw new AcessoEventoVazioException();
 	}
 
 	public void setHoraSaida(LocalTime horaSaida) {
