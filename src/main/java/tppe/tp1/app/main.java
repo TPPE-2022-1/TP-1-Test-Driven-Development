@@ -16,6 +16,22 @@ public class main {
 	
 	public static void main(String[] args) throws Exception {
 		List<Estacionamento> estacionamentos = new ArrayList<Estacionamento>();
+		EstacionamentoBuilder e = new EstacionamentoBuilder();
+		e.setId(0);
+		e.setValorFracao(30.00);
+		e.setDescontoHoraCheia(15.00);
+		e.setValorDiariaDiurna(120.00);
+		e.setDescontoDiariaNoturna(45.00);
+		e.setHorarioEntradaDiariaNoturna(LocalTime.of(19, 0));
+		e.setHorarioSaidaDiariaNoturna(LocalTime.of(8, 0));
+		e.setValorMensalidade(600.00);
+		e.setValorEvento(50.00);
+		e.setHorarioAbertura(LocalTime.of(6, 0));
+		e.setHorarioEncerramento(LocalTime.of(22, 0));
+		e.setCapacidade(300);
+		e.setRetornoContratante(50.00);
+		estacionamentos.add(e.build());
+		
 		Integer opcoes = 0;
 		
 		
@@ -26,7 +42,8 @@ public class main {
 					+ "[2] - Registrar novo acesso.\n"
 					+ "[3] - Verificar informacoes de um acesso.\n"
 					+ "[4] - Verificar valor total de repasse para o contratante de um estacionamento.\n"
-					+ "[5] - Encerrar aplicao.\n");
+					+ "[5] - Verificar todos estacionamentos cadastrados\n"
+					+ "[6] - Encerrar aplicao.\n");
 			opcoes = input.nextInt();
 			switch(opcoes) {
 			case 1:
@@ -55,6 +72,27 @@ public class main {
 			case 4:
 				limpaTela();
 				break;
+			case 5:
+				limpaTela();
+				System.out.println("LISTA DE ESTACIONAMENTOS:\n");
+				for (Estacionamento estacionamento : estacionamentos) {
+					System.out.println("id: "+estacionamento.getId()+"\n"
+					+ "valor da fracao: "+estacionamento.getValorFracao()+"\n"
+					+ "desconto da hora cheia: "+estacionamento.getDescontoHoraCheia()+"\n"
+					+ "valor da diaria diurna: "+estacionamento.getValorDiariaDiurna()+"\n"
+					+ "desconto da diaria noturna: "+estacionamento.getDescontoDiariaNoturna()+"\n"
+					+ "horario de entrada da diaria noturna: "+estacionamento.getHorarioEntradaDiariaNoturna()+"\n"
+					+ "horario de saida da diaria noturna: "+estacionamento.getHorarioSaidaDiariaNoturna()+"\n"
+					+ "valor da mensalidade: "+estacionamento.getValorMensalidade()+"\n"
+					+ "valor do evento: "+estacionamento.getValorEvento()+"\n"
+					+ "horario de abertura: "+estacionamento.getHorarioAbertura()+"\n"
+					+ "horario de encerramento: "+estacionamento.getHorarioEncerramento()+"\n"
+					+ "capacidade: "+estacionamento.getCapacidade()+"\n"
+					+ "retorno do contratante: "+estacionamento.getRetornoContratante()+"\n"
+					+ "-------------------------------------------------------------------------------------------------\n\n"
+					);
+				}
+				break;
 			default:
 					
 			}
@@ -69,9 +107,9 @@ public class main {
 		System.out.println("Digite a placa do carro(7 caracteres): ");
 		acesso.setPlaca(input.next());
 		System.out.println("Digite o horario de entrada do veiculo(dd/mm/aaaa hh:mm): ");
-		acesso.setHoraEntrada(LocalTime.parse(input.next()));
+		acesso.setHoraEntrada(LocalDateTime.parse(input.next()));
 		System.out.println("Digite o horario de saida do veiculo(dd/mm/aaaa hh:mm): ");
-		acesso.setHoraSaida(LocalTime.parse(input.next()));
+		acesso.setHoraSaida(LocalDateTime.parse(input.next()));
 		System.out.println("O acesso e acesso especial(s/n): ");
 		if (input.next().equalsIgnoreCase("s")) {
 			System.out.println("Digite o tipo de acesso do veiculo(Mensalista/Evento): ");
@@ -93,7 +131,7 @@ public class main {
 		estacionamento.setDescontoHoraCheia(input.nextDouble());
 		System.out.println("Valor da diaria diurna: ");
 		estacionamento.setValorDiariaDiurna(input.nextDouble());
-		System.out.println("Desconto da diaria noturna: ");
+		System.out.println("Desconto da diaria noturna (0<= x <=100): ");
 		estacionamento.setDescontoDiariaNoturna(input.nextDouble());
 		System.out.println("Inicio do horário noturno(formato dd/mm/aa hh:mm): ");
 		estacionamento.setHorarioEntradaDiariaNoturna(LocalTime.parse(input.next()));
