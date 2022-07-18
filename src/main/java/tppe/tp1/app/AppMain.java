@@ -13,7 +13,7 @@ import tppe.tp1.acesso.AcessoBuilder;
 import tppe.tp1.estacionamento.Estacionamento;
 import tppe.tp1.estacionamento.EstacionamentoBuilder;
 
-public class main {
+public class AppMain {
 	static Scanner input = new Scanner(System.in);
 	
 	public static void main(String[] args) throws Exception {
