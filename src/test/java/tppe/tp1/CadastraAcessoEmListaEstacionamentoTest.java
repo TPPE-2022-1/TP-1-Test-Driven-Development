@@ -1,6 +1,7 @@
 package tppe.tp1;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.time.LocalTime;
@@ -74,7 +75,7 @@ public class CadastraAcessoEmListaEstacionamentoTest {
 		
 		estacionamento.addAcesso(acesso);
 		estacionamento.addAcesso(acesso2);
-		assertNotNull(estacionamento.getListaAcessos());
+		assertFalse(estacionamento.getListaAcessos().isEmpty());
 		assertEquals(acesso, estacionamento.getListaAcessos().get(0));
 		assertEquals(acesso2, estacionamento.getListaAcessos().get(1));
 	}
