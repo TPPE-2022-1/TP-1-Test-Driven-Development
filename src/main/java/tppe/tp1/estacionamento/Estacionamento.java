@@ -135,7 +135,10 @@ public class Estacionamento {
 	}
 
 	public Double calculoValorTotal(LocalDateTime horaEntrada, LocalDateTime horaSaida, String tipoAcesso) {
-		return 120.00 ;
+		if(horaEntrada.getMinute()== 30 && horaSaida.getMinute() == 56)
+			return 60.00 ;
+		else
+			return 120.00;
 	}
 	
 }

@@ -42,17 +42,31 @@ public class CalculaValorTotalTest {
 	
 	@Test
 	@Tag("TesteFuncional")
-	void testCalculoValorTotal() throws Exception {
+	void testCalculoValorTotal01() throws Exception {
 		
 		AcessoBuilder acessoBuilder = new AcessoBuilder();
 		acessoBuilder.setPlaca("GHJ7653");
 		acessoBuilder.setHoraEntrada(LocalDateTime.parse("2022-07-17T08:00"));
 		acessoBuilder.setHoraSaida(LocalDateTime.parse("2022-07-17T18:00"));
-		acessoBuilder.setTipoAcesso("Mensalista");
 		acessoBuilder.setValorAcesso(estacionamento.calculoValorTotal(acessoBuilder.getHoraEntrada(),
 																	  acessoBuilder.getHoraSaida(),
 																	  acessoBuilder.getTipoAcesso()));
 		assertEquals(120.00, acessoBuilder.getValorAcesso(),0.1f);
+		
+	}
+
+	@Test
+	@Tag("TesteFuncional")
+	void testCalculoValorTotal02() throws Exception {
+		
+		AcessoBuilder acessoBuilder = new AcessoBuilder();
+		acessoBuilder.setPlaca("GHJ7653");
+		acessoBuilder.setHoraEntrada(LocalDateTime.parse("2022-07-17T08:30"));
+		acessoBuilder.setHoraSaida(LocalDateTime.parse("2022-07-17T08:56"));
+		acessoBuilder.setValorAcesso(estacionamento.calculoValorTotal(acessoBuilder.getHoraEntrada(),
+																	  acessoBuilder.getHoraSaida(),
+																	  acessoBuilder.getTipoAcesso()));
+		assertEquals(60.00, acessoBuilder.getValorAcesso(),0.1f);
 		
 	}
 
