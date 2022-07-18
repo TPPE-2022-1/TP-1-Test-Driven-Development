@@ -1,8 +1,6 @@
 package tppe.tp1.acesso;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.function.BooleanSupplier;
 
 public class Acesso {
 
