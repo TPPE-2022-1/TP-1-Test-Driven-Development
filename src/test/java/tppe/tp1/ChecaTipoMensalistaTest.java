@@ -2,7 +2,7 @@ package tppe.tp1;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -22,8 +22,8 @@ public class ChecaTipoMensalistaTest {
 	@BeforeEach
 	void setup() throws Exception {
 		a.setPlaca("JIL2809");
-		a.setHoraEntrada(LocalTime.of(12, 0));
-		a.setHoraSaida(LocalTime.of(15, 0));
+		a.setHoraEntrada(LocalDateTime.parse("2022-07-18T12:00"));
+		a.setHoraSaida(LocalDateTime.parse("2022-07-18T15:00"));
 	}
 	
 	@Tag("TesteFuncional")

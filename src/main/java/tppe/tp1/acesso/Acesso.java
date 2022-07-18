@@ -1,13 +1,14 @@
 package tppe.tp1.acesso;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.function.BooleanSupplier;
 
 public class Acesso {
 
 	private String placa;
-	private LocalTime horaEntrada;
-	private LocalTime horaSaida;
+	private LocalDateTime horaEntrada;
+	private LocalDateTime horaSaida;
 	private String tipoAcesso;
 	private Float valorAcesso;
 	private Float valorContratante;
@@ -26,11 +27,11 @@ public class Acesso {
 		return placa;
 	}
 
-	public LocalTime getHoraEntrada() {
+	public LocalDateTime getHoraEntrada() {
 		return horaEntrada;
 	}
 
-	public LocalTime getHoraSaida() {
+	public LocalDateTime getHoraSaida() {
 		return horaSaida;
 	}
 

@@ -2,7 +2,7 @@ package tppe.tp1;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -20,9 +20,9 @@ public class RegistroHoraSaidaTest {
 	}
 	
 	static Stream<Arguments> geraHoraSaida() {
-		return Stream.of(Arguments.of("08:30"),
-				Arguments.of("14:30"),
-				Arguments.of("19:19")
+		return Stream.of(Arguments.of("2022-07-17T08:30"),
+				Arguments.of("2022-07-17T14:30"),
+				Arguments.of("2022-07-17T19:19")
 				);
 	}
 	
@@ -31,7 +31,7 @@ public class RegistroHoraSaidaTest {
 	@Tag("TesteFuncional")
 	void testRegistroHoraSaida(String saida) {
 		AcessoBuilder acessoBuilder = new AcessoBuilder();
-		LocalTime horaSaida = LocalTime.parse(saida);
+		LocalDateTime horaSaida = LocalDateTime.parse(saida);
 		acessoBuilder.setHoraSaida(horaSaida);
 		assertEquals(horaSaida, acessoBuilder.getHoraSaida());
 		
