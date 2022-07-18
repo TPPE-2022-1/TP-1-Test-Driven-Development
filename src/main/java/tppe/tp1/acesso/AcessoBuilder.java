@@ -6,6 +6,7 @@ import tppe.tp1.acesso.exceptions.AcessoEventoInvalidoException;
 import tppe.tp1.acesso.exceptions.AcessoEventoVazioException;
 import tppe.tp1.acesso.exceptions.AcessoPlacaInvalidaException;
 import tppe.tp1.acesso.exceptions.AcessoPlacaVazioException;
+import tppe.tp1.exceptions.DescricaoEmBrancoException;
 
 
 public class AcessoBuilder {
@@ -17,7 +18,20 @@ public class AcessoBuilder {
 	private Float valorAcesso;
 	private Float valorContratante;	
 	
-	public Acesso build(){
+	public Acesso build() throws DescricaoEmBrancoException {
+		if (horaEntrada == null) {
+			throw new DescricaoEmBrancoException("Hora de entrada não pode ser nula");
+		}
+		if (horaSaida == null) {
+			throw new DescricaoEmBrancoException("Hora de saída não pode ser nula");
+		}
+//		if (valorAcesso == null) {
+//			throw new DescricaoEmBrancoException("Valor do acesso não pode ser nulo");
+//		}
+//		if (valorContratante == null) {
+//			throw new DescricaoEmBrancoException("Valor do contratante não pode ser nulo");
+//		}
+		
 		return new Acesso(this);
 	}
 

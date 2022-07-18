@@ -5,6 +5,7 @@ import org.junit.platform.suite.api.SelectClasses;
 import org.junit.platform.suite.api.Suite;
 import org.junit.platform.suite.api.SuiteDisplayName;
 
+import tppe.tp1.CadastraAcessoEmListaEstacionamentoTest;
 import tppe.tp1.CalculaFracoesTest;
 import tppe.tp1.CalculaHoraCheiaTest;
 import tppe.tp1.ChecaTipoEventoTest;
@@ -40,7 +41,8 @@ import tppe.tp1.RegistroPlacaTest;
 		RegistraValorRetornoContratanteEstacionamentoTest.class, CriaEstacionamentoTest.class,
 		CriaEstacionamentoParametrosInvalidosTest.class, CriaEstacionamentoIncompletoTest.class, CriaAcessoTest.class,
 		RegistroHoraEntradaTest.class, RegistroHoraSaidaTest.class, RegistroPlacaTest.class,
-		CalculaFracoesTest.class, CalculaHoraCheiaTest.class, ChecaTipoEventoTest.class, ChecaTipoMensalistaTest.class})
+		CalculaFracoesTest.class, CalculaHoraCheiaTest.class, ChecaTipoEventoTest.class, ChecaTipoMensalistaTest.class,
+		CadastraAcessoEmListaEstacionamentoTest.class})
 @IncludeTags("TesteFuncional")
 @SuiteDisplayName("Testes Funcionais")
 public class TestesFuncionaisTest {
