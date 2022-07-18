@@ -17,8 +17,8 @@ public class AcessoBuilder {
 	private LocalDateTime horaEntrada;
 	private LocalDateTime horaSaida;
 	private String tipoAcesso;
-	private Float valorAcesso;
-	private Float valorContratante;
+	private Double valorAcesso;
+	private Double valorContratante;
 
 	public Acesso build() throws DescricaoEmBrancoException {
 		if (horaEntrada == null) {
@@ -54,11 +54,11 @@ public class AcessoBuilder {
 		return tipoAcesso;
 	}
 
-	public Float getValorAcesso() {
+	public Double getValorAcesso() {
 		return valorAcesso;
 	}
 
-	public Float getValorContratante() {
+	public Double getValorContratante() {
 		return valorContratante;
 	}
 
@@ -132,11 +132,11 @@ public class AcessoBuilder {
 	// Fim Get
 
 	// SET
-	public void setValorContratante(Float valorContratante) {
-		this.valorContratante = valorContratante;
+	public void setValorContratante(Double d) {
+		this.valorContratante = d;
 	}
 
-	public void setValorAcesso(Float valorAcesso) {
+	public void setValorAcesso(Double valorAcesso) {
 		this.valorAcesso = valorAcesso;
 	}
 

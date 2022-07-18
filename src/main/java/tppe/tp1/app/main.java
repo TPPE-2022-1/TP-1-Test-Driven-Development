@@ -1,5 +1,7 @@
 package tppe.tp1.app;
 
+//import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -32,18 +34,41 @@ public class main {
 		e.setRetornoContratante(50.00);
 		estacionamentos.add(e.build());
 		
+		e = new EstacionamentoBuilder();
+		e.setId(1);
+		e.setValorFracao(30.00);
+		e.setDescontoHoraCheia(15.00);
+		e.setValorDiariaDiurna(120.00);
+		e.setDescontoDiariaNoturna(45.00);
+		e.setHorarioEntradaDiariaNoturna(LocalTime.of(19, 0));
+		e.setHorarioSaidaDiariaNoturna(LocalTime.of(8, 0));
+		e.setValorMensalidade(600.00);
+		e.setValorEvento(50.00);
+		e.setHorarioAbertura(LocalTime.of(6, 0));
+		e.setHorarioEncerramento(LocalTime.of(22, 0));
+		e.setCapacidade(300);
+		e.setRetornoContratante(50.00);
+		estacionamentos.add(e.build());
+	
+		AcessoBuilder acessoBuilder = new AcessoBuilder();
+		acessoBuilder.setPlaca("GHJ7653");
+		acessoBuilder.setHoraEntrada(LocalDateTime.parse("2022-07-17T12:40"));
+		acessoBuilder.setHoraSaida(LocalDateTime.parse("2022-07-17T15:30"));
+		acessoBuilder.setValorAcesso(50.00);
+		acessoBuilder.setValorContratante(100.00);
+		estacionamentos.get(0).addAcesso(acessoBuilder.build());
+		
 		Integer opcoes = 0;
 		
 		
-		while (opcoes != 5) {
-			limpaTela();
+		while (opcoes!=6) {
 			System.out.println("Escolha uma das opcoes:\n"
-					+ "[1] - Cadastrar novo Estacionameno.\n"
-					+ "[2] - Registrar novo acesso.\n"
-					+ "[3] - Verificar informacoes de um acesso.\n"
-					+ "[4] - Verificar valor total de repasse para o contratante de um estacionamento.\n"
-					+ "[5] - Verificar todos estacionamentos cadastrados\n"
-					+ "[6] - Encerrar aplicao.\n");
+					+ "[1] - Cadastrar novo Estacionameno.\n" //feito
+					+ "[2] - Registrar novo acesso.\n" //feito mas horario de entrada ruim
+					+ "[3] - Verificar informacoes de um acesso.\n" //feito
+					+ "[4] - Verificar valor total de repasse para o contratante de um estacionamento.\n" //feito
+					+ "[5] - Verificar todos estacionamentos cadastrados\n" //feito
+					+ "[6] - Encerrar aplicao.\n"); //feito
 			opcoes = input.nextInt();
 			switch(opcoes) {
 			case 1:
@@ -71,6 +96,15 @@ public class main {
 				break;
 			case 4:
 				limpaTela();
+				Double soma = 0.0;
+				System.out.println("Insira o Id do estacionamento: ");
+				for (Acesso acesso : estacionamentos.get(input.nextInt()).getListaAcessos())
+				{
+					//sum valorContratante
+					soma += acesso.getValorContratante();
+					
+				}
+				System.out.println("Valor total de repasse: " + soma);
 				break;
 			case 5:
 				limpaTela();
@@ -92,13 +126,19 @@ public class main {
 					+ "-------------------------------------------------------------------------------------------------\n\n"
 					);
 				}
+				
+				System.out.println("Deseja continuar ?(s/n)");
+				if(input.next().equalsIgnoreCase("n"))
+					opcoes = 6;
+				break;
+			case 6:
 				break;
 			default:
-					
+				System.out.println("Escolha invalida!\n\n");
 			}
 		}
 		
-		
+		System.out.println("Programa Encerrado com Sucesso!");
 	}
 	
 	public static void registraAcesso(Estacionamento estacionamento) throws Exception {
@@ -106,9 +146,9 @@ public class main {
 		
 		System.out.println("Digite a placa do carro(7 caracteres): ");
 		acesso.setPlaca(input.next());
-		System.out.println("Digite o horario de entrada do veiculo(dd/mm/aaaa hh:mm): ");
+		System.out.println("Digite o horario de entrada do veiculo(aaaa-mm-ddThh:mm): ");
 		acesso.setHoraEntrada(LocalDateTime.parse(input.next()));
-		System.out.println("Digite o horario de saida do veiculo(dd/mm/aaaa hh:mm): ");
+		System.out.println("Digite o horario de saida do veiculo(aaaa-mm-ddThh:mm): ");
 		acesso.setHoraSaida(LocalDateTime.parse(input.next()));
 		System.out.println("O acesso e acesso especial(s/n): ");
 		if (input.next().equalsIgnoreCase("s")) {
@@ -154,15 +194,31 @@ public class main {
 	
 	public static void buscaAcessos(Estacionamento estacionamento) {
 		String placa;
-		System.out.println("Insira a placa do veiculo: ");
-		placa = input.nextLine().trim();
-		
-		for (Acesso acesso : estacionamento.getListaAcessos()) {
-			if (acesso.getPlaca() == placa) {
-				System.out.println("Placa");
+		Boolean opcao = true;
+		while(opcao) {
+			System.out.println("Insira a placa do veiculo: ");
+			placa = input.next().trim();
+
+			for (Acesso acesso : estacionamento.getListaAcessos()) {
+
+				if (acesso.getPlaca().equalsIgnoreCase(placa)) {
+					// print all info about the access
+					System.out.println("placa: "+acesso.getPlaca()+"\n"
+					+ "Horario de entrada: "+acesso.getHoraEntrada()+"\n"
+					+ "Horario de saida: "+acesso.getHoraSaida()+"\n"
+					+ "Valor de acesso: "+acesso.getValorAcesso()+"\n"
+					+ "Valor do contratante: "+acesso.getValorContratante()+"\n"
+					);
+				}
 			}
-		}
 		
+
+			// wait for enter to go to menu
+			System.out.println("Deseja continuar ?(s/n)");
+			if(input.next().equalsIgnoreCase("n"))
+				opcao = false;
+					
+		}
 	}
 
 	public static void limpaTela() {
