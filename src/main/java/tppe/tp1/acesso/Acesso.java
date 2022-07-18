@@ -8,8 +8,8 @@ public class Acesso {
 	private LocalDateTime horaEntrada;
 	private LocalDateTime horaSaida;
 	private String tipoAcesso;
-	private Float valorAcesso;
-	private Float valorContratante;
+	private Double valorAcesso;
+	private Double valorContratante;
 
 	Acesso(AcessoBuilder builder){
 		placa = builder.getPlaca();
@@ -37,11 +37,11 @@ public class Acesso {
 		return tipoAcesso;
 	}
 
-	public Float getValorAcesso() {
+	public Double getValorAcesso() {
 		return valorAcesso;
 	}
 
-	public Float getValorContratante() {
+	public Double getValorContratante() {
 		return valorContratante;
 	}
 
