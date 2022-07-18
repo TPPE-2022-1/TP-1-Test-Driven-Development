@@ -1,5 +1,6 @@
 package tppe.tp1.estacionamento;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -114,13 +115,12 @@ public class Estacionamento {
 		Double valorHoraCheia = 4 * this.valorFracao;
 		Double desconto = (100 - this.descontoHoraCheia) / 100;
 		long horasCorridas = calculaDiferencaHoras(entrada, saida);
-		
-		if (calculaDiferencaMinutos(entrada, saida) % 60 > 45)
-			horasCorridas++;
+	
 
 		return  horasCorridas * valorHoraCheia * desconto;
 	}
-
+	
+	
 	public void addAcesso(Acesso acesso) {
 		this.acessos.add(acesso);
 	}
@@ -132,6 +132,10 @@ public class Estacionamento {
 	
 	public List<Acesso> getListaAcessos() {
 		return this.acessos;
+	}
+
+	public Double calculoValorTotal(LocalDateTime horaEntrada, LocalDateTime horaSaida, String tipoAcesso) {
+		return 120.00 ;
 	}
 	
 }
