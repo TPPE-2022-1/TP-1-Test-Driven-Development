@@ -1,10 +1,8 @@
 package tppe.tp1.acesso;
 
-import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.time.LocalTime;
-import java.time.Period;
 
 import tppe.tp1.estacionamento.Estacionamento;
 
@@ -131,8 +129,7 @@ public class Acesso {
 		return diarias;
 	}
 
-	public Double calculoValorContratante(Double valorAcesso) {
-		if (valorAcesso > 40) return 273.00;
-		return 24.00;
+	public Double calculoValorContratante(Double retornoContratante) {
+		return this.valorAcesso * retornoContratante / 100;
 	}
 }

@@ -47,7 +47,7 @@ public class CalculaValorContratanteTest {
 		a.setValorAcesso(40.00);
 
 		acesso = a.build();
-		assertEquals(24.00, acesso.calculoValorContratante(acesso.getValorAcesso()));
+		assertEquals(24.00, acesso.calculoValorContratante(estacionamento.getRetornoContratante()), 0.1);
 	}
 	
 
@@ -63,8 +63,24 @@ public class CalculaValorContratanteTest {
 		a.setValorAcesso(455.00);
 		
 		acesso = a.build();
-		assertEquals(273.00, acesso.calculoValorContratante(acesso.getValorAcesso()));
+		assertEquals(273.00, acesso.calculoValorContratante(estacionamento.getRetornoContratante()), 0.1);
 	}
+
+	
+	@Test
+	@Tag("TesteFuncional")
+	void testCalculaValorContratanteT() throws Exception {
+		AcessoBuilder a = new AcessoBuilder();
+		a.setPlaca("JJL2180");
+		a.setHoraEntrada(LocalDateTime.parse("2022-07-18T21:36"));
+		a.setHoraSaida(LocalDateTime.parse("2022-07-19T06:12"));
+		a.setTipoAcesso("");
+		a.setValorAcesso(21.00);
+
+		acesso = a.build();
+		assertEquals(12.60, acesso.calculoValorContratante(estacionamento.getRetornoContratante()), 0.1);
+	}
+	
 	
 
 }
