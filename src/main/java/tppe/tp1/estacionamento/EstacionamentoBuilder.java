@@ -149,10 +149,9 @@ public class EstacionamentoBuilder {
 			throw new DescricaoEmBrancoException("Valor capacidade não informado");
 		}
 
-		/*
-		 * if (retornoContratante == null) { throw new
-		 * DescricaoEmBrancoException("Retorno contratante não informado"); }
-		 */
+		if (retornoContratante == null) {
+			throw new DescricaoEmBrancoException("Retorno contratante não informado");
+		}
 
 		/*
 		 * Validar horário de abertura e encerramento

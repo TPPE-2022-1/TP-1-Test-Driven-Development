@@ -2,6 +2,7 @@ package tppe.tp1;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.stream.Stream;
 
@@ -40,16 +41,16 @@ public class CalculaFracoesTest {
 	@Tag("TesteFuncional")
 	@ParameterizedTest
 	@MethodSource("geraAcessos")
-	void testacalculoFracao(LocalTime horaEntrada, LocalTime horaSaida, Double total) throws Exception {
+	void testacalculoFracao(LocalDateTime horaEntrada, LocalDateTime horaSaida, Double total) throws Exception {
 		assertEquals(total, estacionamento.calculaFracoes(horaEntrada, horaSaida), 0.1);
 	}
 	
 	static Stream<Arguments> geraAcessos() {
-		return Stream.of(Arguments.of(LocalTime.of(12, 0), LocalTime.of(12, 15), 30.00),
-				Arguments.of(LocalTime.of(12, 00), LocalTime.of(12, 30), 60.00),
-				Arguments.of(LocalTime.of(12, 00), LocalTime.of(12, 16), 60.00),
-				Arguments.of(LocalTime.of(12, 00), LocalTime.of(12, 46), 0.00),
-				Arguments.of(LocalTime.of(12, 00), LocalTime.of(12, 14), 30.00));
+		return Stream.of(Arguments.of(LocalDateTime.of(2000, 04, 04,12, 0), LocalDateTime.of(2000, 04, 04, 12, 15), 30.00),
+				Arguments.of(LocalDateTime.of(2000, 04, 04,12, 00), LocalDateTime.of(2000, 04, 04,12, 30), 60.00),
+				Arguments.of(LocalDateTime.of(2000, 04, 04,12, 00), LocalDateTime.of(2000, 04, 04,12, 16), 60.00),
+				Arguments.of(LocalDateTime.of(2000, 04, 04,12, 00), LocalDateTime.of(2000, 04, 04,12, 46), 0.00),
+				Arguments.of(LocalDateTime.of(2000, 04, 04,2, 00), LocalDateTime.of(2000, 04, 04,12, 14), 30.00));
 	}
 
 }
