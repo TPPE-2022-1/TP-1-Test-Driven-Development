@@ -51,14 +51,14 @@ public class Acesso {
 		return valorContratante;
 	}
 
-	public Boolean isMensalista(String tipoAcesso) {
+	public Boolean isMensalista() {
 		if (this.tipoAcesso == "Mensalista")
 			return true;
 		else
 			return false;
 	}
 
-	public Boolean isEvento(String tipoAcesso) {
+	public Boolean isEvento() {
 		if (tipoAcesso == "Evento")
 			return true;
 		else

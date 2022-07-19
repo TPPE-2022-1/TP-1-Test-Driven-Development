@@ -32,7 +32,7 @@ public class ChecaTipoMensalistaTest {
 	void checaTipoAcesso(String tipo, Boolean resultado) throws Exception {
 		a.setTipoAcesso(tipo);
 		acesso = a.build();
-		assertEquals(resultado, acesso.isMensalista(acesso.getTipoAcesso()));
+		assertEquals(resultado, acesso.isMensalista());
 	}
 	
 	static Stream<Arguments> geraTipoAcesso() {

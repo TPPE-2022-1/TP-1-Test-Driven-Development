@@ -32,7 +32,7 @@ public class ChecaTipoEventoTest {
 	void checaTipoEntrada(String tipoAcesso, Boolean resultado) throws Exception {
 		a.setTipoAcesso(tipoAcesso);
 		acesso = a.build();
-		assertEquals(resultado, acesso.isEvento(acesso.getTipoAcesso()));
+		assertEquals(resultado, acesso.isEvento());
 	}
 
 	static Stream<Arguments> geraTipoAcesso() {
