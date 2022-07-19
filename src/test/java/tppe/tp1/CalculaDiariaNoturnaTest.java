@@ -42,26 +42,26 @@ public class CalculaDiariaNoturnaTest {
 	}
 
 	static Stream<Arguments> getAcesso() {
-		return Stream.of(Arguments.of("2022-07-18T19:01", "2022-07-18T23:59", true),
+		return Stream.of(Arguments.of("2022-07-18T08:01", "2022-07-18T23:59", true),
 						 Arguments.of("2022-07-18T08:00", "2022-07-18T18:00", false),
 						 Arguments.of("2022-07-18T08:00", "2022-07-18T08:30", false),
 						 // diária parcial
-						 Arguments.of("2022-07-18T09:00", "2022-07-18T23:59", false),
+						 Arguments.of("2022-07-18T09:00", "2022-07-18T23:59", true),
 						 Arguments.of("2022-07-18T19:01", "2022-07-19T01:00", true),
-						 Arguments.of("2022-07-18T19:01", "2022-07-19T07:00", true));
-//						 Arguments.of("2022-07-18T01:00", "2022-07-19T07:00", true),
-//						 Arguments.of("2022-07-18T00:01", "2022-07-19T23:59", true));
+						 Arguments.of("2022-07-18T19:00", "2022-07-19T07:00", true),
+						 Arguments.of("2022-07-18T01:00", "2022-07-19T07:00", true),
+						 Arguments.of("2022-07-18T00:01", "2022-07-19T23:59", true));
 	}
 
 	@ParameterizedTest
 	@MethodSource("getAcesso")
 	@Tag("TesteFuncional")
-	void testDiariaNoturna(String entrada, String saida, Boolean resposta) {
+	void testDiariaNoturna(String entrada, String saida, Boolean resposta) throws Exception {
 		a = new AcessoBuilder();
 		LocalDateTime horaEntrada = LocalDateTime.parse(entrada);
 		LocalDateTime horaSaida = LocalDateTime.parse(saida);
 		a.setHoraEntrada(horaEntrada);
 		a.setHoraSaida(horaSaida);
-		assertEquals(resposta, a.isDiariaNoturna(e));
+		assertEquals(resposta, a.build().isDiariaNoturna(e));
 	}
 }

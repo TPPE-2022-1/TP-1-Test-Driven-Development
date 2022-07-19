@@ -1,6 +1,9 @@
 package tppe.tp1.acesso;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+
+import tppe.tp1.estacionamento.Estacionamento;
 
 public class Acesso {
 
@@ -58,5 +61,31 @@ public class Acesso {
 		else
 			return false;
 	}
+	
+	public Boolean isDiariaNoturna(Estacionamento e) {
+		LocalDateTime entrada = getHoraEntrada();
+		LocalDateTime saida = getHoraSaida();
+		long minutosEstadia = ChronoUnit.MINUTES.between(entrada, saida);
+		long minutosTotais = 780;
+		long diff;
+		
+		if (entrada.toLocalTime().isAfter(e.getHorarioEntradaDiariaNoturna())) {
+			return true;
+		} else if (entrada.toLocalTime().isAfter(e.getHorarioEntradaDiariaNoturna())) {
+			 diff = ChronoUnit.MINUTES.between(e.getHorarioEntradaDiariaNoturna(), entrada);
+			 minutosTotais -= diff;
+			 minutosEstadia -= diff;
+			 return minutosTotais < minutosEstadia;
+		} else if (e.getHorarioSaidaDiariaNoturna().isAfter(entrada.toLocalTime()))  {
+			 diff = ChronoUnit.MINUTES.between(entrada.toLocalTime(), e.getHorarioEntradaDiariaNoturna());
+			 minutosTotais -= diff;
+			 minutosEstadia -= diff;
+			 return minutosTotais < minutosEstadia;
+		} else if (saida.toLocalTime().isAfter(e.getHorarioEntradaDiariaNoturna()) || e.getHorarioSaidaDiariaNoturna().isAfter(saida.toLocalTime())) {
+			return true;
+		} else
+			return false;
+ 	}
+
 
 }

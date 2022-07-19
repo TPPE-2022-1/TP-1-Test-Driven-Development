@@ -52,13 +52,13 @@ public class CalculaDiariaDiurnaTest {
 	@ParameterizedTest
 	@MethodSource("getAcesso")
 	@Tag("TesteFuncional")
-	void testDiariaDiurna(String entrada, String saida, Boolean resposta) {
+	void testDiariaDiurna(String entrada, String saida, Boolean resposta) throws Exception {
 		a = new AcessoBuilder();
 		LocalDateTime horaEntrada = LocalDateTime.parse(entrada);
 		LocalDateTime horaSaida = LocalDateTime.parse(saida);
 		a.setHoraEntrada(horaEntrada);
 		a.setHoraSaida(horaSaida);
-		assertEquals(resposta, a.isDiariaDiurna(e));
+		assertEquals(resposta, a.build().isDiariaDiurna(e));
 	}
 
 }
