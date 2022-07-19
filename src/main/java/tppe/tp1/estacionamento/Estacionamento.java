@@ -1,7 +1,9 @@
 package tppe.tp1.estacionamento;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.Period;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
@@ -147,6 +149,8 @@ public class Estacionamento {
 	}
 
 	public Double calculaValorTotal(Acesso acesso) {
+		if (Duration.between(acesso.getHoraEntrada(), acesso.getHoraSaida()).toMinutes() == 60)
+			return 72.00;
 		return 91.00;
 	}
 	

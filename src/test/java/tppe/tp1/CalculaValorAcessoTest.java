@@ -48,4 +48,16 @@ public class CalculaValorAcessoTest {
 		acesso = a.build();
 		assertEquals(91.00, estacionamento.calculaValorTotal(acesso));
 	}
+
+	@Test
+	@Tag("TesteFuncional")
+	void calculaValorAcessTestD() throws Exception {
+		AcessoBuilder a = new AcessoBuilder();
+		a.setPlaca("abc1234");
+		a.setHoraEntrada(LocalDateTime.parse("2022-07-18T09:00"));
+		a.setHoraSaida(LocalDateTime.parse("2022-07-18T10:00"));
+		
+		acesso = a.build();
+		assertEquals(72.00, estacionamento.calculaValorTotal(acesso));
+	}
 }
