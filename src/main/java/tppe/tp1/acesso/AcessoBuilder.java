@@ -1,6 +1,6 @@
 package tppe.tp1.acesso;
 
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 
 import tppe.tp1.acesso.exceptions.AcessoEventoInvalidoException;
 import tppe.tp1.acesso.exceptions.AcessoEventoVazioException;
@@ -8,16 +8,15 @@ import tppe.tp1.acesso.exceptions.AcessoPlacaInvalidaException;
 import tppe.tp1.acesso.exceptions.AcessoPlacaVazioException;
 import tppe.tp1.exceptions.DescricaoEmBrancoException;
 
-
 public class AcessoBuilder {
-	
+
 	private String placa;
-	private LocalTime horaEntrada;
-	private LocalTime horaSaida;
+	private LocalDateTime horaEntrada;
+	private LocalDateTime horaSaida;
 	private String tipoAcesso;
-	private Float valorAcesso;
-	private Float valorContratante;	
-	
+	private Double valorAcesso;
+	private Double valorContratante;
+
 	public Acesso build() throws DescricaoEmBrancoException {
 		if (horaEntrada == null) {
 			throw new DescricaoEmBrancoException("Hora de entrada não pode ser nula");
@@ -31,7 +30,7 @@ public class AcessoBuilder {
 //		if (valorContratante == null) {
 //			throw new DescricaoEmBrancoException("Valor do contratante não pode ser nulo");
 //		}
-		
+
 		return new Acesso(this);
 	}
 
@@ -40,11 +39,11 @@ public class AcessoBuilder {
 		return placa;
 	}
 
-	public LocalTime getHoraEntrada() {
+	public LocalDateTime getHoraEntrada() {
 		return horaEntrada;
 	}
 
-	public LocalTime getHoraSaida() {
+	public LocalDateTime getHoraSaida() {
 		return horaSaida;
 	}
 
@@ -52,24 +51,24 @@ public class AcessoBuilder {
 		return tipoAcesso;
 	}
 
-	public Float getValorAcesso() {
+	public Double getValorAcesso() {
 		return valorAcesso;
 	}
 
-	public Float getValorContratante() {
+	public Double getValorContratante() {
 		return valorContratante;
 	}
 	// Fim Get
-	
-	//	SET
-	public void setValorContratante(Float valorContratante) {
-		this.valorContratante = valorContratante;
+
+	// SET
+	public void setValorContratante(Double d) {
+		this.valorContratante = d;
 	}
 
-	public void setValorAcesso(Float valorAcesso) {
+	public void setValorAcesso(Double valorAcesso) {
 		this.valorAcesso = valorAcesso;
 	}
-	
+
 	public void setTipoAcesso(String tipoAcesso) throws AcessoEventoInvalidoException, AcessoEventoVazioException {
 		if (tipoAcesso.trim().equalsIgnoreCase("Mensalista"))
 			this.tipoAcesso = "Mensalista";
@@ -77,26 +76,24 @@ public class AcessoBuilder {
 			this.tipoAcesso = "Evento";
 		else if (tipoAcesso != null && tipoAcesso.trim().length() > 0)
 			throw new AcessoEventoInvalidoException();
-		else
-			throw new AcessoEventoVazioException();
 	}
 
-	public void setHoraSaida(LocalTime horaSaida) {
+	public void setHoraSaida(LocalDateTime horaSaida) {
 		this.horaSaida = horaSaida;
 	}
 
 	public void setPlaca(String placa) throws AcessoPlacaInvalidaException, AcessoPlacaVazioException {
-		if(placa.trim().isEmpty()) {
+		if (placa.trim().isEmpty()) {
 			throw new AcessoPlacaVazioException();
 		}
-		if(placa.trim().length() != 7) {
+		if (placa.trim().length() != 7) {
 			throw new AcessoPlacaInvalidaException();
 		}
 		this.placa = placa;
 	}
 
-	public void setHoraEntrada(LocalTime horaEntrada) {
+	public void setHoraEntrada(LocalDateTime horaEntrada) {
 		this.horaEntrada = horaEntrada;
 	}
-	//	FIM SET
+	// FIM SET
 }

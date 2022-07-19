@@ -2,7 +2,7 @@ package tppe.tp1;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -16,29 +16,26 @@ import tppe.tp1.acesso.AcessoBuilder;
 
 public class ChecaTipoEventoTest {
 
-
 	Acesso acesso;
 	AcessoBuilder a = new AcessoBuilder();
-	
+
 	@BeforeEach
 	void setup() throws Exception {
 		a.setPlaca("JHS1227");
-		a.setHoraEntrada(LocalTime.of(8, 0));
-		a.setHoraSaida(LocalTime.of(12, 0));
+		a.setHoraEntrada(LocalDateTime.parse("2022-07-18T08:00"));
+		a.setHoraSaida(LocalDateTime.parse("2022-07-18T12:00"));
 	}
-	
+
 	@Tag("TesteFuncional")
 	@ParameterizedTest
 	@MethodSource("geraTipoAcesso")
 	void checaTipoEntrada(String tipoAcesso, Boolean resultado) throws Exception {
 		a.setTipoAcesso(tipoAcesso);
 		acesso = a.build();
-		assertEquals(resultado, acesso.isEvento(acesso.getTipoAcesso()));
+		assertEquals(resultado, acesso.isEvento());
 	}
 
 	static Stream<Arguments> geraTipoAcesso() {
-		return Stream.of(Arguments.of("Evento", true),
-				Arguments.of("Mensalista", false),
-				Arguments.of("Evento", true));
+		return Stream.of(Arguments.of("Evento", true), Arguments.of("Mensalista", false), Arguments.of("Evento", true));
 	}
 }

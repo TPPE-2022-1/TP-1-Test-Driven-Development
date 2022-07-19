@@ -1,16 +1,19 @@
 package tppe.tp1.acesso;
 
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.time.LocalTime;
-import java.util.function.BooleanSupplier;
+
+import tppe.tp1.estacionamento.Estacionamento;
 
 public class Acesso {
 
 	private String placa;
-	private LocalTime horaEntrada;
-	private LocalTime horaSaida;
+	private LocalDateTime horaEntrada;
+	private LocalDateTime horaSaida;
 	private String tipoAcesso;
-	private Float valorAcesso;
-	private Float valorContratante;
+	private Double valorAcesso;
+	private Double valorContratante;
 
 	Acesso(AcessoBuilder builder){
 		placa = builder.getPlaca();
@@ -26,11 +29,11 @@ public class Acesso {
 		return placa;
 	}
 
-	public LocalTime getHoraEntrada() {
+	public LocalDateTime getHoraEntrada() {
 		return horaEntrada;
 	}
 
-	public LocalTime getHoraSaida() {
+	public LocalDateTime getHoraSaida() {
 		return horaSaida;
 	}
 
@@ -38,26 +41,102 @@ public class Acesso {
 		return tipoAcesso;
 	}
 
-	public Float getValorAcesso() {
+	public Double getValorAcesso() {
 		return valorAcesso;
 	}
 
-	public Float getValorContratante() {
+	public Double getValorContratante() {
 		return valorContratante;
 	}
 
-	public Boolean isMensalista(String tipoAcesso) {
+	public Boolean isMensalista() {
 		if (this.tipoAcesso == "Mensalista")
 			return true;
 		else
 			return false;
 	}
 
-	public Boolean isEvento(String tipoAcesso) {
+	public Boolean isEvento() {
 		if (tipoAcesso == "Evento")
 			return true;
 		else
 			return false;
 	}
+	public void setValorContratante(Double d) {
+		this.valorContratante = d;
+	}
 
+	public void setValorAcesso(Double valorAcesso) {
+		this.valorAcesso = valorAcesso;
+	}
+	
+	public Boolean isDiariaNoturna(Estacionamento e) {
+		LocalDateTime entrada = getHoraEntrada();
+		LocalDateTime saida = getHoraSaida();
+		long minutosEstadia = ChronoUnit.MINUTES.between(entrada, saida);
+		long minutosTotais = 780;
+		long diff;
+		
+		if (entrada.toLocalTime().isAfter(e.getHorarioEntradaDiariaNoturna())) {
+			return true;
+		} else if (entrada.toLocalTime().isAfter(e.getHorarioEntradaDiariaNoturna())) {
+			 diff = ChronoUnit.MINUTES.between(e.getHorarioEntradaDiariaNoturna(), entrada);
+			 minutosTotais -= diff;
+			 minutosEstadia -= diff;
+			 return minutosTotais < minutosEstadia;
+		} else if (e.getHorarioSaidaDiariaNoturna().isAfter(entrada.toLocalTime()))  {
+			 diff = ChronoUnit.MINUTES.between(entrada.toLocalTime(), e.getHorarioEntradaDiariaNoturna());
+			 minutosTotais -= diff;
+			 minutosEstadia -= diff;
+			 return minutosTotais < minutosEstadia;
+		} else if (saida.toLocalTime().isAfter(e.getHorarioEntradaDiariaNoturna()) || e.getHorarioSaidaDiariaNoturna().isAfter(saida.toLocalTime())) {
+			return true;
+		} else
+			return false;
+ 	}
+
+	public Integer getDiarias(Estacionamento e) {
+		LocalDateTime entrada = getHoraEntrada();
+		LocalDateTime saida = getHoraSaida();
+		LocalTime entradaTime = getHoraEntrada().toLocalTime();
+		LocalTime saidaTime = getHoraSaida().toLocalTime();
+		boolean entrouNoite = false, saiuNoite = false;
+		if(entrada.toLocalDate().equals(saida.toLocalDate())) {
+			if(e.isNoturno(entradaTime)) {
+				entradaTime = e.getHorarioSaidaDiariaNoturna();
+				entrouNoite = true;
+			}
+			if(e.isNoturno(saidaTime)) {
+				saidaTime = e.getHorarioEntradaDiariaNoturna();
+				saiuNoite = true;
+			}
+			if(entrouNoite && saiuNoite)
+				return 0;
+			if(saidaTime.toSecondOfDay() - entradaTime.toSecondOfDay() >= LocalTime.of(9, 0).toSecondOfDay())
+				return 1;
+			return 0;
+		}
+		int diarias = 0;
+		int nDias = saida.getDayOfYear() - entrada.getDayOfYear();
+		System.out.println(nDias);
+		for(int i = 0; i <= nDias; i++) {
+			if(i==0){
+				if (e.getHorarioEntradaDiariaNoturna().toSecondOfDay() - entradaTime.toSecondOfDay() 
+					>= LocalTime.of(9, 0).toSecondOfDay())
+					diarias++;
+			}
+			else if(i==nDias) {
+				if (saidaTime.toSecondOfDay() - e.getHorarioSaidaDiariaNoturna().toSecondOfDay()
+					>= LocalTime.of(9, 0).toSecondOfDay())
+					diarias++;
+			} else {
+				diarias++;
+			}
+		}
+		return diarias;
+	}
+
+	public Double calculoValorContratante(Double retornoContratante) {
+		return this.valorAcesso * retornoContratante / 100;
+	}
 }

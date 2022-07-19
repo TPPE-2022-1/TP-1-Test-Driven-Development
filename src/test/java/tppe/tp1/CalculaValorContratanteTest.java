@@ -12,13 +12,15 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import tppe.tp1.acesso.Acesso;
+import tppe.tp1.acesso.AcessoBuilder;
 import tppe.tp1.estacionamento.Estacionamento;
 import tppe.tp1.estacionamento.EstacionamentoBuilder;
 
-public class CalculaHoraCheiaTest {
-
-	private Estacionamento estacionamento;
-
+public class CalculaValorContratanteTest {
+	Acesso acesso;
+	Estacionamento estacionamento;
+	
 	@BeforeEach
 	void setup() throws Exception {
 		EstacionamentoBuilder e = new EstacionamentoBuilder();
@@ -37,19 +39,30 @@ public class CalculaHoraCheiaTest {
 		e.setRetornoContratante(60.00);
 		this.estacionamento = e.build();
 	}
-
+	
 	@ParameterizedTest
 	@MethodSource("geraAcessos")
 	@Tag("TesteFuncional")
-	void testCalculaHoraCheia(LocalDateTime entrada, LocalDateTime saida, Double valorTotal) {
-		assertEquals(valorTotal, estacionamento.calculaHoraCheia(entrada, saida), 0.1);
+	void calculaValorAcessTest(String placa, String entrada, String saida, String tipoAcesso, Double valorAcesso, Double resultado) throws Exception {
+		AcessoBuilder a = new AcessoBuilder();
+		a.setPlaca(placa);
+		a.setHoraEntrada(LocalDateTime.parse(entrada));
+		a.setHoraSaida(LocalDateTime.parse(saida));
+		a.setTipoAcesso(tipoAcesso);
+		a.setValorAcesso(valorAcesso);
+		
+		acesso = a.build();
+		assertEquals(resultado, acesso.calculoValorContratante(estacionamento.getRetornoContratante()), 0.1);
+	}
+	
+	
+	static Stream<Arguments> geraAcessos() {
+		return Stream.of(Arguments.of("LZY5677", "2022-07-18T08:01", "2022-07-18T08:01", "", 0.00, 0.00),
+					Arguments.of("GWO6601", "2022-07-18T08:30", "2022-07-18T08:56", "", 40.00, 24.00),
+					Arguments.of("IFE1085", "2022-07-18T08:00", "2022-07-18T18:00", "", 70.00, 42.00),
+					Arguments.of("JJL2180", "2022-07-18T21:36", "2022-07-19T06:12", "", 21.00, 12.60),
+					Arguments.of("JJL2180", "2022-07-18T21:36", "2022-07-19T06:12", "Mensalista", 455.00, 273.00),
+					Arguments.of("JJL2180", "2022-07-18T21:36", "2022-07-19T06:12", "Evento", 60.00, 36.00));
 	}
 
-	static Stream<Arguments> geraAcessos() {
-		return Stream.of(Arguments.of(LocalDateTime.of(2000, 04, 04,12, 0), LocalDateTime.of(2000, 04, 04, 13, 00), 72.00),
-				Arguments.of(LocalDateTime.of(2000, 04, 04, 12, 00), LocalDateTime.of(2000, 04, 04, 14, 00), 144.00),
-				Arguments.of(LocalDateTime.of(2000, 04, 04, 12, 00), LocalDateTime.of(2000, 04, 04, 17, 00), 360.00),
-				Arguments.of(LocalDateTime.of(2000, 04, 04, 12, 00), LocalDateTime.of(2000, 04, 04, 12, 15), 0.00),
-				Arguments.of(LocalDateTime.of(2000, 04, 04, 12, 00), LocalDateTime.of(2000, 04, 04, 13, 46), 72.00));
-	}
 }

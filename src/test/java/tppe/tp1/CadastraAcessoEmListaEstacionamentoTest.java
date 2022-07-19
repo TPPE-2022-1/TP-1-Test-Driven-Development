@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -47,8 +48,8 @@ public class CadastraAcessoEmListaEstacionamentoTest {
 		Acesso acesso;
 
 		assertDoesNotThrow(() -> acessoBuilder.setPlaca("JHD9698"));
-		acessoBuilder.setHoraEntrada(LocalTime.of(22, 40));
-		acessoBuilder.setHoraSaida(LocalTime.of(23, 30));
+		acessoBuilder.setHoraEntrada(LocalDateTime.parse("2022-07-17T22:40"));
+		acessoBuilder.setHoraSaida(LocalDateTime.parse("2022-07-17T23:30"));
 
 		acesso = assertDoesNotThrow(() -> acessoBuilder.build());
 
@@ -65,11 +66,11 @@ public class CadastraAcessoEmListaEstacionamentoTest {
 		Acesso acesso, acesso2;
 
 		assertDoesNotThrow(() -> acessoBuilder.setPlaca("GHJ7653"));
-		acessoBuilder.setHoraEntrada(LocalTime.of(12, 40));
-		acessoBuilder.setHoraSaida(LocalTime.of(15, 30));
+		acessoBuilder.setHoraEntrada(LocalDateTime.parse("2022-07-17T12:40"));
+		acessoBuilder.setHoraSaida(LocalDateTime.parse("2022-07-17T15:30"));
 		assertDoesNotThrow(() -> acessoBuilder2.setPlaca("XXX1234"));
-		acessoBuilder2.setHoraEntrada(LocalTime.of(18, 40));
-		acessoBuilder2.setHoraSaida(LocalTime.of(20, 30));
+		acessoBuilder2.setHoraEntrada(LocalDateTime.parse("2022-07-17T18:40"));
+		acessoBuilder2.setHoraSaida(LocalDateTime.parse("2022-07-17T20:30"));
 
 		acesso = assertDoesNotThrow(() -> acessoBuilder.build());
 		acesso2 = assertDoesNotThrow(() -> acessoBuilder.build());
