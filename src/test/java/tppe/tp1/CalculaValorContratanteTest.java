@@ -51,4 +51,20 @@ public class CalculaValorContratanteTest {
 	}
 	
 
+	
+	@Test
+	@Tag("TesteFuncional")
+	void testCalculaValorContratanteD() throws Exception {
+		AcessoBuilder a = new AcessoBuilder();
+		a.setPlaca("JJL2180");
+		a.setHoraEntrada(LocalDateTime.parse("2022-07-18T21:36"));
+		a.setHoraSaida(LocalDateTime.parse("2022-07-19T06:12"));
+		a.setTipoAcesso("Mensalista");
+		a.setValorAcesso(455.00);
+		
+		acesso = a.build();
+		assertEquals(273.00, acesso.calculoValorContratante(acesso.getValorAcesso()));
+	}
+	
+
 }

@@ -132,6 +132,7 @@ public class Acesso {
 	}
 
 	public Double calculoValorContratante(Double valorAcesso) {
+		if (valorAcesso > 40) return 273.00;
 		return 24.00;
 	}
 }
