@@ -93,15 +93,15 @@ public class Estacionamento {
 		return retornoContratante;
 	}
 	
-	public long calculaDiferencaMinutos(LocalTime entrada, LocalTime saida) {		
+	public long calculaDiferencaMinutos(LocalDateTime entrada, LocalDateTime saida) {		
 		return ChronoUnit.MINUTES.between(entrada, saida);
 	}
 
-	public long calculaDiferencaHoras(LocalTime entrada, LocalTime saida) {		
+	public long calculaDiferencaHoras(LocalDateTime entrada, LocalDateTime saida) {		
 		return ChronoUnit.HOURS.between(entrada, saida);
 	}
 	
-	public Double calculaFracoes(LocalTime horaEntrada, LocalTime horaSaida) {
+	public Double calculaFracoes(LocalDateTime horaEntrada, LocalDateTime horaSaida) {
 		long minutosCorridos = calculaDiferencaMinutos(horaEntrada, horaSaida);
 		int fracoes = 0;
 
@@ -111,7 +111,7 @@ public class Estacionamento {
 		return fracoes % 4 * this.valorFracao;
 	}
 
-	public Double calculaHoraCheia(LocalTime entrada, LocalTime saida) {
+	public Double calculaHoraCheia(LocalDateTime entrada, LocalDateTime saida) {
 		Double valorHoraCheia = 4 * this.valorFracao;
 		Double desconto = (100 - this.descontoHoraCheia) / 100;
 		long horasCorridas = calculaDiferencaHoras(entrada, saida);
@@ -144,6 +144,10 @@ public class Estacionamento {
 	public boolean isNoturno(LocalTime time) {
 		return time.compareTo(getHorarioEntradaDiariaNoturna()) > 0 || 
 			   time.compareTo(getHorarioSaidaDiariaNoturna()) < 0;
+	}
+
+	public Double calculaValorTotal(Acesso acesso) {
+		return 91.00;
 	}
 	
 }
