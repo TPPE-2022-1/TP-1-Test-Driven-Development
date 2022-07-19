@@ -149,9 +149,14 @@ public class Estacionamento {
 	}
 
 	public Double calculaValorTotal(Acesso acesso) {
-		if (Duration.between(acesso.getHoraEntrada(), acesso.getHoraSaida()).toMinutes() == 60)
-			return 72.00;
-		return 91.00;
+		long duracao = Duration.between(acesso.getHoraEntrada(), acesso.getHoraSaida()).toMinutes();
+		if (acesso.isMensalista()) return this.valorMensalidade;
+		else if (acesso.isEvento()) return this.valorEvento;
+		else if (duracao <= 540 && !acesso.isDiariaNoturna(this))
+			return calculaHoraCheia(acesso.getHoraEntrada(), acesso.getHoraSaida()) + calculaFracoes(acesso.getHoraEntrada(), acesso.getHoraSaida());
+		else if (duracao <= 540) return this.valorDiariaDiurna * (this.getDescontoDiariaNoturna()) / 100;
+		else if (!acesso.isDiariaNoturna(this)) return this.valorDiariaDiurna;
+		else return this.valorDiariaDiurna + (this.valorDiariaDiurna * (this.getDescontoDiariaNoturna()) / 100);
 	}
 	
 }
