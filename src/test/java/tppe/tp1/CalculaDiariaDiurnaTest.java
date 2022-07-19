@@ -42,23 +42,24 @@ public class CalculaDiariaDiurnaTest {
 
 	static Stream<Arguments> getAcesso() {
 		return Stream.of(
-//				Arguments.of("2022-07-18T08:00", "2022-07-18T18:00", true),
-				Arguments.of("2022-07-18T11:00", "2022-07-18T19:00", false),
-//						 Arguments.of("2022-07-18T10:00", "2022-07-19T09:00", true),
-				Arguments.of("2022-07-18T15:00", "2022-07-18T23:00", false),
-				Arguments.of("2022-07-18T23:00", "2022-07-19T09:00", false));
+				Arguments.of("2022-07-18T08:00", "2022-07-18T18:00", 1),
+				Arguments.of("2022-07-18T11:00", "2022-07-18T19:00", 0),
+				Arguments.of("2022-07-18T10:00", "2022-07-19T09:00", 1),
+				Arguments.of("2022-07-18T15:00", "2022-07-18T23:00", 0),
+				Arguments.of("2022-07-18T23:00", "2022-07-19T09:00", 0),
+				Arguments.of("2022-07-18T10:00", "2022-07-20T17:00", 3));
 	}
 
 	@ParameterizedTest
 	@MethodSource("getAcesso")
 	@Tag("TesteFuncional")
-	void testDiariaDiurna(String entrada, String saida, Boolean resposta) throws Exception {
+	void testDiariaDiurna(String entrada, String saida, Integer resposta) throws Exception {
 		a = new AcessoBuilder();
 		LocalDateTime horaEntrada = LocalDateTime.parse(entrada);
 		LocalDateTime horaSaida = LocalDateTime.parse(saida);
 		a.setHoraEntrada(horaEntrada);
 		a.setHoraSaida(horaSaida);
-		assertEquals(resposta, a.build().isDiariaDiurna(e));
+		assertEquals(resposta, a.build().getDiarias(e));
 	}
 
 }

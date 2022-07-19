@@ -141,4 +141,9 @@ public class Estacionamento {
 			return 120.00;
 	}
 	
+	public boolean isNoturno(LocalTime time) {
+		return time.compareTo(getHorarioEntradaDiariaNoturna()) > 0 || 
+			   time.compareTo(getHorarioSaidaDiariaNoturna()) < 0;
+	}
+	
 }

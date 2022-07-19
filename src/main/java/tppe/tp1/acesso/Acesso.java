@@ -1,7 +1,10 @@
 package tppe.tp1.acesso;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.time.LocalTime;
+import java.time.Period;
 
 import tppe.tp1.estacionamento.Estacionamento;
 
@@ -87,5 +90,44 @@ public class Acesso {
 			return false;
  	}
 
-
+	public Integer getDiarias(Estacionamento e) {
+		LocalDateTime entrada = getHoraEntrada();
+		LocalDateTime saida = getHoraSaida();
+		LocalTime entradaTime = getHoraEntrada().toLocalTime();
+		LocalTime saidaTime = getHoraSaida().toLocalTime();
+		boolean entrouNoite = false, saiuNoite = false;
+		if(entrada.toLocalDate().equals(saida.toLocalDate())) {
+			if(e.isNoturno(entradaTime)) {
+				entradaTime = e.getHorarioSaidaDiariaNoturna();
+				entrouNoite = true;
+			}
+			if(e.isNoturno(saidaTime)) {
+				saidaTime = e.getHorarioEntradaDiariaNoturna();
+				saiuNoite = true;
+			}
+			if(entrouNoite && saiuNoite)
+				return 0;
+			if(saidaTime.toSecondOfDay() - entradaTime.toSecondOfDay() >= LocalTime.of(9, 0).toSecondOfDay())
+				return 1;
+			return 0;
+		}
+		int diarias = 0;
+		int nDias = saida.getDayOfYear() - entrada.getDayOfYear();
+		System.out.println(nDias);
+		for(int i = 0; i <= nDias; i++) {
+			if(i==0){
+				if (e.getHorarioEntradaDiariaNoturna().toSecondOfDay() - entradaTime.toSecondOfDay() 
+					>= LocalTime.of(9, 0).toSecondOfDay())
+					diarias++;
+			}
+			else if(i==nDias) {
+				if (saidaTime.toSecondOfDay() - e.getHorarioSaidaDiariaNoturna().toSecondOfDay()
+					>= LocalTime.of(9, 0).toSecondOfDay())
+					diarias++;
+			} else {
+				diarias++;
+			}
+		}
+		return diarias;
+	}
 }

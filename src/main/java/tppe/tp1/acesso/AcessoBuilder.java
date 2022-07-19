@@ -58,7 +58,6 @@ public class AcessoBuilder {
 	public Double getValorContratante() {
 		return valorContratante;
 	}
-
 	// Fim Get
 
 	// SET
