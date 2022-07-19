@@ -4,10 +4,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import tppe.tp1.acesso.Acesso;
 import tppe.tp1.acesso.AcessoBuilder;
@@ -37,41 +40,27 @@ public class CalculaValorAcessoTest {
 		this.estacionamento = e.build();
 	}
 
-	@Test
+	@ParameterizedTest
+	@MethodSource("geraAcessos")
 	@Tag("TesteFuncional")
-	void calculaValorAcessTest() throws Exception {
+	void calculaValorAcessTest(String placa, String entrada, String saida, String tipoAcesso, Double resultado) throws Exception {
 		AcessoBuilder a = new AcessoBuilder();
-		a.setPlaca("abc1234");
-		a.setHoraEntrada(LocalDateTime.parse("2022-07-18T08:01"));
-		a.setHoraSaida(LocalDateTime.parse("2022-07-18T23:59"));
+		a.setPlaca(placa);
+		a.setHoraEntrada(LocalDateTime.parse(entrada));
+		a.setHoraSaida(LocalDateTime.parse(saida));
+		a.setTipoAcesso(tipoAcesso);
 		
 		acesso = a.build();
-		assertEquals(91.00, estacionamento.calculaValorTotal(acesso));
-	}
-
-	@Test
-	@Tag("TesteFuncional")
-	void calculaValorAcessTestD() throws Exception {
-		AcessoBuilder a = new AcessoBuilder();
-		a.setPlaca("abc1234");
-		a.setHoraEntrada(LocalDateTime.parse("2022-07-18T09:00"));
-		a.setHoraSaida(LocalDateTime.parse("2022-07-18T10:00"));
-		
-		acesso = a.build();
-		assertEquals(72.00, estacionamento.calculaValorTotal(acesso));
+		assertEquals(resultado, estacionamento.calculaValorTotal(acesso), 0.1);
 	}
 	
-
-	@Test
-	@Tag("TesteFuncional")
-	void calculaValorAcessTestT() throws Exception {
-		AcessoBuilder a = new AcessoBuilder();
-		a.setPlaca("abc1234");
-		a.setHoraEntrada(LocalDateTime.parse("2022-07-18T09:00"));
-		a.setHoraSaida(LocalDateTime.parse("2022-07-18T10:00"));
-		a.setTipoAcesso("Mensalista");
-		
-		acesso = a.build();
-		assertEquals(455.00, estacionamento.calculaValorTotal(acesso));
+	
+	static Stream<Arguments> geraAcessos() {
+		return Stream.of(Arguments.of("LZY5677", "2022-07-18T08:01", "2022-07-18T08:01", "", 0.00),
+					Arguments.of("GWO6601", "2022-07-18T08:30", "2022-07-18T08:56", "", 40.00),
+					Arguments.of("IFE1085", "2022-07-18T08:00", "2022-07-18T18:00", "", 70.00),
+					Arguments.of("JJL2180", "2022-07-18T21:36", "2022-07-19T06:12", "", 21.00),
+					Arguments.of("JJL2180", "2022-07-18T21:36", "2022-07-19T06:12", "Mensalista", 455.00),
+					Arguments.of("JJL2180", "2022-07-18T21:36", "2022-07-19T06:12", "Evento", 60.00));
 	}
 }

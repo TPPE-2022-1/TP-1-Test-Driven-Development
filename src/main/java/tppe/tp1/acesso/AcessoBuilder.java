@@ -76,8 +76,6 @@ public class AcessoBuilder {
 			this.tipoAcesso = "Evento";
 		else if (tipoAcesso != null && tipoAcesso.trim().length() > 0)
 			throw new AcessoEventoInvalidoException();
-		else
-			throw new AcessoEventoVazioException();
 	}
 
 	public void setHoraSaida(LocalDateTime horaSaida) {
