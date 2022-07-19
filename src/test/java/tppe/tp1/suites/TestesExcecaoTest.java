@@ -49,7 +49,7 @@ import tppe.tp1.RegistroPlacaTest;
 		RegistraValorFracaoEstacionamentoTest.class, RegistraValorEventoEstacionamentoTest.class,
 		RegistraValorHoraCheiaEstacionamentoTest.class, RegistraValorMensalistaEstacionamentoTest.class,
 		RegistraValorRetornoContratanteEstacionamentoTest.class, RegistroHoraEntradaTest.class,
-		RegistroHoraSaidaTest.class, RegistroPlacaTest.class })
+		RegistroHoraSaidaTest.class, RegistroPlacaTest.class})
 @IncludeTags("TesteExcecao")
 @SuiteDisplayName("Testes de Excecao")
 class TestesExcecaoTest {

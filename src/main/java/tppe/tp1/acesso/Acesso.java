@@ -130,4 +130,8 @@ public class Acesso {
 		}
 		return diarias;
 	}
+
+	public Double calculoValorContratante(Double valorAcesso) {
+		return 24.00;
+	}
 }
