@@ -11,6 +11,7 @@ import tppe.tp1.CalculaDiariaNoturnaTest;
 import tppe.tp1.CalculaFracoesTest;
 import tppe.tp1.CalculaHoraCheiaTest;
 import tppe.tp1.CalculaValorAcessoTest;
+import tppe.tp1.CalculaValorContratanteTest;
 import tppe.tp1.CalculaValorTotalTest;
 import tppe.tp1.ChecaTipoEventoTest;
 import tppe.tp1.ChecaTipoMensalistaTest;
@@ -49,7 +50,7 @@ import tppe.tp1.RegistroPlacaTest;
 		RegistraValorFracaoEstacionamentoTest.class, RegistraValorEventoEstacionamentoTest.class,
 		RegistraValorHoraCheiaEstacionamentoTest.class, RegistraValorMensalistaEstacionamentoTest.class,
 		RegistraValorRetornoContratanteEstacionamentoTest.class, RegistroHoraEntradaTest.class,
-		RegistroHoraSaidaTest.class, RegistroPlacaTest.class })
+		RegistroHoraSaidaTest.class, RegistroPlacaTest.class, CalculaValorContratanteTest.class})
 @IncludeTags("TesteFuncional")
 @SuiteDisplayName("Testes Funcionais")
 public class TestesFuncionaisTest {

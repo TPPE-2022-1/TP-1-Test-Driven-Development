@@ -10,10 +10,6 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import tppe.tp1.acesso.AcessoBuilder;
-import tppe.tp1.acesso.exceptions.AcessoEventoInvalidoException;
-import tppe.tp1.acesso.exceptions.AcessoEventoVazioException;
-import tppe.tp1.acesso.exceptions.AcessoPlacaInvalidaException;
-import tppe.tp1.acesso.exceptions.AcessoPlacaVazioException;
 import tppe.tp1.estacionamento.Estacionamento;
 import tppe.tp1.estacionamento.EstacionamentoBuilder;
 

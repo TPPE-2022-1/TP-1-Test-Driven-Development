@@ -4,10 +4,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import tppe.tp1.acesso.Acesso;
 import tppe.tp1.acesso.AcessoBuilder;
@@ -37,50 +40,29 @@ public class CalculaValorContratanteTest {
 		this.estacionamento = e.build();
 	}
 	
-	@Test
+	@ParameterizedTest
+	@MethodSource("geraAcessos")
 	@Tag("TesteFuncional")
-	void testCalculaValorContratante() throws Exception {
+	void calculaValorAcessTest(String placa, String entrada, String saida, String tipoAcesso, Double valorAcesso, Double resultado) throws Exception {
 		AcessoBuilder a = new AcessoBuilder();
-		a.setPlaca("MWS3805");
-		a.setHoraEntrada(LocalDateTime.parse("2022-07-18T08:30"));
-		a.setHoraSaida(LocalDateTime.parse("2022-07-18T08:56"));
-		a.setValorAcesso(40.00);
-
-		acesso = a.build();
-		assertEquals(24.00, acesso.calculoValorContratante(estacionamento.getRetornoContratante()), 0.1);
-	}
-	
-
-	
-	@Test
-	@Tag("TesteFuncional")
-	void testCalculaValorContratanteD() throws Exception {
-		AcessoBuilder a = new AcessoBuilder();
-		a.setPlaca("JJL2180");
-		a.setHoraEntrada(LocalDateTime.parse("2022-07-18T21:36"));
-		a.setHoraSaida(LocalDateTime.parse("2022-07-19T06:12"));
-		a.setTipoAcesso("Mensalista");
-		a.setValorAcesso(455.00);
+		a.setPlaca(placa);
+		a.setHoraEntrada(LocalDateTime.parse(entrada));
+		a.setHoraSaida(LocalDateTime.parse(saida));
+		a.setTipoAcesso(tipoAcesso);
+		a.setValorAcesso(valorAcesso);
 		
 		acesso = a.build();
-		assertEquals(273.00, acesso.calculoValorContratante(estacionamento.getRetornoContratante()), 0.1);
-	}
-
-	
-	@Test
-	@Tag("TesteFuncional")
-	void testCalculaValorContratanteT() throws Exception {
-		AcessoBuilder a = new AcessoBuilder();
-		a.setPlaca("JJL2180");
-		a.setHoraEntrada(LocalDateTime.parse("2022-07-18T21:36"));
-		a.setHoraSaida(LocalDateTime.parse("2022-07-19T06:12"));
-		a.setTipoAcesso("");
-		a.setValorAcesso(21.00);
-
-		acesso = a.build();
-		assertEquals(12.60, acesso.calculoValorContratante(estacionamento.getRetornoContratante()), 0.1);
+		assertEquals(resultado, acesso.calculoValorContratante(estacionamento.getRetornoContratante()), 0.1);
 	}
 	
 	
+	static Stream<Arguments> geraAcessos() {
+		return Stream.of(Arguments.of("LZY5677", "2022-07-18T08:01", "2022-07-18T08:01", "", 0.00, 0.00),
+					Arguments.of("GWO6601", "2022-07-18T08:30", "2022-07-18T08:56", "", 40.00, 24.00),
+					Arguments.of("IFE1085", "2022-07-18T08:00", "2022-07-18T18:00", "", 70.00, 42.00),
+					Arguments.of("JJL2180", "2022-07-18T21:36", "2022-07-19T06:12", "", 21.00, 12.60),
+					Arguments.of("JJL2180", "2022-07-18T21:36", "2022-07-19T06:12", "Mensalista", 455.00, 273.00),
+					Arguments.of("JJL2180", "2022-07-18T21:36", "2022-07-19T06:12", "Evento", 60.00, 36.00));
+	}
 
 }
