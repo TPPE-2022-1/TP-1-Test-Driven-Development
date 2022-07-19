@@ -64,6 +64,13 @@ public class Acesso {
 		else
 			return false;
 	}
+	public void setValorContratante(Double d) {
+		this.valorContratante = d;
+	}
+
+	public void setValorAcesso(Double valorAcesso) {
+		this.valorAcesso = valorAcesso;
+	}
 	
 	public Boolean isDiariaNoturna(Estacionamento e) {
 		LocalDateTime entrada = getHoraEntrada();

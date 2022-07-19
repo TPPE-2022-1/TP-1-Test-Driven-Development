@@ -155,8 +155,10 @@ public class AppMain {
 			System.out.println("Digite o tipo de acesso do veiculo(Mensalista/Evento): ");
 			acesso.setTipoAcesso(input.next());
 		}
-			
-		estacionamento.addAcesso(acesso.build());
+		Acesso acessoCadastro = acesso.build();
+		acessoCadastro.setValorAcesso(estacionamento.calculaValorTotal(acessoCadastro));
+		acessoCadastro.setValorContratante((estacionamento.getRetornoContratante()*acessoCadastro.getValorAcesso())/100);
+		estacionamento.addAcesso(acessoCadastro);
 		System.out.println("Registro efetuado com sucesso.");
 	}
 
