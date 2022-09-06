@@ -7,6 +7,8 @@ import tppe.tp1.estacionamento.Estacionamento;
 
 public class Acesso {
 
+	private static final int _100 = 100;
+	private static final int TREZE_HORAS_MINUTOS = 780;
 	private String placa;
 	private LocalDateTime horaEntrada;
 	private LocalDateTime horaSaida;
@@ -74,7 +76,7 @@ public class Acesso {
 		LocalDateTime entrada = getHoraEntrada();
 		LocalDateTime saida = getHoraSaida();
 		long minutosEstadia = ChronoUnit.MINUTES.between(entrada, saida);
-		long minutosTotais = 780;
+		long minutosTotais = TREZE_HORAS_MINUTOS;
 		long diff;
 
 		if (entrada.toLocalTime().isAfter(e.getHorarioEntradaDiariaNoturna())) {
@@ -101,6 +103,6 @@ public class Acesso {
 	}
 
 	public Double calculoValorContratante(Double retornoContratante) {
-		return this.valorAcesso * retornoContratante / 100;
+		return this.valorAcesso * retornoContratante / _100;
 	}
 }

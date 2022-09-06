@@ -3,7 +3,6 @@ package tppe.tp1.estacionamento;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.Period;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +10,14 @@ import java.util.List;
 import tppe.tp1.acesso.Acesso;
 
 public class Estacionamento {
+	private static final double DOUBLE_120 = 120.00;
+	private static final double DOUBLE_60 = 60.00;
+	private static final int NINE_HOURS = 540;
+	private static final int MINUTE_56 = 56;
+	private static final int MINUTE_30 = 30;
+	private static final int _100 = 100;
+	private static final int FRACOES_HORA = 4;
+	private static final int FRACAO = 15;
 	private Integer id;
 	private Double valorFracao;
 	private Double descontoHoraCheia;
@@ -107,15 +114,15 @@ public class Estacionamento {
 		long minutosCorridos = calculaDiferencaMinutos(horaEntrada, horaSaida);
 		int fracoes = 0;
 
-		if (minutosCorridos % 15 > 0) fracoes++;
-		fracoes += minutosCorridos / 15;
+		if (minutosCorridos % FRACAO > 0) fracoes++;
+		fracoes += minutosCorridos / FRACAO;
 
-		return fracoes % 4 * this.valorFracao;
+		return fracoes % FRACOES_HORA * this.valorFracao;
 	}
 
 	public Double calculaHoraCheia(LocalDateTime entrada, LocalDateTime saida) {
-		Double valorHoraCheia = 4 * this.valorFracao;
-		Double desconto = (100 - this.descontoHoraCheia) / 100;
+		Double valorHoraCheia = FRACOES_HORA * this.valorFracao;
+		Double desconto = (_100 - this.descontoHoraCheia) / _100;
 		long horasCorridas = calculaDiferencaHoras(entrada, saida);
 	
 
@@ -137,10 +144,10 @@ public class Estacionamento {
 	}
 
 	public Double calculoValorTotal(LocalDateTime horaEntrada, LocalDateTime horaSaida, String tipoAcesso) {
-		if(horaEntrada.getMinute()== 30 && horaSaida.getMinute() == 56)
-			return 60.00 ;
+		if (horaEntrada.getMinute() == MINUTE_30 && horaSaida.getMinute() == MINUTE_56)
+			return DOUBLE_60;
 		else
-			return 120.00;
+			return DOUBLE_120;
 	}
 	
 	public boolean isNoturno(LocalTime time) {
@@ -152,11 +159,11 @@ public class Estacionamento {
 		long duracao = Duration.between(acesso.getHoraEntrada(), acesso.getHoraSaida()).toMinutes();
 		if (acesso.isMensalista()) return this.valorMensalidade;
 		else if (acesso.isEvento()) return this.valorEvento;
-		else if (duracao <= 540 && !acesso.isDiariaNoturna(this))
+		else if (duracao <= NINE_HOURS && !acesso.isDiariaNoturna(this))
 			return calculaHoraCheia(acesso.getHoraEntrada(), acesso.getHoraSaida()) + calculaFracoes(acesso.getHoraEntrada(), acesso.getHoraSaida());
-		else if (duracao <= 540) return this.valorDiariaDiurna * (this.getDescontoDiariaNoturna()) / 100;
+		else if (duracao <= NINE_HOURS) return this.valorDiariaDiurna * (this.getDescontoDiariaNoturna()) / _100;
 		else if (!acesso.isDiariaNoturna(this)) return this.valorDiariaDiurna;
-		else return this.valorDiariaDiurna + (this.valorDiariaDiurna * (this.getDescontoDiariaNoturna()) / 100);
+		else return this.valorDiariaDiurna + (this.valorDiariaDiurna * (this.getDescontoDiariaNoturna()) / _100);
 	}
 	
 }
