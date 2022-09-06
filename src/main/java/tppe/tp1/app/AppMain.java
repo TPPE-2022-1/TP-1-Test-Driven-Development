@@ -15,10 +15,156 @@ import tppe.tp1.estacionamento.EstacionamentoBuilder;
 
 public class AppMain {
 	static Scanner input = new Scanner(System.in);
-	
+
 	public static void main(String[] args) throws Exception {
 		List<Estacionamento> estacionamentos = new ArrayList<Estacionamento>();
 		EstacionamentoBuilder e = new EstacionamentoBuilder();
+		setUpEstacionamentoBuilder(estacionamentos, e);
+
+		AcessoBuilder acessoBuilder = new AcessoBuilder();
+		setUpAcessoBuilder(estacionamentos, acessoBuilder);
+
+		Integer opcoes = 0;
+
+		while (opcoes != 6) {
+			printMenu();
+			opcoes = input.nextInt();
+			switch (opcoes) {
+			case 1:
+				cadastroEstacionamento(estacionamentos);
+				break;
+			case 2:
+				registraNovoAcesso(estacionamentos);
+				break;
+			case 3:
+				verificaInformacoesAcesso(estacionamentos);
+				break;
+			case 4:
+				verificaRepasseUmEstacionamento(estacionamentos);
+				break;
+			case 5:
+				opcoes = verificaTodosEstacionamentos(estacionamentos, opcoes);
+				break;
+			case 6:
+				break;
+			default:
+				System.out.println("Escolha invalida!\n\n");
+			}
+		}
+		System.out.println("Programa Encerrado com Sucesso!");
+	}
+
+	public static Integer desejaContinuar() {
+		System.out.println("Deseja continuar ?(s/n)");
+
+		if (input.next().equalsIgnoreCase("n"))
+			return 6;
+		else return 0;
+	}
+
+	private static Integer verificaTodosEstacionamentos(List<Estacionamento> estacionamentos, Integer opcoes)
+			throws Exception {
+		limpaTela();
+
+		if (estacionamentos.size() == 0) {
+			avisoEstacionamento(estacionamentos);
+		} else {
+			System.out.println("LISTA DE ESTACIONAMENTOS:\n");
+			printListaEstacionamento(estacionamentos);
+		}
+		
+		return desejaContinuar();
+	}
+
+	private static void verificaRepasseUmEstacionamento(List<Estacionamento> estacionamentos) {
+		Double soma = 0.0;
+		limpaTela();
+		System.out.println("Insira o Id do estacionamento: ");
+		soma = calculoRepasseEstacionamento(estacionamentos, soma);
+		System.out.println("Valor total de repasse: " + soma);
+	}
+
+	private static void verificaInformacoesAcesso(List<Estacionamento> estacionamentos) {
+		limpaTela();
+		System.out.println("Insira o Id do estacionamento: ");
+		buscaAcessos(estacionamentos.get(input.nextInt()));
+	}
+
+	private static void registraNovoAcesso(List<Estacionamento> estacionamentos) throws Exception {
+		limpaTela();
+		if (estacionamentos.size() == 0) {
+			avisoEstacionamento(estacionamentos);
+		} else if (estacionamentos.size() == 1) {
+			registraAcesso(estacionamentos.get(0));
+		} else {
+			System.out.println("Digite o id do estacionamento desejado: ");
+			registraAcesso(estacionamentos.get(input.nextInt()));
+		}
+	}
+
+	private static void cadastroEstacionamento(List<Estacionamento> estacionamentos) throws Exception {
+		limpaTela();
+		estacionamentos.add(novoEstacionamento());
+	}
+
+	private static Double calculoRepasseEstacionamento(List<Estacionamento> estacionamentos, Double soma) {
+		for (Acesso acesso : estacionamentos.get(input.nextInt()).getListaAcessos()) {
+			// sum valorContratante
+			soma += acesso.getValorContratante();
+
+		}
+		return soma;
+	}
+
+	private static void printListaEstacionamento(List<Estacionamento> estacionamentos) {
+		for (Estacionamento estacionamento : estacionamentos) {
+			System.out.println("id: " + estacionamento.getId() + "\n" + "valor da fracao: "
+					+ estacionamento.getValorFracao() + "\n" + "desconto da hora cheia: "
+					+ estacionamento.getDescontoHoraCheia() + "\n" + "valor da diaria diurna: "
+					+ estacionamento.getValorDiariaDiurna() + "\n" + "desconto da diaria noturna: "
+					+ estacionamento.getDescontoDiariaNoturna() + "\n" + "horario de entrada da diaria noturna: "
+					+ estacionamento.getHorarioEntradaDiariaNoturna() + "\n" + "horario de saida da diaria noturna: "
+					+ estacionamento.getHorarioSaidaDiariaNoturna() + "\n" + "valor da mensalidade: "
+					+ estacionamento.getValorMensalidade() + "\n" + "valor do evento: "
+					+ estacionamento.getValorEvento() + "\n" + "horario de abertura: "
+					+ estacionamento.getHorarioAbertura() + "\n" + "horario de encerramento: "
+					+ estacionamento.getHorarioEncerramento() + "\n" + "capacidade: " + estacionamento.getCapacidade()
+					+ "\n" + "retorno do contratante: " + estacionamento.getRetornoContratante() + "\n"
+					+ "-------------------------------------------------------------------------------------------------\n\n");
+		}
+	}
+
+	private static void avisoEstacionamento(List<Estacionamento> estacionamentos)
+				throws Exception {
+		System.out.println("Voce precisa primeiro cadastrar um estacionamento.\n"
+				+ "Deseja cadastrar um estacionamento? (s/n): ");
+		
+		if (input.next().equalsIgnoreCase("s"))
+			estacionamentos.add(novoEstacionamento());
+	}
+
+	private static void printMenu() {
+		System.out.println("Escolha uma das opcoes:\n"
+				+ "[1] - Cadastrar novo Estacionameno.\n"
+				+ "[2] - Registrar novo acesso.\n"
+				+ "[3] - Verificar informacoes de um acesso.\n"
+				+ "[4] - Verificar valor total de repasse para o contratante de um estacionamento.\n"
+				+ "[5] - Verificar todos estacionamentos cadastrados\n" 
+				+ "[6] - Encerrar aplicao.\n");
+	}
+
+	private static void setUpAcessoBuilder(List<Estacionamento> estacionamentos, AcessoBuilder acessoBuilder)
+			throws Exception {
+		acessoBuilder.setPlaca("GHJ7653");
+		acessoBuilder.setHoraEntrada(LocalDateTime.parse("2022-07-17T12:40"));
+		acessoBuilder.setHoraSaida(LocalDateTime.parse("2022-07-17T15:30"));
+		acessoBuilder.setValorAcesso(50.00);
+		acessoBuilder.setValorContratante(100.00);
+		estacionamentos.get(0).addAcesso(acessoBuilder.build());
+	}
+
+	private static void setUpEstacionamentoBuilder(List<Estacionamento> estacionamentos, EstacionamentoBuilder e)
+			throws Exception {
 		e.setId(0);
 		e.setValorFracao(30.00);
 		e.setDescontoHoraCheia(15.00);
@@ -33,7 +179,7 @@ public class AppMain {
 		e.setCapacidade(300);
 		e.setRetornoContratante(50.00);
 		estacionamentos.add(e.build());
-		
+
 		e = new EstacionamentoBuilder();
 		e.setId(1);
 		e.setValorFracao(30.00);
@@ -49,101 +195,11 @@ public class AppMain {
 		e.setCapacidade(300);
 		e.setRetornoContratante(50.00);
 		estacionamentos.add(e.build());
-	
-		AcessoBuilder acessoBuilder = new AcessoBuilder();
-		acessoBuilder.setPlaca("GHJ7653");
-		acessoBuilder.setHoraEntrada(LocalDateTime.parse("2022-07-17T12:40"));
-		acessoBuilder.setHoraSaida(LocalDateTime.parse("2022-07-17T15:30"));
-		acessoBuilder.setValorAcesso(50.00);
-		acessoBuilder.setValorContratante(100.00);
-		estacionamentos.get(0).addAcesso(acessoBuilder.build());
-		
-		Integer opcoes = 0;
-		
-		
-		while (opcoes!=6) {
-			System.out.println("Escolha uma das opcoes:\n"
-					+ "[1] - Cadastrar novo Estacionameno.\n" //feito
-					+ "[2] - Registrar novo acesso.\n" //feito mas horario de entrada ruim
-					+ "[3] - Verificar informacoes de um acesso.\n" //feito
-					+ "[4] - Verificar valor total de repasse para o contratante de um estacionamento.\n" //feito
-					+ "[5] - Verificar todos estacionamentos cadastrados\n" //feito
-					+ "[6] - Encerrar aplicao.\n"); //feito
-			opcoes = input.nextInt();
-			switch(opcoes) {
-			case 1:
-				limpaTela();
-				estacionamentos.add(novoEstacionamento());
-				break;
-			case 2:
-				limpaTela();
-				if (estacionamentos.size() == 0) {
-					System.out.println("Voce precisa primeiro cadastrar um estacionamento.\n"
-							+ "Deseja cadastrar um estacionamento? (s/n): ");
-					if (input.next().equalsIgnoreCase("s"));
-						estacionamentos.add(novoEstacionamento());
-				} else if (estacionamentos.size() == 1) {
-					registraAcesso(estacionamentos.get(0));
-				} else {
-					System.out.println("Digite o id do estacionamento desejado: ");
-					registraAcesso(estacionamentos.get(input.nextInt()));
-				}
-				break;
-			case 3:
-				limpaTela();
-				System.out.println("Insira o Id do estacionamento: ");
-				buscaAcessos(estacionamentos.get(input.nextInt()));
-				break;
-			case 4:
-				limpaTela();
-				Double soma = 0.0;
-				System.out.println("Insira o Id do estacionamento: ");
-				for (Acesso acesso : estacionamentos.get(input.nextInt()).getListaAcessos())
-				{
-					//sum valorContratante
-					soma += acesso.getValorContratante();
-					
-				}
-				System.out.println("Valor total de repasse: " + soma);
-				break;
-			case 5:
-				limpaTela();
-				System.out.println("LISTA DE ESTACIONAMENTOS:\n");
-				for (Estacionamento estacionamento : estacionamentos) {
-					System.out.println("id: "+estacionamento.getId()+"\n"
-					+ "valor da fracao: "+estacionamento.getValorFracao()+"\n"
-					+ "desconto da hora cheia: "+estacionamento.getDescontoHoraCheia()+"\n"
-					+ "valor da diaria diurna: "+estacionamento.getValorDiariaDiurna()+"\n"
-					+ "desconto da diaria noturna: "+estacionamento.getDescontoDiariaNoturna()+"\n"
-					+ "horario de entrada da diaria noturna: "+estacionamento.getHorarioEntradaDiariaNoturna()+"\n"
-					+ "horario de saida da diaria noturna: "+estacionamento.getHorarioSaidaDiariaNoturna()+"\n"
-					+ "valor da mensalidade: "+estacionamento.getValorMensalidade()+"\n"
-					+ "valor do evento: "+estacionamento.getValorEvento()+"\n"
-					+ "horario de abertura: "+estacionamento.getHorarioAbertura()+"\n"
-					+ "horario de encerramento: "+estacionamento.getHorarioEncerramento()+"\n"
-					+ "capacidade: "+estacionamento.getCapacidade()+"\n"
-					+ "retorno do contratante: "+estacionamento.getRetornoContratante()+"\n"
-					+ "-------------------------------------------------------------------------------------------------\n\n"
-					);
-				}
-				
-				System.out.println("Deseja continuar ?(s/n)");
-				if(input.next().equalsIgnoreCase("n"))
-					opcoes = 6;
-				break;
-			case 6:
-				break;
-			default:
-				System.out.println("Escolha invalida!\n\n");
-			}
-		}
-		
-		System.out.println("Programa Encerrado com Sucesso!");
 	}
-	
+
 	public static void registraAcesso(Estacionamento estacionamento) throws Exception {
 		AcessoBuilder acesso = new AcessoBuilder();
-		
+
 		System.out.println("Digite a placa do carro(7 caracteres): ");
 		acesso.setPlaca(input.next());
 		System.out.println("Digite o horario de entrada do veiculo(aaaa-mm-ddThh:mm): ");
@@ -157,14 +213,23 @@ public class AppMain {
 		}
 		Acesso acessoCadastro = acesso.build();
 		acessoCadastro.setValorAcesso(estacionamento.calculaValorTotal(acessoCadastro));
-		acessoCadastro.setValorContratante((estacionamento.getRetornoContratante()*acessoCadastro.getValorAcesso())/100);
+		acessoCadastro
+				.setValorContratante((estacionamento.getRetornoContratante() * acessoCadastro.getValorAcesso()) / 100);
 		estacionamento.addAcesso(acessoCadastro);
 		System.out.println("Registro efetuado com sucesso.");
 	}
 
 	public static Estacionamento novoEstacionamento() throws Exception {
 		EstacionamentoBuilder estacionamento = new EstacionamentoBuilder();
-		
+
+		setEstacionamento(estacionamento);
+
+		System.out.println("Registro efetuado com sucesso.");
+		return estacionamento.build();
+	}
+
+	private static void setEstacionamento(EstacionamentoBuilder estacionamento)
+			throws Exception {
 		System.out.println("Insira os dados do estacionamento:\nID: ");
 		estacionamento.setId(input.nextInt());
 		System.out.println("Valor cobrado por fração de 15min: ");
@@ -189,15 +254,13 @@ public class AppMain {
 		estacionamento.setHorarioEncerramento(LocalTime.parse(input.next()));
 		System.out.println("Capacidade do estacionamento: ");
 		estacionamento.setCapacidade(input.nextInt());
-
-		System.out.println("Registro efetuado com sucesso.");
-		return estacionamento.build();
 	}
-	
+
 	public static void buscaAcessos(Estacionamento estacionamento) {
 		String placa;
 		Boolean opcao = true;
-		while(opcao) {
+
+		while (opcao) {
 			System.out.println("Insira a placa do veiculo: ");
 			placa = input.next().trim();
 
@@ -205,22 +268,24 @@ public class AppMain {
 
 				if (acesso.getPlaca().equalsIgnoreCase(placa)) {
 					// print all info about the access
-					System.out.println("placa: "+acesso.getPlaca()+"\n"
-					+ "Horario de entrada: "+acesso.getHoraEntrada()+"\n"
-					+ "Horario de saida: "+acesso.getHoraSaida()+"\n"
-					+ "Valor de acesso: "+acesso.getValorAcesso()+"\n"
-					+ "Valor do contratante: "+acesso.getValorContratante()+"\n"
-					);
+					printListaAcessos(acesso);
 				}
 			}
-		
 
 			// wait for enter to go to menu
 			System.out.println("Deseja continuar ?(s/n)");
-			if(input.next().equalsIgnoreCase("n"))
+			if (input.next().equalsIgnoreCase("n"))
 				opcao = false;
-					
+
 		}
+	}
+
+	public static void printListaAcessos(Acesso acesso) {
+		System.out.println("placa: " + acesso.getPlaca() 
+				+ "\n" + "Horario de entrada: " + acesso.getHoraEntrada()
+				+ "\n" + "Horario de saida: " + acesso.getHoraSaida() + "\n" 
+				+ "Valor de acesso: " + acesso.getValorAcesso() + "\n"
+				+ "Valor do contratante: " + acesso.getValorContratante() + "\n");
 	}
 
 	public static void limpaTela() {
